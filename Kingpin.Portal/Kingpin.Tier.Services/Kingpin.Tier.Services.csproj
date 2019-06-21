@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kingpin.Tier.Contexts\Kingpin.Tier.Contexts.csproj" />
+    <ProjectReference Include="..\Kingpin.Tier.ExceptionHandling\Kingpin.Tier.ExceptionHandling.csproj" />
+    <ProjectReference Include="..\Kingpin.Tier.Logging\Kingpin.Tier.Logging.csproj" />
+    <ProjectReference Include="..\Kingpin.Tier.Mappings\Kingpin.Tier.Mappings.csproj" />
+  </ItemGroup>
+
+</Project>
