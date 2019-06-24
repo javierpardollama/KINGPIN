@@ -1,5 +1,6 @@
 using AutoMapper;
 using Kingpin.Tier.Contexts.Classes;
+using Kingpin.Tier.Mappings.Classes;
 using Kingpin.Tier.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -17,8 +18,12 @@ namespace Kingpin.Tier.Web
     public class Startup
     {
         public Startup(IConfiguration configuration) => Configuration = configuration;
-        
+
         public IConfiguration Configuration { get; }
+
+        public MapperConfiguration MapperConfiguration { get; set; }
+
+        public IMapper Mapper { get; set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -27,13 +32,20 @@ namespace Kingpin.Tier.Web
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
+            MapperConfiguration = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            Mapper = MapperConfiguration.CreateMapper();
+
+            // Add Mapping to the services container.
+            services.AddSingleton(Mapper);
+
             // Register the service and implementation for the database context
             services.AddCustomContexts();
 
             services.AddCustomServices();
-
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(options =>
             {
