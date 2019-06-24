@@ -33,18 +33,29 @@ namespace Kingpin.Tier.Contexts.Classes
                 {
                     case EntityState.Added:
                         entity.CurrentValues["LastModified"] = DateTime.Now;
+                        entity.State = EntityState.Added;
                         entity.CurrentValues["Deleted"] = false;
                         break;
+
+                    case EntityState.Modified:
+                        entity.CurrentValues["LastModified"] = DateTime.Now;
+                        entity.State = EntityState.Modified;
+                        entity.CurrentValues["Deleted"] = false;
+                        break;
+
                     case EntityState.Deleted:
                         entity.CurrentValues["LastModified"] = DateTime.Now;
                         entity.State = EntityState.Modified;
                         entity.CurrentValues["Deleted"] = true;
                         break;
-                    case EntityState.Modified:
-                        entity.CurrentValues["LastModified"] = DateTime.Now;
-                        break;
                 }
             }
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Configure entity filters           
+         
         }
     }
 }
