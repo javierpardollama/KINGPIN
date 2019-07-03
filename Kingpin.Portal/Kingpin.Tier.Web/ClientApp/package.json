@@ -1,11 +1,11 @@
 {
-  "name": "Sandwitch.Tier.Web",
+  "name": "Kingpin.Tier.Web",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:ssr": "ng run Sandwitch.Tier.Web:server:dev",
+    "build:ssr": "ng run Kingpin.Tier.Web:server:dev",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
