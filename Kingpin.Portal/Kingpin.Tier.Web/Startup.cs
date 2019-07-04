@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System;
 
 namespace Kingpin.Tier.Web
 {
@@ -34,7 +33,7 @@ namespace Kingpin.Tier.Web
 
             MapperConfiguration = new MapperConfiguration(mc =>
             {
-                mc.AddProfile(new MappingProfile());
+                mc.AddProfile(new ModelingProfile());
             });
 
             Mapper = MapperConfiguration.CreateMapper();

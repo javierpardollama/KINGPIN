@@ -1,9 +1,9 @@
-﻿using Kingpin.Tier.Logging.Enums;
-using Kingpin.Tier.Logging.Mapping;
+﻿using Kingpin.Tier.Constants.Enums;
+using Kingpin.Tier.Mappings.Classes;
 using Microsoft.Extensions.Logging;
 using System;
 
-namespace Kingpin.Tier.Logging.Extensions
+namespace Kingpin.Tier.Logging.Classes
 {
     public static class LoggingTransistor
     {

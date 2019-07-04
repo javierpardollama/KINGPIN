@@ -1,9 +1,9 @@
-﻿using Kingpin.Tier.Logging.Enums;
+﻿using Kingpin.Tier.Constants.Enums;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 
-namespace Kingpin.Tier.Logging.Mapping
+namespace Kingpin.Tier.Mappings.Classes
 {
     public static class LoggingProfile
     {
@@ -15,5 +15,6 @@ namespace Kingpin.Tier.Logging.Mapping
     { ApplicationEvents.GetItemNotFound, LogLevel.Error },
     { ApplicationEvents.GetItemFound, LogLevel.Error }
     };
+
     }
 }

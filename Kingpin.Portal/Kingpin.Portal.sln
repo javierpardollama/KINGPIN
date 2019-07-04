@@ -3,23 +3,25 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Entities", "Kingpin.Tier.Entities\Kingpin.Tier.Entities.csproj", "{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Entities", "Kingpin.Tier.Entities\Kingpin.Tier.Entities.csproj", "{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Exceptions", "Kingpin.Tier.Exceptions\Kingpin.Tier.Exceptions.csproj", "{C6125C58-A324-40D8-AB4E-A531D17CA92F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Exceptions", "Kingpin.Tier.Exceptions\Kingpin.Tier.Exceptions.csproj", "{C6125C58-A324-40D8-AB4E-A531D17CA92F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Logging", "Kingpin.Tier.Logging\Kingpin.Tier.Logging.csproj", "{BBE37BBB-098F-4906-A908-507E70EE2189}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Logging", "Kingpin.Tier.Logging\Kingpin.Tier.Logging.csproj", "{BBE37BBB-098F-4906-A908-507E70EE2189}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.ExceptionHandling", "Kingpin.Tier.ExceptionHandling\Kingpin.Tier.ExceptionHandling.csproj", "{6BF3BE40-F138-430D-9DF2-37877E78EB10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.ExceptionHandling", "Kingpin.Tier.ExceptionHandling\Kingpin.Tier.ExceptionHandling.csproj", "{6BF3BE40-F138-430D-9DF2-37877E78EB10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Services", "Kingpin.Tier.Services\Kingpin.Tier.Services.csproj", "{83247ADC-0C4F-4A02-AF08-472B5C3F9007}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Services", "Kingpin.Tier.Services\Kingpin.Tier.Services.csproj", "{83247ADC-0C4F-4A02-AF08-472B5C3F9007}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.ViewModels", "Kingpin.Tier.ViewModels\Kingpin.Tier.ViewModels.csproj", "{B1D9BD0C-B6CB-404D-8EE1-1763A1113BDB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.ViewModels", "Kingpin.Tier.ViewModels\Kingpin.Tier.ViewModels.csproj", "{B1D9BD0C-B6CB-404D-8EE1-1763A1113BDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Contexts", "Kingpin.Tier.Contexts\Kingpin.Tier.Contexts.csproj", "{3D3CC830-55E7-4984-8DA0-A009BA1294F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Contexts", "Kingpin.Tier.Contexts\Kingpin.Tier.Contexts.csproj", "{3D3CC830-55E7-4984-8DA0-A009BA1294F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Mappings", "Kingpin.Tier.Mappings\Kingpin.Tier.Mappings.csproj", "{43E82A6B-D5BF-4B33-990B-B898F53AE992}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Mappings", "Kingpin.Tier.Mappings\Kingpin.Tier.Mappings.csproj", "{43E82A6B-D5BF-4B33-990B-B898F53AE992}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Web", "Kingpin.Tier.Web\Kingpin.Tier.Web.csproj", "{CE740934-F8E2-4878-9459-678DC8E36B57}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Web", "Kingpin.Tier.Web\Kingpin.Tier.Web.csproj", "{CE740934-F8E2-4878-9459-678DC8E36B57}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Constants", "Kingpin.Tier.Constants\Kingpin.Tier.Constants.csproj", "{4E606A88-CDF2-4987-847F-52E8D946C0E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{CE740934-F8E2-4878-9459-678DC8E36B57}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE740934-F8E2-4878-9459-678DC8E36B57}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE740934-F8E2-4878-9459-678DC8E36B57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

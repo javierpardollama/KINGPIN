@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
@@ -7,6 +7,11 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Kingpin.Tier.Constants\Kingpin.Tier.Constants.csproj" />
+    <ProjectReference Include="..\Kingpin.Tier.Mappings\Kingpin.Tier.Mappings.csproj" />
   </ItemGroup>
 
 </Project>

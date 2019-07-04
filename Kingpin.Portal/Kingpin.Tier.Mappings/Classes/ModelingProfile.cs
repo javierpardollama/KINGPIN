@@ -2,9 +2,9 @@
 
 namespace Kingpin.Tier.Mappings.Classes
 {
-    public class MappingProfile : Profile
+    public class ModelingProfile : Profile
     {
-        public MappingProfile()
+        public ModelingProfile()
         {
         }
     }

@@ -1,4 +1,4 @@
-﻿namespace Kingpin.Tier.Logging.Enums
+﻿namespace Kingpin.Tier.Constants.Enums
 {
     public enum ApplicationEvents
     {
