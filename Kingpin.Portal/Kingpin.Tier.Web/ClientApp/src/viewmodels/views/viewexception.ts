@@ -1,4 +1,4 @@
 export interface ViewException {
-    StatusCode: number;
-    Message: string;
+  StatusCode: number;
+  Message: string;
 }

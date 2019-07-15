@@ -1,9 +1,11 @@
 using AutoMapper;
 using Kingpin.Tier.Contexts.Classes;
+using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Mappings.Classes;
 using Kingpin.Tier.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +33,10 @@ namespace Kingpin.Tier.Web
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddIdentity<ApplicationUser, ApplicationRole>()
+              .AddEntityFrameworkStores<ApplicationContext>()
+              .AddDefaultTokenProviders();
+
             MapperConfiguration = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new ModelingProfile());
@@ -47,6 +53,8 @@ namespace Kingpin.Tier.Web
             services.AddCustomServices();
 
             services.AddCustomAuthentication();
+
+            services.AddCustomCrossOriginRequests();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(options =>
@@ -79,6 +87,8 @@ namespace Kingpin.Tier.Web
             }
 
             app.UseAuthentication();
+
+            app.UseCors("EnableCORS");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

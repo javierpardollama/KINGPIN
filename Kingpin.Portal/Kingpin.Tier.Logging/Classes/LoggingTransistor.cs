@@ -50,6 +50,20 @@ namespace Kingpin.Tier.Logging.Classes
             WriteDiagnostics(logData);
         }
 
+        public static void WriteUserAuthenticatedLog(this ILogger @this, string logData)
+        {
+            @this.Emit(ApplicationEvents.UserAuthenticated, logData);
+
+            WriteDiagnostics(logData);
+        }
+
+        public static void WriteUserNotAuthenticatedLog(this ILogger @this, string logData)
+        {
+            @this.Emit(ApplicationEvents.UserNotAuthenticated, logData);
+
+            WriteDiagnostics(logData);
+        }
+
         private static void WriteDiagnostics(string logData) => System.Diagnostics.Debug.WriteLine(logData);
 
         private static int GetApplicationEventCode(Enum appEventData) => (int)Convert.ChangeType(appEventData, appEventData.GetTypeCode());

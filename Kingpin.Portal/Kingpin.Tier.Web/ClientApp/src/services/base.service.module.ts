@@ -7,26 +7,26 @@ import { TextAppVariants } from './../variants/text.app.variants';
 
 export class BaseService {
 
-    public constructor(
-        protected httpClient: HttpClient,
-        protected matSnackBar: MatSnackBar) {
+  public constructor(
+    protected httpClient: HttpClient,
+    protected matSnackBar: MatSnackBar) {
 
-    }
+  }
 
-    public HandleError<T>(operation = 'Operation', result?: T) {
-        return (httpErrorResponse: HttpErrorResponse): Observable<T> => {
+  public HandleError<T>(operation = 'Operation', result?: T) {
+    return (httpErrorResponse: HttpErrorResponse): Observable<T> => {
 
-            const expception: ViewException =
-            {
-                Message: httpErrorResponse.error.Message,
-                StatusCode: httpErrorResponse.error.StatusCode
-            }
+      const expception: ViewException =
+      {
+        Message: httpErrorResponse.error.Message,
+        StatusCode: httpErrorResponse.error.StatusCode
+      }
 
-            this.matSnackBar.open(expception.Message, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+      this.matSnackBar.open(expception.Message, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
 
-            // Let the app keep running by returning an empty result.
-            return of(result as T);
-        };
-    }
+      // Let the app keep running by returning an empty result.
+      return of(result as T);
+    };
+  }
 }
 

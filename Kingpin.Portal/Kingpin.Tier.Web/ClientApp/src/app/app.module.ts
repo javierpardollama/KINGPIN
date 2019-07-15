@@ -16,6 +16,10 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 
+// App-Auth
+import { JoininAuthComponent } from './auth/joinin-auth/joinin-auth.component';
+import { SigninAuthComponent } from './auth/signin-auth/signin-auth.component';
+
 // App-Grid
 // App-Modal-Adition
 // App-Modal-Update
@@ -24,8 +28,9 @@ import { HomeComponent } from './home/home.component';
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent   
-  ],
+    HomeComponent,
+    JoininAuthComponent,
+    SigninAuthComponent],
   imports: [
     // Angular Material
     BrowserAnimationsModule,
@@ -47,7 +52,9 @@ import { HomeComponent } from './home/home.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },    
+      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: 'auth/joinin', component: JoininAuthComponent, pathMatch: 'full' },
+      { path: 'auth/signin', component: SigninAuthComponent, pathMatch: 'full' }
     ])
   ],
   entryComponents: [],

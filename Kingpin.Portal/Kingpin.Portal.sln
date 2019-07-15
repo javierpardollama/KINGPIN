@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29009.5
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Entities", "Kingpin.Tier.Entities\Kingpin.Tier.Entities.csproj", "{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}"
 EndProject
@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Mappings", "Ki
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Web", "Kingpin.Tier.Web\Kingpin.Tier.Web.csproj", "{CE740934-F8E2-4878-9459-678DC8E36B57}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Constants", "Kingpin.Tier.Constants\Kingpin.Tier.Constants.csproj", "{4E606A88-CDF2-4987-847F-52E8D946C0E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Constants", "Kingpin.Tier.Constants\Kingpin.Tier.Constants.csproj", "{4E606A88-CDF2-4987-847F-52E8D946C0E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Settings", "Kingpin.Tier.Settings\Kingpin.Tier.Settings.csproj", "{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +71,10 @@ Global
 		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E606A88-CDF2-4987-847F-52E8D946C0E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

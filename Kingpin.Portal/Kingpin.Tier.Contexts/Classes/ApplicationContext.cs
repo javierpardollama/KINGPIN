@@ -1,4 +1,5 @@
 ﻿using Kingpin.Tier.Contexts.Interfaces;
+using Kingpin.Tier.Entities.Classes;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
@@ -7,11 +8,26 @@ using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Contexts.Classes
 {
-    public class ApplicationContext : IdentityDbContext, IApplicationContext
+    public class ApplicationContext : IdentityDbContext<ApplicationUser, ApplicationRole, int,ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>, IApplicationContext
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
         }
+
+        public DbSet<ApplicationRole> ApplicationRole { get; set; }
+
+        public DbSet<ApplicationRoleClaim> ApplicationRoleClaim { get; set; }
+
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+
+        public DbSet<ApplicationUserClaim> ApplicationUserClaim { get; set; }
+
+        public DbSet<ApplicationUserLogin> ApplicationUserLogin { get; set; }
+
+        public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
+
+
+        public DbSet<ApplicationUserToken> ApplicationUserToken { get; set; }
 
         public override int SaveChanges()
         {
@@ -54,8 +70,16 @@ namespace Kingpin.Tier.Contexts.Classes
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // Configure entity filters           
-         
+            base.OnModelCreating(modelBuilder);
+
+            // Configure entity filters         
+            modelBuilder.Entity<ApplicationRole>().HasQueryFilter(p => !p.Deleted);
+            modelBuilder.Entity<ApplicationRoleClaim>().HasQueryFilter(p => !p.Deleted);
+            modelBuilder.Entity<ApplicationUser>().HasQueryFilter(p => !p.Deleted);
+            modelBuilder.Entity<ApplicationUserClaim>().HasQueryFilter(p => !p.Deleted);
+            modelBuilder.Entity<ApplicationUserLogin>().HasQueryFilter(p => !p.Deleted);
+            modelBuilder.Entity<ApplicationUserRole>().HasQueryFilter(p => !p.Deleted);
+            modelBuilder.Entity<ApplicationUserToken>().HasQueryFilter(p => !p.Deleted);           
         }
     }
 }

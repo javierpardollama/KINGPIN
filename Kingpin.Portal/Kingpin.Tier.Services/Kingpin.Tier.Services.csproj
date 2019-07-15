@@ -8,6 +8,7 @@
     <ProjectReference Include="..\Kingpin.Tier.Contexts\Kingpin.Tier.Contexts.csproj" />
     <ProjectReference Include="..\Kingpin.Tier.ExceptionHandling\Kingpin.Tier.ExceptionHandling.csproj" />
     <ProjectReference Include="..\Kingpin.Tier.Logging\Kingpin.Tier.Logging.csproj" />
+    <ProjectReference Include="..\Kingpin.Tier.Settings\Kingpin.Tier.Settings.csproj" />
   </ItemGroup>
 
 </Project>
