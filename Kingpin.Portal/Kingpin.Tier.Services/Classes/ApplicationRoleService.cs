@@ -34,6 +34,7 @@ namespace Kingpin.Tier.Services.Classes
             ApplicationRole applicationRole = new ApplicationRole
             {              
                 Name = viewModel.Name,
+                NormalizedName = viewModel.Name,
                 ConcurrencyStamp = DateTime.Now.ToBinary().ToString()
             };
 
@@ -130,6 +131,7 @@ namespace Kingpin.Tier.Services.Classes
             ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);
 
             applicationRole.Name = viewModel.Name;
+            applicationRole.NormalizedName = viewModel.Name;
 
             await RoleManager.UpdateAsync(applicationRole);            
 
