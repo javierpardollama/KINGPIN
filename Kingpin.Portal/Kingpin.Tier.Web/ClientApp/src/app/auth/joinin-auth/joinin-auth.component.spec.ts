@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { JoininAuthComponent } from './joinin-auth.component';
+import { JoinInAuthComponent } from './joinin-auth.component';
 
-describe('JoininAuthComponent', () => {
-  let component: JoininAuthComponent;
-  let fixture: ComponentFixture<JoininAuthComponent>;
+describe('JoinInAuthComponent', () => {
+  let component: JoinInAuthComponent;
+  let fixture: ComponentFixture<JoinInAuthComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ JoininAuthComponent ]
+      declarations: [ JoinInAuthComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(JoininAuthComponent);
+    fixture = TestBed.createComponent(JoinInAuthComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,10 +8,10 @@ namespace Kingpin.Tier.Services.Interfaces
 {
     public interface IAuthService : IBaseService
     {
-        Task<ActionResult<ViewUser>> SignIn(UserSignIn viewModel);
+        Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserSignIn viewModel);
 
-        Task<ActionResult<ViewUser>> JoinIn(UserJoinIn viewModel);
+        Task<ActionResult<ViewApplicationUser>> JoinIn(ApplicationUserJoinIn viewModel);
 
-        ApplicationUser FindIdentityUserByEmail(string email);
+        ApplicationUser FindApplicationUserByEmail(string email);
     }
 }

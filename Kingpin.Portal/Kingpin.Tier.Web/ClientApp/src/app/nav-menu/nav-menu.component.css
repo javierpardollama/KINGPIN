@@ -1,5 +1,5 @@
 nav{
-background-color: #e91e63 !important;
+background-color: #3f51b5 !important;
 }
 
 nav *{
@@ -30,3 +30,8 @@ float:left;
 background-image: url('/iconos/Kingpin_500px.png');
 background-size: cover;
 }  
+
+.nav-menu-role-image{
+background-image: url('/iconos/Role_500px.png');
+background-size: cover;
+} 

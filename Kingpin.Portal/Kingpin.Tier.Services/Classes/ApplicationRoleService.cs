@@ -15,11 +15,11 @@ using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Services.Classes
 {
-    public class RoleService : BaseService, IRoleService
+    public class ApplicationRoleService : BaseService, IApplicationRoleService
     {
         private readonly RoleManager<ApplicationRole> RoleManager;
 
-        public RoleService(
+        public ApplicationRoleService(
             IMapper iMapper,
             ILogger iLogger,
              RoleManager<ApplicationRole> roleManager) : base(iMapper, iLogger)
@@ -27,72 +27,72 @@ namespace Kingpin.Tier.Services.Classes
             RoleManager = roleManager;
         }
 
-        public async Task<ViewRole> AddIdentityRole(AddRole viewModel)
+        public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole viewModel)
         {
             await CheckName(viewModel);
 
-            ApplicationRole identityRole = new ApplicationRole
+            ApplicationRole applicationRole = new ApplicationRole
             {              
                 Name = viewModel.Name,
                 ConcurrencyStamp = DateTime.Now.ToBinary().ToString()
             };
 
-            await RoleManager.CreateAsync(identityRole);
+            await RoleManager.CreateAsync(applicationRole);
 
             // Log
-            string logData = identityRole.GetType().Name
+            string logData = applicationRole.GetType().Name
                 + " with Id "
-                + identityRole.Id
+                + applicationRole.Id
                 + " was added at "
                 + DateTime.Now.ToShortTimeString();
 
             ILogger.WriteInsertItemLog(logData);
 
-            return IMapper.Map<ViewRole>(identityRole);
+            return IMapper.Map<ViewApplicationRole>(applicationRole);
         }
 
-        public async Task<ApplicationRole> CheckName(AddRole viewModel)
+        public async Task<ApplicationRole> CheckName(AddApplicationRole viewModel)
         {
-            ApplicationRole identityRole = await RoleManager.FindByNameAsync(viewModel.Name);
+            ApplicationRole applicationRole = await RoleManager.FindByNameAsync(viewModel.Name);
 
-            if (identityRole != null)
+            if (applicationRole != null)
             {
                 // Log
-                string logData = identityRole.GetType().Name
+                string logData = applicationRole.GetType().Name
                     + " with Name "
-                    + identityRole.Name
+                    + applicationRole.Name
                     + " was already found at "
                     + DateTime.Now.ToShortTimeString();
 
                 ILogger.WriteGetItemFoundLog(logData);
 
-                throw new ServiceException(identityRole.GetType().Name
+                throw new ServiceException(applicationRole.GetType().Name
                     + " with Name "
                     + viewModel.Name
                     + " already exists");
             }
 
-            return identityRole;
+            return applicationRole;
         }
 
-        public async Task<ICollection<ViewRole>> FindAllIdentityRole()
+        public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
             ICollection<ApplicationRole> roles = await RoleManager.Roles
                 .AsQueryable()
                 .ToAsyncEnumerable()
                 .ToList();
 
-            return IMapper.Map<ICollection<ViewRole>>(roles);
+            return IMapper.Map<ICollection<ViewApplicationRole>>(roles);
         }
 
-        public async Task<ApplicationRole> FindIdentityRoleById(int id)
+        public async Task<ApplicationRole> FindApplicationRoleById(int id)
         {
-            ApplicationRole identityRole = await RoleManager.FindByIdAsync(id.ToString());
+            ApplicationRole applicationRole = await RoleManager.FindByIdAsync(id.ToString());
 
-            if (identityRole == null)
+            if (applicationRole == null)
             {
                 // Log
-                string logData = identityRole.GetType().Name
+                string logData = applicationRole.GetType().Name
                     + " with Id "
                     + id
                     + " was not found at "
@@ -100,49 +100,49 @@ namespace Kingpin.Tier.Services.Classes
 
                 ILogger.WriteGetItemNotFoundLog(logData);
 
-                throw new ServiceException(identityRole.GetType().Name
+                throw new ServiceException(applicationRole.GetType().Name
                     + " with Id "
                     + id
                     + " does not exist");
             }
 
-            return identityRole;
+            return applicationRole;
         }
 
-        public async Task RemoveIdentityRoleById(int id)
+        public async Task RemoveApplicationRoleById(int id)
         {
-            ApplicationRole identityRole = await FindIdentityRoleById(id);
+            ApplicationRole applicationRole = await FindApplicationRoleById(id);
 
-            await RoleManager.DeleteAsync(identityRole);
+            await RoleManager.DeleteAsync(applicationRole);
 
             // Log
-            string logData = identityRole.GetType().Name
+            string logData = applicationRole.GetType().Name
                 + " with Id "
-                + identityRole.Id
+                + applicationRole.Id
                 + " was removed at "
                 + DateTime.Now.ToShortTimeString();
 
             ILogger.WriteDeleteItemLog(logData);
         }
 
-        public async Task<ViewRole> UpdateIdentityRole(UpdateRole viewModel)
+        public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole viewModel)
         {
-            ApplicationRole identityRole = await FindIdentityRoleById(viewModel.Id);
+            ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);
 
-            identityRole.Name = viewModel.Name;
+            applicationRole.Name = viewModel.Name;
 
-            await RoleManager.UpdateAsync(identityRole);            
+            await RoleManager.UpdateAsync(applicationRole);            
 
             // Log
-            string logData = identityRole.GetType().Name
+            string logData = applicationRole.GetType().Name
                 + " with Id "
-                + identityRole.Id
+                + applicationRole.Id
                 + " was modified at "
                 + DateTime.Now.ToShortTimeString();
 
             ILogger.WriteUpdateItemLog(logData);
 
-            return IMapper.Map<ViewRole>(identityRole);
+            return IMapper.Map<ViewApplicationRole>(applicationRole);
         }
     }
 }

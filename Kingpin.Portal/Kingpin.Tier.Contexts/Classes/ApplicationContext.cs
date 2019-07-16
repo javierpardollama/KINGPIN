@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Contexts.Classes
 {
-    public class ApplicationContext : IdentityDbContext<ApplicationUser, ApplicationRole, int,ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>, IApplicationContext
+    public class ApplicationContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>, IApplicationContext
     {
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
@@ -31,13 +31,13 @@ namespace Kingpin.Tier.Contexts.Classes
 
         public override int SaveChanges()
         {
-            this.UpdateSoftStatus();
+            UpdateSoftStatus();
             return base.SaveChanges();
         }
 
         public async Task<int> SaveChangesAsync()
         {
-            this.UpdateSoftStatus();
+            UpdateSoftStatus();
             return await base.SaveChangesAsync();
         }
 
@@ -79,7 +79,7 @@ namespace Kingpin.Tier.Contexts.Classes
             modelBuilder.Entity<ApplicationUserClaim>().HasQueryFilter(p => !p.Deleted);
             modelBuilder.Entity<ApplicationUserLogin>().HasQueryFilter(p => !p.Deleted);
             modelBuilder.Entity<ApplicationUserRole>().HasQueryFilter(p => !p.Deleted);
-            modelBuilder.Entity<ApplicationUserToken>().HasQueryFilter(p => !p.Deleted);           
+            modelBuilder.Entity<ApplicationUserToken>().HasQueryFilter(p => !p.Deleted);
         }
     }
 }

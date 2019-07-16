@@ -35,26 +35,26 @@ namespace Kingpin.Tier.Services.Classes
             ITokenService = iTokenService;
         }
 
-        public async Task<ActionResult<ViewUser>> SignIn(UserSignIn viewModel)
+        public async Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserSignIn viewModel)
         {
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
 
             if (signInResult.Succeeded)
             {
-                ApplicationUser identityUser = FindIdentityUserByEmail(viewModel.Email);
+                ApplicationUser applicationUser = FindApplicationUserByEmail(viewModel.Email);
 
                 // Log
-                string logData = identityUser.GetType().Name
+                string logData = applicationUser.GetType().Name
                     + " with Email "
-                    + identityUser.Email
+                    + applicationUser.Email
                     + " logged in at "
                     + DateTime.Now.ToShortTimeString();
 
                 ILogger.WriteUserAuthenticatedLog(logData);
 
-                ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, identityUser));
+                ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser));
 
-                return IMapper.Map<ViewUser>(identityUser);               
+                return IMapper.Map<ViewApplicationUser>(applicationUser);               
             }
             else
             {
@@ -62,9 +62,9 @@ namespace Kingpin.Tier.Services.Classes
             } 
         }
 
-        public async Task<ActionResult<ViewUser>> JoinIn(UserJoinIn viewModel)
+        public async Task<ActionResult<ViewApplicationUser>> JoinIn(ApplicationUserJoinIn viewModel)
         {
-            ApplicationUser identityUser = new ApplicationUser
+            ApplicationUser applicationUser = new ApplicationUser
             {
                 UserName = viewModel.Email,
                 Email = viewModel.Email,
@@ -72,24 +72,24 @@ namespace Kingpin.Tier.Services.Classes
                 SecurityStamp = DateTime.Now.ToBinary().ToString()
             };
 
-            IdentityResult identityResult = await UserManager.CreateAsync(identityUser, viewModel.Password);
+            IdentityResult identityResult = await UserManager.CreateAsync(applicationUser, viewModel.Password);
 
             if (identityResult.Succeeded)
             {    
-                await SignInManager.SignInAsync(identityUser, false);
+                await SignInManager.SignInAsync(applicationUser, false);
 
                 // Log
-                string logData = identityUser.GetType().Name
+                string logData = applicationUser.GetType().Name
                     + " with Email "
-                    + identityUser.Email
+                    + applicationUser.Email
                     + " logged in at "
                     + DateTime.Now.ToShortTimeString();
 
                 ILogger.WriteUserAuthenticatedLog(logData);
 
-                ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, identityUser));
+                ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser));
 
-                return IMapper.Map<ViewUser>(identityUser);
+                return IMapper.Map<ViewApplicationUser>(applicationUser);
             }
             else
             {
@@ -97,14 +97,14 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
-        public ApplicationUser FindIdentityUserByEmail(string email)
+        public ApplicationUser FindApplicationUserByEmail(string email)
         {
-            ApplicationUser identityUser = UserManager.Users.SingleOrDefault(x => x.Email == email);
+            ApplicationUser applicationUser = UserManager.Users.SingleOrDefault(x => x.Email == email);
 
-            if (identityUser == null)
+            if (applicationUser == null)
             {
                 // Log
-                string logData = identityUser.GetType().Name
+                string logData = applicationUser.GetType().Name
                     + " with Email "
                     + email
                     + " was not found at "
@@ -112,13 +112,13 @@ namespace Kingpin.Tier.Services.Classes
 
                 ILogger.WriteGetItemNotFoundLog(logData);
 
-                throw new ServiceException(identityUser.GetType().Name
+                throw new ServiceException(applicationUser.GetType().Name
                     + " with Email "
                     + email
                     + " does not exist");
             }
 
-            return identityUser;
+            return applicationUser;
         }
     }
 }

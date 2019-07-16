@@ -1,7 +1,7 @@
-import { UserJoinIn } from './../viewmodels/users/userjoinin';
-import { UserSignIn } from './../viewmodels/users/usersignin';
+import { ApplicationUserJoinIn } from './../viewmodels/users/applicationuserjoinin';
+import { ApplicationUserSignIn } from './../viewmodels/users/applicationusersignin';
 
-import { ViewUser } from './../viewmodels/views/viewuser';
+import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
 
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
@@ -22,13 +22,13 @@ export class AuthService extends BaseService {
     super(httpClient, matSnackBar);
   }
 
-  public SignIn(viewModel: UserSignIn): Observable<ViewUser> {
-    return this.httpClient.post<ViewUser>('api/auth/signin', viewModel)
-      .pipe(catchError(this.HandleError<ViewUser>('SignIn', undefined)));
+  public SignIn(viewModel: ApplicationUserSignIn): Observable<ViewApplicationUser> {
+    return this.httpClient.post<ViewApplicationUser>('api/auth/signin', viewModel)
+      .pipe(catchError(this.HandleError<ViewApplicationUser>('SignIn', undefined)));
   }
 
-  public JoinIn(viewModel: UserJoinIn): Observable<ViewUser> {
-    return this.httpClient.post<ViewUser>('api/auth/joinin', viewModel)
-      .pipe(catchError(this.HandleError<ViewUser>('JoinIn', undefined)));
+  public JoinIn(viewModel: ApplicationUserJoinIn): Observable<ViewApplicationUser> {
+    return this.httpClient.post<ViewApplicationUser>('api/auth/joinin', viewModel)
+      .pipe(catchError(this.HandleError<ViewApplicationUser>('JoinIn', undefined)));
   }
 }

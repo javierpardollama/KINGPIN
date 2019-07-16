@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Kingpin.Tier.Web.Extensions
 {
-    public static class ContextsConfiguration
+    public static class ContextsExtension
     {
         public static void AddCustomContexts(this IServiceCollection services)
         {

@@ -8,9 +8,11 @@ namespace Kingpin.Tier.Mappings.Classes
     {
         public ModelingProfile()
         {
-            CreateMap<ApplicationRole, ViewRole>();
+            CreateMap<ApplicationRole, ViewApplicationRole>();
 
-            CreateMap<ApplicationUser, ViewUser>();
+            CreateMap<ApplicationUser, ViewApplicationUser>();
+
+            CreateMap<ApplicationUserRole, ViewApplicationUserRole>();
         }
     }
 }

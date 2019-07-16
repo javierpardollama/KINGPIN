@@ -17,20 +17,28 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 
 // App-Auth
-import { JoininAuthComponent } from './auth/joinin-auth/joinin-auth.component';
-import { SigninAuthComponent } from './auth/signin-auth/signin-auth.component';
+import { JoinInAuthComponent } from './auth/joinin-auth/joinin-auth.component';
+import { SignInAuthComponent } from './auth/signin-auth/signin-auth.component';
 
 // App-Grid
+import { ApplicationRoleGridComponent } from './management/grids/applicationrole-grid/applicationrole-grid.component';
+
 // App-Modal-Adition
+import { ApplicationRoleAddModalComponent } from './management/modals/additions/applicationrole-add-modal/applicationrole-add-modal.component';
+
 // App-Modal-Update
+import { ApplicationRoleUpdateModalComponent } from './management/modals/updates/applicationrole-update-modal/applicationrole-update-modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    JoininAuthComponent,
-    SigninAuthComponent],
+    JoinInAuthComponent,
+    SignInAuthComponent,
+    ApplicationRoleGridComponent,
+    ApplicationRoleAddModalComponent,
+    ApplicationRoleUpdateModalComponent],
   imports: [
     // Angular Material
     BrowserAnimationsModule,
@@ -52,12 +60,13 @@ import { SigninAuthComponent } from './auth/signin-auth/signin-auth.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'auth/joinin', component: JoininAuthComponent, pathMatch: 'full' },
-      { path: 'auth/signin', component: SigninAuthComponent, pathMatch: 'full' }
+      { path: '', component: SignInAuthComponent, pathMatch: 'full' },
+      { path: 'auth/joinin', component: JoinInAuthComponent, pathMatch: 'full' },
+      { path: 'auth/signin', component: SignInAuthComponent, pathMatch: 'full' },
+      { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full' }
     ])
   ],
-  entryComponents: [],
+  entryComponents: [ApplicationRoleAddModalComponent, ApplicationRoleUpdateModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

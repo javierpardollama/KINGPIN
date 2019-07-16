@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Kingpin.Tier.Web.Extensions
 {
-    public static class AuthenticationConfiguration
+    public static class AuthenticationExtension
     {
         public static void AddCustomAuthentication(this IServiceCollection services)
         {

@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Builder;
 
 namespace Kingpin.Tier.Web.Extensions
 {
-    public static class ExceptionsConfiguration
+    public static class ExceptionsExtension
     {
         public static void UseCustomExceptionMiddlewares(this IApplicationBuilder app)
         {

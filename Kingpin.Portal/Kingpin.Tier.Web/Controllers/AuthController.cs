@@ -15,14 +15,14 @@ namespace Kingpin.Tier.Web.Controllers
 
         [HttpPost]
         [Route("signin")]
-        public async Task<IActionResult> SignIn([FromBody]UserSignIn viewModel)
+        public async Task<IActionResult> SignIn([FromBody]ApplicationUserSignIn viewModel)
         {
             return new JsonResult(await Service.SignIn(viewModel));
         }
 
         [HttpPost]
         [Route("joinin")]
-        public async Task<IActionResult> JoinIn([FromBody]UserJoinIn viewModel)
+        public async Task<IActionResult> JoinIn([FromBody]ApplicationUserJoinIn viewModel)
         {
             return new JsonResult(await Service.JoinIn(viewModel));
         }

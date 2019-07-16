@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from './../../../services/auth.service.module';
 
-import { UserSignIn } from './../../../viewmodels/users/usersignin';
+import { ApplicationUserSignIn } from './../../../viewmodels/users/applicationusersignin';
 
 import { TextAppVariants } from './../../../variants/text.app.variants';
 import { TimeAppVariants } from './../../../variants/time.app.variants';
@@ -15,7 +15,7 @@ import { ExpressionAppVariants } from './../../../variants/expression.app.varian
   templateUrl: './signin-auth.component.html',
   styleUrls: ['./signin-auth.component.css']
 })
-export class SigninAuthComponent implements OnInit {
+export class SignInAuthComponent implements OnInit {
 
   public formGroup: FormGroup;
 
@@ -38,7 +38,7 @@ export class SigninAuthComponent implements OnInit {
   }
 
   // Form Actions
-  onSubmit(viewModel: UserSignIn) {
+  onSubmit(viewModel: ApplicationUserSignIn) {
     this.authService.SignIn(viewModel).subscribe(user => {
 
       if (user !== undefined) {

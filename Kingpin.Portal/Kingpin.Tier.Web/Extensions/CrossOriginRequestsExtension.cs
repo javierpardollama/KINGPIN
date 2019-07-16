@@ -2,7 +2,7 @@
 
 namespace Kingpin.Tier.Web.Extensions
 {
-    public static class CrossOriginRequestsConfiguration
+    public static class CrossOriginRequestsExtension
     {
         public static void AddCustomCrossOriginRequests(this IServiceCollection services)
         {

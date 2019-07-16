@@ -4,13 +4,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Kingpin.Tier.Web.Extensions
 {
-    public static class ServicesConfiguration
+    public static class ServicesExtension
     {
         public static void AddCustomServices(this IServiceCollection services)
         {
             services.AddTransient<ITokenService, TokenService>();
-            services.AddTransient<IAuthService,AuthService>();
-            services.AddTransient<IRoleService, RoleService>();
+            services.AddTransient<IAuthService, AuthService>();
+            services.AddTransient<IApplicationRoleService, ApplicationRoleService>();
             // Add other services here
         }
     }

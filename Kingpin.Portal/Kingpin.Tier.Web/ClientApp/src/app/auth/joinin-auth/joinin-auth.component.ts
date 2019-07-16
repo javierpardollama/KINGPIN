@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from './../../../services/auth.service.module';
 
-import { UserSignIn } from './../../../viewmodels/users/usersignin';
+import { ApplicationUserSignIn } from './../../../viewmodels/users/applicationusersignin';
 
 import { TextAppVariants } from './../../../variants/text.app.variants';
 import { TimeAppVariants } from './../../../variants/time.app.variants';
@@ -15,7 +15,7 @@ import { ExpressionAppVariants } from './../../../variants/expression.app.varian
   templateUrl: './joinin-auth.component.html',
   styleUrls: ['./joinin-auth.component.css']
 })
-export class JoininAuthComponent implements OnInit {
+export class JoinInAuthComponent implements OnInit {
 
   public formGroup: FormGroup;
 
@@ -38,7 +38,7 @@ export class JoininAuthComponent implements OnInit {
   }
 
   // Form Actions
-  onSubmit(viewModel: UserSignIn) {
+  onSubmit(viewModel: ApplicationUserSignIn) {
     this.authService.JoinIn(viewModel).subscribe(user => {
 
       if (user !== undefined) {

@@ -1,7 +1,6 @@
 ﻿using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.Settings.Classes;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -19,12 +18,12 @@ namespace Kingpin.Tier.Services.Classes
         {
         }
 
-        public JwtSecurityToken GenerateJwtToken(string email, ApplicationUser identityUser)
+        public JwtSecurityToken GenerateJwtToken(string email, ApplicationUser applicationUser)
         {
             return new JwtSecurityToken(
                 JwtSettings.JwtIssuer,
                 JwtSettings.JwtIssuer,
-                GenerateJwtClaims(email, identityUser),
+                GenerateJwtClaims(email, applicationUser),
                 expires: GenerateTokenExpirationDate(),
                 signingCredentials: GenerateSigningCredentials(GenerateSymmetricSecurityKey())
             );
@@ -44,13 +43,13 @@ namespace Kingpin.Tier.Services.Classes
 
         public DateTime GenerateTokenExpirationDate() => DateTime.Now.AddDays(JwtSettings.JwtExpireDays);
 
-        public List<Claim> GenerateJwtClaims(string email, ApplicationUser identityUser)
+        public List<Claim> GenerateJwtClaims(string email, ApplicationUser applicationUser)
         {
             return new List<Claim>
             {
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, identityUser.Id.ToString())
+                new Claim(ClaimTypes.NameIdentifier, applicationUser.Id.ToString())
             };
         }
     }
