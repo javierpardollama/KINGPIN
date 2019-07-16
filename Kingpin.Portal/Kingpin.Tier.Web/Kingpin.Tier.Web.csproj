@@ -34,7 +34,6 @@
 
   <ItemGroup>
     <TypeScriptCompile Include="ClientApp\src\services\auth.service.module.ts" />
-    <TypeScriptCompile Include="ClientApp\src\services\role.service.module.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
