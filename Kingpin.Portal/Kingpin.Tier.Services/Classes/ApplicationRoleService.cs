@@ -1,4 +1,8 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.Logging.Classes;
@@ -8,10 +12,6 @@ using Kingpin.Tier.ViewModels.Classes.Updates;
 using Kingpin.Tier.ViewModels.Classes.Views;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Services.Classes
 {

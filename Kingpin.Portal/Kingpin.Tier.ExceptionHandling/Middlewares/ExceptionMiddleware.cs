@@ -1,9 +1,9 @@
-﻿using Kingpin.Tier.Exceptions.Classes;
+﻿using System.Net;
+using System.Threading.Tasks;
+using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.ViewModels.Classes.Views;
 using Microsoft.AspNetCore.Http;
 using Newtonsoft.Json;
-using System.Net;
-using System.Threading.Tasks;
 
 namespace Kingpin.Tier.ExceptionHandling.Middlewares
 {

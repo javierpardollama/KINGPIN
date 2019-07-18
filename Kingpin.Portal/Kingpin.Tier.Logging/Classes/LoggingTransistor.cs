@@ -1,7 +1,7 @@
-﻿using Kingpin.Tier.Constants.Enums;
+﻿using System;
+using Kingpin.Tier.Constants.Enums;
 using Kingpin.Tier.Mappings.Classes;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace Kingpin.Tier.Logging.Classes
 {

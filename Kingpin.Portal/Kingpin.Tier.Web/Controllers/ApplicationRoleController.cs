@@ -1,11 +1,11 @@
-﻿using Kingpin.Tier.Services.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Additions;
 using Kingpin.Tier.ViewModels.Classes.Updates;
 using Kingpin.Tier.ViewModels.Classes.Views;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Web.Controllers
 {

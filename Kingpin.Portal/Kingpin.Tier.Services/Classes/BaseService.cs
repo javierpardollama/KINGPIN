@@ -27,20 +27,20 @@ namespace Kingpin.Tier.Services.Classes
         {
             IContext = iContext;
             IMapper = iMapper;
-            ILogger = iLogger;                  
+            ILogger = iLogger;
         }
 
-        public BaseService(           
+        public BaseService(
             IMapper iMapper,
             ILogger iLogger
            )
-        {          
+        {
             IMapper = iMapper;
             ILogger = iLogger;
         }
 
         public BaseService(
-            IConfiguration iConfiguration           
+            IConfiguration iConfiguration
            )
         {
             IConfiguration = iConfiguration;

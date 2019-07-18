@@ -1,8 +1,8 @@
-﻿using Kingpin.Tier.Entities.Interfaces;
-using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Kingpin.Tier.Entities.Interfaces;
+using Microsoft.AspNetCore.Identity;
 
 namespace Kingpin.Tier.Entities.Classes
 {

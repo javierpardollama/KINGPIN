@@ -1,8 +1,8 @@
-﻿using Kingpin.Tier.Entities.Classes;
+﻿using System.Threading.Tasks;
+using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.ViewModels.Classes.Users;
 using Kingpin.Tier.ViewModels.Classes.Views;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Services.Interfaces
 {

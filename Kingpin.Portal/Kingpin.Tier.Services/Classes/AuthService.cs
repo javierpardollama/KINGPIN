@@ -1,4 +1,7 @@
-﻿using AutoMapper;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using AutoMapper;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.Logging.Classes;
@@ -8,9 +11,6 @@ using Kingpin.Tier.ViewModels.Classes.Views;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Kingpin.Tier.Services.Classes
@@ -53,12 +53,12 @@ namespace Kingpin.Tier.Services.Classes
 
                 ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser));
 
-                return IMapper.Map<ViewApplicationUser>(applicationUser);               
+                return IMapper.Map<ViewApplicationUser>(applicationUser);
             }
             else
             {
                 throw new ServiceException("Authentication Error");
-            } 
+            }
         }
 
         public async Task<ActionResult<ViewApplicationUser>> JoinIn(ApplicationUserJoinIn viewModel)
@@ -74,7 +74,7 @@ namespace Kingpin.Tier.Services.Classes
             IdentityResult identityResult = await UserManager.CreateAsync(applicationUser, viewModel.Password);
 
             if (identityResult.Succeeded)
-            {    
+            {
                 await SignInManager.SignInAsync(applicationUser, false);
 
                 // Log

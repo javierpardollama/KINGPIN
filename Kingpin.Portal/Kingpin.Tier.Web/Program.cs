@@ -1,9 +1,9 @@
+using System;
 using Kingpin.Tier.Contexts.Classes;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace Kingpin.Tier.Web
 {
