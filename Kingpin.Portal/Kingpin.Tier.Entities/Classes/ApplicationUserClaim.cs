@@ -8,6 +8,10 @@ namespace Kingpin.Tier.Entities.Classes
 {
     public partial class ApplicationUserClaim : IdentityUserClaim<int>, IBase
     {
+        public ApplicationUserClaim()
+        {
+        }
+
         [Required]
         public DateTime LastModified { get; set; }
 

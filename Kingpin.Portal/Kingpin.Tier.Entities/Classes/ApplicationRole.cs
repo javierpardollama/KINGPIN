@@ -8,6 +8,10 @@ namespace Kingpin.Tier.Entities.Classes
 {
     public partial class ApplicationRole : IdentityRole<int>, IBase
     {
+        public ApplicationRole()
+        {
+        }
+
         [Required]
         public DateTime LastModified { get; set; }
 

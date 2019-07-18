@@ -2,6 +2,10 @@
 {
     public class AddApplicationRole
     {
+        public AddApplicationRole()
+        {
+        }
+
         public string Name { get; set; }
     }
 }

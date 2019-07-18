@@ -8,6 +8,10 @@ namespace Kingpin.Tier.Entities.Classes
 {
     public partial class ApplicationUserRole : IdentityUserRole<int>, IBase
     {
+        public ApplicationUserRole()
+        {
+        }
+
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }

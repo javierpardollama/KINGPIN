@@ -5,6 +5,10 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
 {
     public class ViewApplicationUser : ViewBase
     {
+        public ViewApplicationUser()
+        {
+        }
+
         public string Email { get; set; }
 
         public virtual ICollection<ViewApplicationUserRole> ApplicationUserRoles { get; set; }

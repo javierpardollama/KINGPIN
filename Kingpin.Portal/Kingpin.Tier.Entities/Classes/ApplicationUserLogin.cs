@@ -8,6 +8,10 @@ namespace Kingpin.Tier.Entities.Classes
 {
     public partial class ApplicationUserLogin : IdentityUserLogin<int>, IBase
     {
+        public ApplicationUserLogin()
+        {
+        }
+
         [Required]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
