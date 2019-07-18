@@ -37,7 +37,7 @@ export class JoinInAuthComponent implements OnInit {
 
   // Form Actions
   onSubmit(viewModel: ApplicationUserSignIn) {
-    this.authService.JoinIn(viewModel);
+    this.authService.JoinIn(viewModel).subscribe(user => this.authService.User.next(user));
   }
 
   onNavigate() {

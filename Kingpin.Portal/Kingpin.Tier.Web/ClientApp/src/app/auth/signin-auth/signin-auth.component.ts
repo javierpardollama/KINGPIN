@@ -37,7 +37,7 @@ export class SignInAuthComponent implements OnInit {
 
   // Form Actions
   onSubmit(viewModel: ApplicationUserSignIn) {
-    this.authService.SignIn(viewModel);     
+    this.authService.SignIn(viewModel).subscribe(user => this.authService.User.next(user));
   }
 
   onNavigate() {

@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
 import { CanActivate } from '@angular/router';
 import { AuthService } from './../services/auth.service.module';
 import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
@@ -10,7 +9,7 @@ import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
 
 export class SignInGuard implements CanActivate {
 
-    private User: Observable<ViewApplicationUser>;
+    private User: ViewApplicationUser;
 
     private Activated: boolean = false;
 

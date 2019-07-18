@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { AuthService } from './../../services/auth.service.module';
 import { ViewApplicationUser } from './../../viewmodels/views/viewapplicationuser';
 
@@ -14,7 +13,7 @@ export class NavMenuComponent implements OnInit {
 
   public isVisible: boolean = false;
 
-  public User: Observable<ViewApplicationUser>;
+  public User: ViewApplicationUser;
 
   // Constructor
   constructor(private authService: AuthService) {
@@ -23,7 +22,7 @@ export class NavMenuComponent implements OnInit {
 
   // Life Cicle
   ngOnInit() {
-   
+
   }
 
   // Nav Actions
@@ -35,8 +34,7 @@ export class NavMenuComponent implements OnInit {
     this.isExpanded = !this.isExpanded;
   }
 
-  display()
-  {
+  display() {
     this.authService.User.subscribe(user => {
       this.User = user;
 
