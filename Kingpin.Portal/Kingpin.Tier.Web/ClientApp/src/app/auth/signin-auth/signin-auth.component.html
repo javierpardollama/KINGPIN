@@ -1,5 +1,9 @@
 <div class="container" novalidate>
-  <mat-card>
+  <mat-card class="auth-card">
+    <mat-card-header>
+      <div mat-card-avatar class="auth-header-image"></div>
+      <mat-card-title>Sign In</mat-card-title>
+    </mat-card-header>
     <form [formGroup]="formGroup" class="form">
       <mat-card-content>
         <div class="modal-content-line">
@@ -20,14 +24,14 @@
             </mat-error>
           </mat-form-field>
         </div>
-        <mat-card-actions>
-          <div class="form-element">
-            <button mat-raised-button color="primary" type="submit" class="button" (click)="onSubmit(formGroup.value)"
-              [disabled]="!formGroup.valid">Sign In
-            </button>
-          </div>
-        </mat-card-actions>
       </mat-card-content>
+      <mat-card-actions>
+        <button mat-raised-button color="primary" type="submit" class="button" (click)="onSubmit(formGroup.value)"
+          [disabled]="!formGroup.valid">Sign In
+        </button>
+        <button mat-raised-button color="primary" type="submit" class="button" (click)="onNavigate()">Join In
+        </button>
+      </mat-card-actions>
     </form>
   </mat-card>
 </div>

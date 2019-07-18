@@ -1,5 +1,5 @@
 <header>
-  <nav class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3'>
+  <nav *ngIf="display()" class='navbar navbar-expand-sm navbar-toggleable-sm navbar-light mb-3'>
     <div class="container">
       <a class="navbar-brand " [routerLink]='["/"]'>
         <div class="nav-menu-option-image nav-menu-app-image"></div>

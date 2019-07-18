@@ -11,6 +11,9 @@ import {
   MatInputModule, MatFormFieldModule, MatButtonModule, MatSnackBarModule, MatAutocompleteModule, MatSelectModule
 } from '@angular/material';
 
+// Guards
+import { SignInGuard } from './../guards/signin.guard';
+
 // App
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -63,7 +66,7 @@ import { ApplicationRoleUpdateModalComponent } from './management/modals/updates
       { path: '', component: SignInAuthComponent, pathMatch: 'full' },
       { path: 'auth/joinin', component: JoinInAuthComponent, pathMatch: 'full' },
       { path: 'auth/signin', component: SignInAuthComponent, pathMatch: 'full' },
-      { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full' }
+      { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full', canActivate: [SignInGuard] }
     ])
   ],
   entryComponents: [ApplicationRoleAddModalComponent, ApplicationRoleUpdateModalComponent],

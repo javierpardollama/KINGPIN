@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material';
+import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from './../../../services/auth.service.module';
 
 import { ApplicationUserSignIn } from './../../../viewmodels/users/applicationusersignin';
 
-import { TextAppVariants } from './../../../variants/text.app.variants';
-import { TimeAppVariants } from './../../../variants/time.app.variants';
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
 @Component({
@@ -20,9 +18,9 @@ export class SignInAuthComponent implements OnInit {
   public formGroup: FormGroup;
 
   // Constructor
-  constructor(private authService: AuthService,
-    private formBuilder: FormBuilder,
-    private matSnackBar: MatSnackBar) { }
+  constructor(private router: Router,
+    private authService: AuthService,
+    private formBuilder: FormBuilder) { }
 
   // Life Cicle
   ngOnInit() {
@@ -39,12 +37,10 @@ export class SignInAuthComponent implements OnInit {
 
   // Form Actions
   onSubmit(viewModel: ApplicationUserSignIn) {
-    this.authService.SignIn(viewModel).subscribe(user => {
-
-      if (user !== undefined) {
-        this.matSnackBar.open(TextAppVariants.AppSuccessButtonText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
-      }
-    });
+    this.authService.SignIn(viewModel);     
   }
 
+  onNavigate() {
+    this.router.navigate(["/auth/joinin"]);
+  }
 }
