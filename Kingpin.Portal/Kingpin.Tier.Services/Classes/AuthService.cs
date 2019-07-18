@@ -23,12 +23,11 @@ namespace Kingpin.Tier.Services.Classes
 
         private readonly ITokenService ITokenService;
 
-        public AuthService(
-            IMapper iMapper,
-            ILogger<AuthService> iLogger,           
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
-            ITokenService iTokenService) : base(iMapper, iLogger)
+        public AuthService(IMapper iMapper,
+                           ILogger<AuthService> iLogger,
+                           UserManager<ApplicationUser> userManager,
+                           SignInManager<ApplicationUser> signInManager,
+                           ITokenService iTokenService) : base(iMapper, iLogger)
         {
             UserManager = userManager;
             SignInManager = signInManager;

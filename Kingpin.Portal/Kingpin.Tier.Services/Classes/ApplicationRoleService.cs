@@ -19,20 +19,16 @@ namespace Kingpin.Tier.Services.Classes
     {
         private readonly RoleManager<ApplicationRole> RoleManager;
 
-        public ApplicationRoleService(
-            IMapper iMapper,
-            ILogger<ApplicationRoleService> iLogger,
-             RoleManager<ApplicationRole> roleManager) : base(iMapper, iLogger)
-        {
-            RoleManager = roleManager;
-        }
+        public ApplicationRoleService(IMapper iMapper,
+                                      ILogger<ApplicationRoleService> iLogger,
+                                      RoleManager<ApplicationRole> roleManager) : base(iMapper, iLogger) => RoleManager = roleManager;
 
         public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole viewModel)
         {
             await CheckName(viewModel);
 
             ApplicationRole applicationRole = new ApplicationRole
-            {              
+            {
                 Name = viewModel.Name,
                 NormalizedName = viewModel.Name,
                 ConcurrencyStamp = DateTime.Now.ToBinary().ToString()
@@ -133,7 +129,7 @@ namespace Kingpin.Tier.Services.Classes
             applicationRole.Name = viewModel.Name;
             applicationRole.NormalizedName = viewModel.Name;
 
-            await RoleManager.UpdateAsync(applicationRole);            
+            await RoleManager.UpdateAsync(applicationRole);
 
             // Log
             string logData = applicationRole.GetType().Name
