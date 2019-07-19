@@ -2,6 +2,7 @@ using AutoMapper;
 using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Mappings.Classes;
+using Kingpin.Tier.Settings.Classes;
 using Kingpin.Tier.Web.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -22,14 +23,15 @@ namespace Kingpin.Tier.Web
 
         public IConfiguration Configuration { get; }
 
-        public MapperConfiguration MapperConfiguration { get; set; }
+        public MapperConfiguration MapperConfiguration { get; private set; }
 
         public IMapper Mapper { get; set; }
 
+        public JwtSettings JwtSettings { get; private set; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-            // Add Entity Framework services to the services container.
+        {            
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -50,9 +52,15 @@ namespace Kingpin.Tier.Web
             // Register the service and implementation for the database context
             services.AddCustomContexts();
 
+            // Add Entity Framework services to the services container.
             services.AddCustomServices();
 
-            services.AddCustomAuthentication();
+            // Register the Jwt Settings to the configuration container
+            JwtSettings = new JwtSettings();
+            Configuration.GetSection("Jwt").Bind(JwtSettings);
+
+            // Add Authentication to the services container.
+            services.AddCustomAuthentication(JwtSettings);
 
             services.AddCustomCrossOriginRequests();
 

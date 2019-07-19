@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using Kingpin.Tier.Settings.Classes;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -7,7 +8,7 @@ namespace Kingpin.Tier.Web.Extensions
 {
     public static class AuthenticationExtension
     {
-        public static void AddCustomAuthentication(this IServiceCollection services)
+        public static void AddCustomAuthentication(this IServiceCollection services, JwtSettings JwtSettings)
         {
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
@@ -19,11 +20,11 @@ namespace Kingpin.Tier.Web.Extensions
                        ValidateLifetime = true,
                        ValidateIssuerSigningKey = true,
 
-                       ValidIssuer = "http://localhost:5000",
-                       ValidAudience = "http://localhost:5000",
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("superSecretKey@345"))
+                       ValidIssuer = JwtSettings.JwtIssuer,
+                       ValidAudience = JwtSettings.JwtAudience,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.JwtKey))
                    };
-               });            // Add other services here
+               });            
         }
     }
 }
