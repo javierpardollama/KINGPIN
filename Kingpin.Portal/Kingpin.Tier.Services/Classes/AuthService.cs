@@ -128,7 +128,11 @@ namespace Kingpin.Tier.Services.Classes
 
         public ApplicationUser FindApplicationUserByEmail(string email)
         {
-            ApplicationUser applicationUser = UserManager.Users.AsQueryable().Include(x => x.ApplicationUserTokens).FirstOrDefault(x => x.Email == email);
+            ApplicationUser applicationUser = UserManager.Users.AsQueryable()
+                .Include(x => x.ApplicationUserTokens)
+                .Include(x=>x.ApplicationUserRoles)
+                .ThenInclude(x=>x.ApplicationRole)
+                .FirstOrDefault(x => x.Email == email);
 
             if (applicationUser == null)
             {
