@@ -10,6 +10,7 @@ using Kingpin.Tier.ViewModels.Classes.Users;
 using Kingpin.Tier.ViewModels.Classes.Views;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
@@ -42,6 +43,13 @@ namespace Kingpin.Tier.Services.Classes
             {
                 ApplicationUser applicationUser = FindApplicationUserByEmail(viewModel.Email);
 
+                applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
+                {
+                    User = applicationUser,
+                    UserId = applicationUser.Id,
+                    Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser))
+                });
+
                 // Log
                 string logData = applicationUser.GetType().Name
                     + " with Email "
@@ -51,7 +59,37 @@ namespace Kingpin.Tier.Services.Classes
 
                 ILogger.WriteUserAuthenticatedLog(logData);
 
-                ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser));
+                return IMapper.Map<ViewApplicationUser>(applicationUser);
+            }
+            else
+            {
+                throw new ServiceException("Authentication Error");
+            }
+        }
+
+        public async Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserJoinIn viewModel)
+        {
+            SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
+
+            if (signInResult.Succeeded)
+            {
+                ApplicationUser applicationUser = FindApplicationUserByEmail(viewModel.Email);
+
+                applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
+                {
+                    User = applicationUser,
+                    UserId = applicationUser.Id,
+                    Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser))
+                });
+
+                // Log
+                string logData = applicationUser.GetType().Name
+                    + " with Email "
+                    + applicationUser.Email
+                    + " logged in at "
+                    + DateTime.Now.ToShortTimeString();
+
+                ILogger.WriteUserAuthenticatedLog(logData);
 
                 return IMapper.Map<ViewApplicationUser>(applicationUser);
             }
@@ -68,27 +106,16 @@ namespace Kingpin.Tier.Services.Classes
                 UserName = viewModel.Email,
                 Email = viewModel.Email,
                 ConcurrencyStamp = DateTime.Now.ToBinary().ToString(),
-                SecurityStamp = DateTime.Now.ToBinary().ToString()
+                SecurityStamp = DateTime.Now.ToBinary().ToString(),
+                NormalizedEmail = viewModel.Email,
+                NormalizedUserName = viewModel.Email,
             };
 
             IdentityResult identityResult = await UserManager.CreateAsync(applicationUser, viewModel.Password);
 
             if (identityResult.Succeeded)
             {
-                await SignInManager.SignInAsync(applicationUser, false);
-
-                // Log
-                string logData = applicationUser.GetType().Name
-                    + " with Email "
-                    + applicationUser.Email
-                    + " logged in at "
-                    + DateTime.Now.ToShortTimeString();
-
-                ILogger.WriteUserAuthenticatedLog(logData);
-
-                ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser));
-
-                return IMapper.Map<ViewApplicationUser>(applicationUser);
+                return await SignIn(viewModel);               
             }
             else
             {
@@ -98,7 +125,7 @@ namespace Kingpin.Tier.Services.Classes
 
         public ApplicationUser FindApplicationUserByEmail(string email)
         {
-            ApplicationUser applicationUser = UserManager.Users.SingleOrDefault(x => x.Email == email);
+            ApplicationUser applicationUser = UserManager.Users.AsQueryable().Include(x => x.ApplicationUserTokens).FirstOrDefault(x => x.Email == email);
 
             if (applicationUser == null)
             {

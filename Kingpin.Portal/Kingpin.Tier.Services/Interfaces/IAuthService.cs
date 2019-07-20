@@ -10,7 +10,9 @@ namespace Kingpin.Tier.Services.Interfaces
     {
         Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserSignIn viewModel);
 
-        Task<ActionResult<ViewApplicationUser>> JoinIn(ApplicationUserJoinIn viewModel);
+        Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserJoinIn viewModel);
+
+        Task<ActionResult<ViewApplicationUser>> JoinIn(ApplicationUserJoinIn viewModel);       
 
         ApplicationUser FindApplicationUserByEmail(string email);
     }

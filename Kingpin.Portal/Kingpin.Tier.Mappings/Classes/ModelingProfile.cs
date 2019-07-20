@@ -13,6 +13,8 @@ namespace Kingpin.Tier.Mappings.Classes
             CreateMap<ApplicationUser, ViewApplicationUser>();
 
             CreateMap<ApplicationUserRole, ViewApplicationUserRole>();
+
+            CreateMap<ApplicationUserToken, ViewApplicationUserToken>();
         }
     }
 }

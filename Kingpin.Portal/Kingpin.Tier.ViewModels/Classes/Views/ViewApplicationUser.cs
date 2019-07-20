@@ -20,5 +20,16 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
                 return this.ApplicationUserRoles?.AsQueryable().Select(x => x.ApplicationRole).ToList();
             }
         }
+
+        public virtual ICollection<ViewApplicationUserToken> ApplicationUserTokens { get; set; }
+
+
+        public virtual ViewApplicationUserToken ApplicationUserToken
+        {
+            get
+            {
+                return this.ApplicationUserTokens?.AsQueryable().LastOrDefault();
+            }
+        }
     }
 }
