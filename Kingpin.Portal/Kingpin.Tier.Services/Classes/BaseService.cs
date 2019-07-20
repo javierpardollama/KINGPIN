@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
+
 using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.Settings.Classes;
+
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 

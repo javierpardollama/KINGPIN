@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
+
 using Kingpin.Tier.Entities.Classes;
+
 using Microsoft.EntityFrameworkCore;
 
 namespace Kingpin.Tier.Contexts.Interfaces

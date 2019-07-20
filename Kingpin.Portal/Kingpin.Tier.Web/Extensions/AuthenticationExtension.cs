@@ -24,7 +24,7 @@ namespace Kingpin.Tier.Web.Extensions
                        ValidAudience = JwtSettings.JwtAudience,
                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.JwtKey))
                    };
-               });            
+               });
         }
     }
 }

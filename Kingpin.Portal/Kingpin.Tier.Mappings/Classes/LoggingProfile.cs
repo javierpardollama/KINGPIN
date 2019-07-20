@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Kingpin.Tier.Constants.Enums;
+
 using Microsoft.Extensions.Logging;
 
 namespace Kingpin.Tier.Mappings.Classes

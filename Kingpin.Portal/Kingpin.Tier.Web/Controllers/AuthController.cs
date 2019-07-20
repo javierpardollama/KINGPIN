@@ -1,6 +1,8 @@
 ﻿using System.Threading.Tasks;
+
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Users;
+
 using Microsoft.AspNetCore.Mvc;
 
 namespace Kingpin.Tier.Web.Controllers

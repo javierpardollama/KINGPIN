@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.ViewModels.Classes.Views;
 

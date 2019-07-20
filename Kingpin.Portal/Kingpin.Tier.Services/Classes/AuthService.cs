@@ -1,17 +1,20 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+
 using AutoMapper;
+
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Users;
 using Kingpin.Tier.ViewModels.Classes.Views;
+
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+
 using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Kingpin.Tier.Services.Classes
@@ -35,7 +38,7 @@ namespace Kingpin.Tier.Services.Classes
             ITokenService = iTokenService;
         }
 
-        public async Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserSignIn viewModel)
+        public async Task<ViewApplicationUser> SignIn(ApplicationUserSignIn viewModel)
         {
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
 
@@ -67,7 +70,7 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
-        public async Task<ActionResult<ViewApplicationUser>> SignIn(ApplicationUserJoinIn viewModel)
+        public async Task<ViewApplicationUser> SignIn(ApplicationUserJoinIn viewModel)
         {
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
 
@@ -99,7 +102,7 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
-        public async Task<ActionResult<ViewApplicationUser>> JoinIn(ApplicationUserJoinIn viewModel)
+        public async Task<ViewApplicationUser> JoinIn(ApplicationUserJoinIn viewModel)
         {
             ApplicationUser applicationUser = new ApplicationUser
             {
@@ -115,7 +118,7 @@ namespace Kingpin.Tier.Services.Classes
 
             if (identityResult.Succeeded)
             {
-                return await SignIn(viewModel);               
+                return await SignIn(viewModel);
             }
             else
             {

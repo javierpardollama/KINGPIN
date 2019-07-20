@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+
 using Kingpin.Tier.Entities.Interfaces;
+
 using Microsoft.AspNetCore.Identity;
 
 namespace Kingpin.Tier.Entities.Classes
