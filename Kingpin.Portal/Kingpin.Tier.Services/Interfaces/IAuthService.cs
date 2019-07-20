@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Kingpin.Tier.Entities.Classes;
-using Kingpin.Tier.ViewModels.Classes.Users;
+using Kingpin.Tier.ViewModels.Classes.ApplicationUsers;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
 namespace Kingpin.Tier.Services.Interfaces

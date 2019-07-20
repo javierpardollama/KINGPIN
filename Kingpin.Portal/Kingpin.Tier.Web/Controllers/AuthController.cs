@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 using Kingpin.Tier.Services.Interfaces;
-using Kingpin.Tier.ViewModels.Classes.Users;
+using Kingpin.Tier.ViewModels.Classes.ApplicationUsers;
 
 using Microsoft.AspNetCore.Mvc;
 

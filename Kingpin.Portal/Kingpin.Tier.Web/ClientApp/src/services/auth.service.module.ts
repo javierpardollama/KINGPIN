@@ -1,5 +1,5 @@
-import { ApplicationUserJoinIn } from './../viewmodels/users/applicationuserjoinin';
-import { ApplicationUserSignIn } from './../viewmodels/users/applicationusersignin';
+import { ApplicationUserJoinIn } from './../viewmodels/applicationusers/applicationuserjoinin';
+import { ApplicationUserSignIn } from './../viewmodels/applicationusers/applicationusersignin';
 
 import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
 

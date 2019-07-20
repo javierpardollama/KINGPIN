@@ -8,7 +8,7 @@ using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
-using Kingpin.Tier.ViewModels.Classes.Users;
+using Kingpin.Tier.ViewModels.Classes.ApplicationUsers;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
 using Microsoft.AspNetCore.Identity;

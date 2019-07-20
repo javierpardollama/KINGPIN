@@ -1,4 +1,4 @@
-﻿namespace Kingpin.Tier.ViewModels.Classes.Users
+﻿namespace Kingpin.Tier.ViewModels.Classes.ApplicationUsers
 {
     public class ApplicationUserSignIn
     {

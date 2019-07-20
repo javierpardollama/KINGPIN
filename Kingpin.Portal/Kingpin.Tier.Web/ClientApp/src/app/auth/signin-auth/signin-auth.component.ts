@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { AuthService } from './../../../services/auth.service.module';
 
-import { ApplicationUserSignIn } from './../../../viewmodels/users/applicationusersignin';
+import { ApplicationUserSignIn } from './../../../viewmodels/applicationusers/applicationusersignin';
 
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
