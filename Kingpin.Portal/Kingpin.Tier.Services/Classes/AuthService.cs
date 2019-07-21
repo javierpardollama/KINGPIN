@@ -138,8 +138,8 @@ namespace Kingpin.Tier.Services.Classes
         {
             ApplicationUser applicationUser = UserManager.Users.AsQueryable()
                 .Include(x => x.ApplicationUserTokens)
-                .Include(x=>x.ApplicationUserRoles)
-                .ThenInclude(x=>x.ApplicationRole)
+                .Include(x => x.ApplicationUserRoles)
+                .ThenInclude(x => x.ApplicationRole)
                 .FirstOrDefault(x => x.Email == email);
 
             if (applicationUser == null)

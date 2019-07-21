@@ -14,13 +14,13 @@ namespace Kingpin.Tier.ExceptionHandling.Middlewares
     {
         private readonly RequestDelegate RequestDelegate;
 
-        public ExceptionMiddleware(RequestDelegate request) => this.RequestDelegate = request;
+        public ExceptionMiddleware(RequestDelegate request) => RequestDelegate = request;
 
         public async Task InvokeAsync(HttpContext httpContext)
         {
             try
             {
-                await this.RequestDelegate(httpContext);
+                await RequestDelegate(httpContext);
             }
             catch (ServiceException ex)
             {

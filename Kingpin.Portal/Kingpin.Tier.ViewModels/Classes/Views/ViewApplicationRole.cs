@@ -13,12 +13,6 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
 
         public virtual ICollection<ViewApplicationUserRole> ApplicationUserRoles { get; set; }
 
-        public virtual ICollection<ViewApplicationUser> ApplicationUsers
-        {
-            get
-            {
-                return this.ApplicationUserRoles?.AsQueryable().Select(x => x.ApplicationUser).ToList();
-            }
-        }
+        public virtual ICollection<ViewApplicationUser> ApplicationUsers => ApplicationUserRoles?.AsQueryable().Select(x => x.ApplicationUser).ToList();
     }
 }
