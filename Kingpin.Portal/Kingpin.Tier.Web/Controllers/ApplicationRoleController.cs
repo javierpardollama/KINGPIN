@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Additions;
 using Kingpin.Tier.ViewModels.Classes.Updates;
-using Kingpin.Tier.ViewModels.Classes.Views;
 
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,27 +22,21 @@ namespace Kingpin.Tier.Web.Controllers
         [Route("updateapplicationrole")]
         public async Task<IActionResult> UpdateApplicationRole([FromBody]UpdateApplicationRole viewModel)
         {
-            ViewApplicationRole applicationRole = await Service.UpdateApplicationRole(viewModel);
-
-            return new JsonResult(applicationRole);
+            return new JsonResult(value: await Service.UpdateApplicationRole(viewModel));
         }
 
         [HttpGet]
         [Route("findallapplicationrole")]
         public async Task<IActionResult> FindAllApplicationRole()
         {
-            ICollection<ViewApplicationRole> applicationRoles = await Service.FindAllApplicationRole();
-
-            return new JsonResult(applicationRoles);
+            return new JsonResult(value: await Service.FindAllApplicationRole());
         }
 
         [HttpPost]
         [Route("addapplicationrole")]
         public async Task<IActionResult> AddApplicationRole([FromBody]AddApplicationRole viewModel)
         {
-            ViewApplicationRole applicationRole = await Service.AddApplicationRole(viewModel);
-
-            return new JsonResult(applicationRole);
+            return new JsonResult(value: await Service.AddApplicationRole(viewModel));
         }
 
         [HttpDelete]

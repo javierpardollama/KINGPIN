@@ -25,7 +25,8 @@ namespace Kingpin.Tier.Services.Classes
             return new JwtSecurityToken(
                 JwtSettings.JwtIssuer,
                 JwtSettings.JwtIssuer,
-                GenerateJwtClaims(email, applicationUser),
+                GenerateJwtClaims(email,
+                                  applicationUser),
                 expires: GenerateTokenExpirationDate(),
                 signingCredentials: GenerateSigningCredentials(GenerateSymmetricSecurityKey())
             );
@@ -40,18 +41,23 @@ namespace Kingpin.Tier.Services.Classes
 
         public SigningCredentials GenerateSigningCredentials(SymmetricSecurityKey symmetricSecurityKey)
         {
-            return new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256); ;
+            return new SigningCredentials(symmetricSecurityKey,
+                                          SecurityAlgorithms.HmacSha256); ;
         }
 
         public DateTime GenerateTokenExpirationDate() => DateTime.Now.AddDays(JwtSettings.JwtExpireDays);
 
-        public List<Claim> GenerateJwtClaims(string email, ApplicationUser applicationUser)
+        public List<Claim> GenerateJwtClaims(string email,
+                                             ApplicationUser applicationUser)
         {
             return new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub, email),
-                new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier, applicationUser.Id.ToString())
+                new Claim(JwtRegisteredClaimNames.Sub,
+                          email),
+                new Claim(JwtRegisteredClaimNames.Jti,
+                          Guid.NewGuid().ToString()),
+                new Claim(ClaimTypes.NameIdentifier,
+                          applicationUser.Id.ToString())
             };
         }
     }

@@ -40,7 +40,10 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ViewApplicationUser> SignIn(ApplicationUserSignIn viewModel)
         {
-            SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
+            SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email,
+                                                                                viewModel.Password,
+                                                                                false,
+                                                                                false);
 
             if (signInResult.Succeeded)
             {
@@ -72,7 +75,10 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ViewApplicationUser> SignIn(ApplicationUserJoinIn viewModel)
         {
-            SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email, viewModel.Password, false, false);
+            SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email,
+                                                                                viewModel.Password,
+                                                                                false,
+                                                                                false);
 
             if (signInResult.Succeeded)
             {
@@ -82,7 +88,8 @@ namespace Kingpin.Tier.Services.Classes
                 {
                     User = applicationUser,
                     UserId = applicationUser.Id,
-                    Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser))
+                    Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email,
+                                                                                       applicationUser))
                 });
 
                 // Log
@@ -114,7 +121,8 @@ namespace Kingpin.Tier.Services.Classes
                 NormalizedUserName = viewModel.Email,
             };
 
-            IdentityResult identityResult = await UserManager.CreateAsync(applicationUser, viewModel.Password);
+            IdentityResult identityResult = await UserManager.CreateAsync(applicationUser,
+                                                                          viewModel.Password);
 
             if (identityResult.Succeeded)
             {

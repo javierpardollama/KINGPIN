@@ -28,7 +28,6 @@ namespace Kingpin.Tier.Contexts.Classes
 
         public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
 
-
         public DbSet<ApplicationUserToken> ApplicationUserToken { get; set; }
 
         public override int SaveChanges()

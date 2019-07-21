@@ -13,20 +13,20 @@ namespace Kingpin.Tier.Web.Controllers
     {
         private readonly IAuthService Service;
 
-        public AuthController(IAuthService service) => this.Service = service;
+        public AuthController(IAuthService service) => Service = service;
 
         [HttpPost]
         [Route("signin")]
         public async Task<IActionResult> SignIn([FromBody]ApplicationUserSignIn viewModel)
         {
-            return new JsonResult(await Service.SignIn(viewModel));
+            return new JsonResult(value: await Service.SignIn(viewModel));
         }
 
         [HttpPost]
         [Route("joinin")]
         public async Task<IActionResult> JoinIn([FromBody]ApplicationUserJoinIn viewModel)
         {
-            return new JsonResult(await Service.JoinIn(viewModel));
+            return new JsonResult(value: await Service.JoinIn(viewModel));
         }
     }
 }
