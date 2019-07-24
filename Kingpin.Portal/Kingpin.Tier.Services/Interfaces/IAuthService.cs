@@ -14,6 +14,6 @@ namespace Kingpin.Tier.Services.Interfaces
 
         Task<ViewApplicationUser> JoinIn(ApplicationUserJoinIn viewModel);
 
-        ApplicationUser FindApplicationUserByEmail(string email);
+        Task<ApplicationUser> FindApplicationUserByEmail(string email);
     }
 }

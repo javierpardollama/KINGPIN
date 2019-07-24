@@ -1,0 +1,52 @@
+<div *ngIf="!dataSource" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
+<div class="grid-page">
+  <h4 class="breadcrumb">Management / Application Users</h4>
+
+  <button mat-raised-button color="primary" class="add-button" (click)="AddRecord()"><span>Add New</span></button>
+
+  <mat-form-field class="grid-filter">
+    <input matInput (keyup)="ApplyMyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="dataSource" matSort>
+
+      <!-- Id Column -->
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Id </th>
+        <td mat-cell *matCellDef="let row"> {{row.Id}} </td>
+      </ng-container>
+
+      <!-- Email Column -->
+      <ng-container matColumnDef="Email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Email </th>
+        <td mat-cell *matCellDef="let row"> {{row.Email}} </td>
+      </ng-container>
+
+      <!-- ApplicationRoles Column -->
+      <ng-container matColumnDef="ApplicationRoles">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ApplicationRoles </th>
+        <td mat-cell *matCellDef="let row">
+          <mat-chip-list>
+            <mat-chip *ngFor="let ApplicationRole of row.ApplicationRoles">{{ApplicationRole.Name}}</mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+
+      <!-- LastModified Column -->
+      <ng-container matColumnDef="LastModified">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> LastModified </th>
+        <td mat-cell *matCellDef="let row"> {{row.LastModified | date: 'MMM d, y'}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="GetRecord(row)">
+      </tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+  </div>
+</div>

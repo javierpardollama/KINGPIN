@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Entities", "Kingpin.Tier.Entities\Kingpin.Tier.Entities.csproj", "{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Exceptions", "Kingpin.Tier.Exceptions\Kingpin.Tier.Exceptions.csproj", "{C6125C58-A324-40D8-AB4E-A531D17CA92F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Logging", "Kingpin.Tier.Logging\Kingpin.Tier.Logging.csproj", "{BBE37BBB-098F-4906-A908-507E70EE2189}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.ExceptionHandling", "Kingpin.Tier.ExceptionHandling\Kingpin.Tier.ExceptionHandling.csproj", "{6BF3BE40-F138-430D-9DF2-37877E78EB10}"
@@ -23,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Web", "Kingpin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Constants", "Kingpin.Tier.Constants\Kingpin.Tier.Constants.csproj", "{4E606A88-CDF2-4987-847F-52E8D946C0E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Settings", "Kingpin.Tier.Settings\Kingpin.Tier.Settings.csproj", "{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Settings", "Kingpin.Tier.Settings\Kingpin.Tier.Settings.csproj", "{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0F634BF-8CDE-4A4C-8DE3-098ACB6C4E69}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C6125C58-A324-40D8-AB4E-A531D17CA92F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C6125C58-A324-40D8-AB4E-A531D17CA92F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C6125C58-A324-40D8-AB4E-A531D17CA92F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C6125C58-A324-40D8-AB4E-A531D17CA92F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{BBE37BBB-098F-4906-A908-507E70EE2189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{BBE37BBB-098F-4906-A908-507E70EE2189}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBE37BBB-098F-4906-A908-507E70EE2189}.Release|Any CPU.ActiveCfg = Release|Any CPU

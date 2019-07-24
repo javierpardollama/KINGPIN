@@ -65,7 +65,7 @@ namespace Kingpin.Tier.Web
             // Add Authentication to the services container.
             services.AddCustomAuthentication(JwtSettings);
 
-            services.AddCustomCrossOriginRequests();
+            services.AddCustomCrossOriginRequests(JwtSettings);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(options =>
@@ -99,7 +99,7 @@ namespace Kingpin.Tier.Web
 
             app.UseAuthentication();
 
-            app.UseCors("EnableCORS");
+            app.UseCors("Authentication");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

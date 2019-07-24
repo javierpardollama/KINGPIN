@@ -1,7 +1,7 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 
-using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
 using Microsoft.AspNetCore.Http;
@@ -22,26 +22,26 @@ namespace Kingpin.Tier.ExceptionHandling.Middlewares
             {
                 await RequestDelegate(httpContext);
             }
-            catch (ServiceException ex)
+            catch (Exception ex)
             {
                 await HandleExceptionAsync(httpContext, ex);
             }
         }
 
         private static Task HandleExceptionAsync(
-            HttpContext context,
-            ServiceException exception)
+            HttpContext httpContext,
+            Exception exception)
         {
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+            httpContext.Response.ContentType = "application/json";
+            httpContext.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
             ViewException viewException = new ViewException
             {
-                StatusCode = context.Response.StatusCode,
+                StatusCode = httpContext.Response.StatusCode,
                 Message = exception.Message
             };
 
-            return context.Response.WriteAsync(JsonConvert.SerializeObject(viewException));
+            return httpContext.Response.WriteAsync(JsonConvert.SerializeObject(viewException));
         }
     }
 }

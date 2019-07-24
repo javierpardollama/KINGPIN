@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 
 using Kingpin.Tier.Entities.Classes;
-using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Additions;
@@ -39,6 +38,8 @@ namespace Kingpin.Tier.Services.Classes
 
             await RoleManager.CreateAsync(applicationRole);
 
+            await IContext.SaveChangesAsync();
+
             // Log
             string logData = applicationRole.GetType().Name
                 + " with Id "
@@ -66,7 +67,7 @@ namespace Kingpin.Tier.Services.Classes
 
                 ILogger.WriteGetItemFoundLog(logData);
 
-                throw new ServiceException(applicationRole.GetType().Name
+                throw new Exception(applicationRole.GetType().Name
                     + " with Name "
                     + viewModel.Name
                     + " already exists");
@@ -100,7 +101,7 @@ namespace Kingpin.Tier.Services.Classes
 
                 ILogger.WriteGetItemNotFoundLog(logData);
 
-                throw new ServiceException(applicationRole.GetType().Name
+                throw new Exception(applicationRole.GetType().Name
                     + " with Id "
                     + id
                     + " does not exist");
@@ -114,6 +115,8 @@ namespace Kingpin.Tier.Services.Classes
             ApplicationRole applicationRole = await FindApplicationRoleById(id);
 
             await RoleManager.DeleteAsync(applicationRole);
+
+            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name
@@ -133,6 +136,8 @@ namespace Kingpin.Tier.Services.Classes
             applicationRole.NormalizedName = viewModel.Name;
 
             await RoleManager.UpdateAsync(applicationRole);
+
+            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name

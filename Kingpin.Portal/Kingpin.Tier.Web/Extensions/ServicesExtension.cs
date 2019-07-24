@@ -11,6 +11,8 @@ namespace Kingpin.Tier.Web.Extensions
             services.AddTransient<ITokenService, TokenService>();
             services.AddTransient<IAuthService, AuthService>();
             services.AddTransient<IApplicationRoleService, ApplicationRoleService>();
+            services.AddTransient<IApplicationUserService, ApplicationUserService>();
+
             // Add other services here
         }
     }

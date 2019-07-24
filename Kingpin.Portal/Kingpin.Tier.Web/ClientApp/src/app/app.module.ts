@@ -31,6 +31,8 @@ import { ApplicationRoleAddModalComponent } from './management/modals/additions/
 
 // App-Modal-Update
 import { ApplicationRoleUpdateModalComponent } from './management/modals/updates/applicationrole-update-modal/applicationrole-update-modal.component';
+import { ApplicationUserGridComponent } from './management/grids/applicationuser-grid/applicationuser-grid.component';
+import { ApplicationUserUpdateModalComponent } from './management/modals/updates/applicationuser-update-modal/applicationuser-update-modal.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { ApplicationRoleUpdateModalComponent } from './management/modals/updates
     SignInAuthComponent,
     ApplicationRoleGridComponent,
     ApplicationRoleAddModalComponent,
-    ApplicationRoleUpdateModalComponent],
+    ApplicationRoleUpdateModalComponent,
+    ApplicationUserGridComponent,
+    ApplicationUserUpdateModalComponent],
   imports: [
     // Angular Material
     BrowserAnimationsModule,
@@ -66,10 +70,11 @@ import { ApplicationRoleUpdateModalComponent } from './management/modals/updates
       { path: '', component: SignInAuthComponent, pathMatch: 'full' },
       { path: 'auth/joinin', component: JoinInAuthComponent, pathMatch: 'full' },
       { path: 'auth/signin', component: SignInAuthComponent, pathMatch: 'full' },
-      { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full', canActivate: [SignInGuard] }
+      { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full', canActivate: [SignInGuard] },
+      { path: 'management/applicationusers', component: ApplicationUserGridComponent, pathMatch: 'full', canActivate: [SignInGuard] }
     ])
   ],
-  entryComponents: [ApplicationRoleAddModalComponent, ApplicationRoleUpdateModalComponent],
+  entryComponents: [ApplicationRoleAddModalComponent, ApplicationRoleUpdateModalComponent, ApplicationUserUpdateModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

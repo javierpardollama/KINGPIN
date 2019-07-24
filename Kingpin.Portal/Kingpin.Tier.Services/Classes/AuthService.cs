@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using AutoMapper;
 
 using Kingpin.Tier.Entities.Classes;
-using Kingpin.Tier.Exceptions.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.ApplicationUsers;
@@ -47,7 +46,7 @@ namespace Kingpin.Tier.Services.Classes
 
             if (signInResult.Succeeded)
             {
-                ApplicationUser applicationUser = FindApplicationUserByEmail(viewModel.Email);
+                ApplicationUser applicationUser = await FindApplicationUserByEmail(viewModel.Email);
 
                 applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
                 {
@@ -69,7 +68,7 @@ namespace Kingpin.Tier.Services.Classes
             }
             else
             {
-                throw new ServiceException("Authentication Error");
+                throw new Exception("Authentication Error");
             }
         }
 
@@ -82,7 +81,7 @@ namespace Kingpin.Tier.Services.Classes
 
             if (signInResult.Succeeded)
             {
-                ApplicationUser applicationUser = FindApplicationUserByEmail(viewModel.Email);
+                ApplicationUser applicationUser = await FindApplicationUserByEmail(viewModel.Email);
 
                 applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
                 {
@@ -105,7 +104,7 @@ namespace Kingpin.Tier.Services.Classes
             }
             else
             {
-                throw new ServiceException("Authentication Error");
+                throw new Exception("Authentication Error");
             }
         }
 
@@ -126,21 +125,23 @@ namespace Kingpin.Tier.Services.Classes
 
             if (identityResult.Succeeded)
             {
+                await IContext.SaveChangesAsync();
+
                 return await SignIn(viewModel);
             }
             else
             {
-                throw new ServiceException("Authentication Error");
+                throw new Exception("Authentication Error");
             }
         }
 
-        public ApplicationUser FindApplicationUserByEmail(string email)
+        public async Task<ApplicationUser> FindApplicationUserByEmail(string email)
         {
-            ApplicationUser applicationUser = UserManager.Users.AsQueryable()
+            ApplicationUser applicationUser = await UserManager.Users.AsQueryable()
                 .Include(x => x.ApplicationUserTokens)
                 .Include(x => x.ApplicationUserRoles)
                 .ThenInclude(x => x.ApplicationRole)
-                .FirstOrDefault(x => x.Email == email);
+                .FirstOrDefaultAsync(x => x.Email == email);
 
             if (applicationUser == null)
             {
@@ -153,7 +154,7 @@ namespace Kingpin.Tier.Services.Classes
 
                 ILogger.WriteGetItemNotFoundLog(logData);
 
-                throw new ServiceException(applicationUser.GetType().Name
+                throw new Exception(applicationUser.GetType().Name
                     + " with Email "
                     + email
                     + " does not exist");

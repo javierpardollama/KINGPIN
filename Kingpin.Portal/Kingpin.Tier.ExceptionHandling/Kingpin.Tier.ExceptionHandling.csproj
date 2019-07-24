@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Kingpin.Tier.Exceptions\Kingpin.Tier.Exceptions.csproj" />
     <ProjectReference Include="..\Kingpin.Tier.ViewModels\Kingpin.Tier.ViewModels.csproj" />
   </ItemGroup>
 
