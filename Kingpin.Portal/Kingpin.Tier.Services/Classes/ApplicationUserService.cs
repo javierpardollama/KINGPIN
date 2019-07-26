@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
@@ -24,10 +25,11 @@ namespace Kingpin.Tier.Services.Classes
         private readonly RoleManager<ApplicationRole> RoleManager;
 
         public ApplicationUserService(IMapper iMapper,
+                          IApplicationContext iContext,
                           ILogger<ApplicationUserService> iLogger,
                           UserManager<ApplicationUser> userManager,
                           RoleManager<ApplicationRole> roleManager
-                          ) : base(iMapper, iLogger)
+                          ) : base(iContext, iMapper, iLogger)
         {
             UserManager = userManager;
             RoleManager = roleManager;

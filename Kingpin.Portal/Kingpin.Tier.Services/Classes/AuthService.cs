@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 
 using AutoMapper;
 
+using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
@@ -27,10 +28,11 @@ namespace Kingpin.Tier.Services.Classes
         private readonly ITokenService ITokenService;
 
         public AuthService(IMapper iMapper,
+                           IApplicationContext iContext,
                            ILogger<AuthService> iLogger,
                            UserManager<ApplicationUser> userManager,
                            SignInManager<ApplicationUser> signInManager,
-                           ITokenService iTokenService) : base(iMapper, iLogger)
+                           ITokenService iTokenService) : base(iContext, iMapper, iLogger)
         {
             UserManager = userManager;
             SignInManager = signInManager;
