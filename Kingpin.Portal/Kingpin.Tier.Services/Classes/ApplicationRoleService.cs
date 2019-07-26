@@ -13,6 +13,7 @@ using Kingpin.Tier.ViewModels.Classes.Updates;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace Kingpin.Tier.Services.Classes
@@ -80,6 +81,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             ICollection<ApplicationRole> applicationRoles = await RoleManager.Roles
                 .AsQueryable()
+                .AsNoTracking()
                 .ToAsyncEnumerable()
                 .ToList();
 

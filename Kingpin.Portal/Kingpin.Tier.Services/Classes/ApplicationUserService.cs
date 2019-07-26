@@ -37,6 +37,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             ICollection<ApplicationUser> applicationUsers = await UserManager.Users
                .AsQueryable()
+               .AsNoTracking()
                .Include(x => x.ApplicationUserTokens)
                .Include(x => x.ApplicationUserRoles)
                .ThenInclude(x => x.ApplicationRole)
