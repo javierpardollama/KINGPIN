@@ -3,5 +3,5 @@ import { ViewApplicationUser } from './viewapplicationuser';
 
 export interface ViewApplicationUserToken extends ViewBase {
     Value: string;
-    User: ViewApplicationUser;
+    ApplicationUser: ViewApplicationUser;
 }

@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kingpin.Tier.Contexts.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190715144942_Initial")]
+    [Migration("20190726193055_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -185,6 +185,8 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<int>("RoleId");
 
+                    b.Property<int>("ApplicationRoleId");
+
                     b.Property<int>("ApplicationUserId");
 
                     b.Property<bool>("Deleted");
@@ -195,6 +197,8 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<DateTime>("LastModified");
 
                     b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("ApplicationRoleId");
 
                     b.HasIndex("ApplicationUserId");
 
@@ -272,7 +276,7 @@ namespace Kingpin.Tier.Contexts.Migrations
                 {
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationRole", "ApplicationRole")
                         .WithMany("ApplicationUserRoles")
-                        .HasForeignKey("ApplicationUserId")
+                        .HasForeignKey("ApplicationRoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "ApplicationUser")
@@ -293,7 +297,7 @@ namespace Kingpin.Tier.Contexts.Migrations
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationUserToken", b =>
                 {
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "User")
+                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "ApplicationUser")
                         .WithMany("ApplicationUserTokens")
                         .HasForeignKey("ApplicationUserId")
                         .OnDelete(DeleteBehavior.Cascade);

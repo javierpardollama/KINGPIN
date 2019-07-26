@@ -153,14 +153,15 @@ namespace Kingpin.Tier.Contexts.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false),
+                    ApplicationRoleId = table.Column<int>(nullable: false),
                     ApplicationUserId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
                     table.ForeignKey(
-                        name: "FK_AspNetUserRoles_AspNetRoles_ApplicationUserId",
-                        column: x => x.ApplicationUserId,
+                        name: "FK_AspNetUserRoles_AspNetRoles_ApplicationRoleId",
+                        column: x => x.ApplicationRoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
@@ -250,6 +251,11 @@ namespace Kingpin.Tier.Contexts.Migrations
                 name: "IX_AspNetUserLogins_UserId",
                 table: "AspNetUserLogins",
                 column: "UserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AspNetUserRoles_ApplicationRoleId",
+                table: "AspNetUserRoles",
+                column: "ApplicationRoleId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_ApplicationUserId",

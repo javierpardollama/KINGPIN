@@ -25,7 +25,7 @@ namespace Kingpin.Tier.Entities.Classes
         public bool Deleted { get; set; }
 
         [Required]
-        [ForeignKey("ApplicationUserId")]
+        [ForeignKey("ApplicationRoleId")]
         public virtual ApplicationRole ApplicationRole { get; set; }
 
         [Required]

@@ -50,7 +50,7 @@ namespace Kingpin.Tier.Services.Classes
 
                 applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
                 {
-                    User = applicationUser,
+                    ApplicationUser = applicationUser,
                     UserId = applicationUser.Id,
                     Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser))
                 });
@@ -85,7 +85,7 @@ namespace Kingpin.Tier.Services.Classes
 
                 applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
                 {
-                    User = applicationUser,
+                    ApplicationUser = applicationUser,
                     UserId = applicationUser.Id,
                     Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email,
                                                                                        applicationUser))

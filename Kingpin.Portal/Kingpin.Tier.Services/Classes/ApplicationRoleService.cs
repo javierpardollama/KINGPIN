@@ -78,12 +78,12 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
-            ICollection<ApplicationRole> roles = await RoleManager.Roles
+            ICollection<ApplicationRole> applicationRoles = await RoleManager.Roles
                 .AsQueryable()
                 .ToAsyncEnumerable()
                 .ToList();
 
-            return IMapper.Map<ICollection<ViewApplicationRole>>(roles);
+            return IMapper.Map<ICollection<ViewApplicationRole>>(applicationRoles);
         }
 
         public async Task<ApplicationRole> FindApplicationRoleById(int id)

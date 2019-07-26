@@ -35,7 +35,7 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ICollection<ViewApplicationUser>> FindAllApplicationUser()
         {
-            ICollection<ApplicationUser> users = await UserManager.Users
+            ICollection<ApplicationUser> applicationUsers = await UserManager.Users
                .AsQueryable()
                .Include(x => x.ApplicationUserTokens)
                .Include(x => x.ApplicationUserRoles)
@@ -43,7 +43,7 @@ namespace Kingpin.Tier.Services.Classes
                .ToAsyncEnumerable()
                .ToList();
 
-            return IMapper.Map<ICollection<ViewApplicationUser>>(users);
+            return IMapper.Map<ICollection<ViewApplicationUser>>(applicationUsers);
         }
 
         public async Task<ApplicationUser> FindApplicationUserById(int id)

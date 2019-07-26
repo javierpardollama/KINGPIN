@@ -26,6 +26,6 @@ namespace Kingpin.Tier.Entities.Classes
 
         [Required]
         [ForeignKey("ApplicationUserId")]
-        public virtual ApplicationUser User { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

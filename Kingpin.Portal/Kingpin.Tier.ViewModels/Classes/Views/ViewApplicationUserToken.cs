@@ -8,6 +8,6 @@
 
         public string Value { get; set; }
 
-        public virtual ViewApplicationUser User { get; set; }
+        public virtual ViewApplicationUser ApplicationUser { get; set; }
     }
 }
