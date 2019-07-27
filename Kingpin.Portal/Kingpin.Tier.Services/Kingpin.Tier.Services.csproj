@@ -2,6 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
+    <PackageProjectUrl>https://github.com/javierpardollama/KINGPIN/tree/master/Kinpin.Portal/Kingpin.Tier.Services</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/javierpardollama/KINGPIN/tree/master/Kinpin.Portal/Kingpin.Tier.Services</RepositoryUrl>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Copyright>2019 Javier Pardo</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
@@ -9,6 +14,13 @@
     <ProjectReference Include="..\Kingpin.Tier.ExceptionHandling\Kingpin.Tier.ExceptionHandling.csproj" />
     <ProjectReference Include="..\Kingpin.Tier.Logging\Kingpin.Tier.Logging.csproj" />
     <ProjectReference Include="..\Kingpin.Tier.Settings\Kingpin.Tier.Settings.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\Kingpin.Tier.Mappings\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
