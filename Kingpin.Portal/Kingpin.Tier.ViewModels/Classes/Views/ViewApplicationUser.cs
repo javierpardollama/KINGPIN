@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Kingpin.Tier.ViewModels.Classes.Views
 {
-    public class ViewApplicationUser : ViewBase
+    public class ViewApplicationUser : ViewKey
     {
         public ViewApplicationUser()
         {

@@ -1,3 +1,4 @@
+using System;
 using AutoMapper;
 
 using Kingpin.Tier.Contexts.Classes;
@@ -38,7 +39,15 @@ namespace Kingpin.Tier.Web
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>()
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            {
+                options.Lockout = new LockoutOptions()
+                {
+                    AllowedForNewUsers = true,
+                    DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5),
+                    MaxFailedAccessAttempts = 5
+                };
+            })
               .AddEntityFrameworkStores<ApplicationContext>()
               .AddDefaultTokenProviders();
 

@@ -24,10 +24,6 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<bool>("Deleted");
-
-                    b.Property<DateTime>("LastModified");
-
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
@@ -40,7 +36,7 @@ namespace Kingpin.Tier.Contexts.Migrations
                         .IsUnique()
                         .HasName("RoleNameIndex");
 
-                    b.ToTable("AspNetRoles");
+                    b.ToTable("ApplicationRole");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationRoleClaim", b =>
@@ -48,25 +44,17 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ApplicationRoleId");
-
                     b.Property<string>("ClaimType");
 
                     b.Property<string>("ClaimValue");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<int>("RoleId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationRoleId");
-
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetRoleClaims");
+                    b.ToTable("ApplicationRoleClaim");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationUser", b =>
@@ -79,14 +67,10 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<bool>("Deleted");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -120,7 +104,7 @@ namespace Kingpin.Tier.Contexts.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex");
 
-                    b.ToTable("AspNetUsers");
+                    b.ToTable("ApplicationUser");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationUserClaim", b =>
@@ -128,25 +112,17 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ApplicationUserId");
-
                     b.Property<string>("ClaimType");
 
                     b.Property<string>("ClaimValue");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<DateTime>("LastModified");
 
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserClaims");
+                    b.ToTable("ApplicationUserClaim");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationUserLogin", b =>
@@ -155,26 +131,15 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<string>("ProviderKey");
 
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("LastModified");
-
                     b.Property<string>("ProviderDisplayName");
 
                     b.Property<int>("UserId");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("UserId");
 
-                    b.ToTable("AspNetUserLogins");
+                    b.ToTable("ApplicationUserLogin");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationUserRole", b =>
@@ -183,26 +148,11 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<int>("RoleId");
 
-                    b.Property<int>("ApplicationRoleId");
-
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("LastModified");
-
                     b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("ApplicationRoleId");
-
-                    b.HasIndex("ApplicationUserId");
 
                     b.HasIndex("RoleId");
 
-                    b.ToTable("AspNetUserRoles");
+                    b.ToTable("ApplicationUserRole");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationUserToken", b =>
@@ -213,33 +163,17 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("ApplicationUserId");
-
-                    b.Property<bool>("Deleted");
-
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("LastModified");
-
                     b.Property<string>("Value");
 
                     b.HasKey("UserId", "LoginProvider", "Name");
 
-                    b.HasIndex("ApplicationUserId");
-
-                    b.ToTable("AspNetUserTokens");
+                    b.ToTable("ApplicationUserToken");
                 });
 
             modelBuilder.Entity("Kingpin.Tier.Entities.Classes.ApplicationRoleClaim", b =>
                 {
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationRole", "ApplicationRole")
                         .WithMany("ApplicationRoleClaims")
-                        .HasForeignKey("ApplicationRoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationRole")
-                        .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -248,11 +182,6 @@ namespace Kingpin.Tier.Contexts.Migrations
                 {
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "ApplicationUser")
                         .WithMany("ApplicationUserClaims")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -261,11 +190,6 @@ namespace Kingpin.Tier.Contexts.Migrations
                 {
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "ApplicationUser")
                         .WithMany("ApplicationUserLogins")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -274,21 +198,11 @@ namespace Kingpin.Tier.Contexts.Migrations
                 {
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationRole", "ApplicationRole")
                         .WithMany("ApplicationUserRoles")
-                        .HasForeignKey("ApplicationRoleId")
+                        .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "ApplicationUser")
                         .WithMany("ApplicationUserRoles")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationRole")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -297,11 +211,6 @@ namespace Kingpin.Tier.Contexts.Migrations
                 {
                     b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser", "ApplicationUser")
                         .WithMany("ApplicationUserTokens")
-                        .HasForeignKey("ApplicationUserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("Kingpin.Tier.Entities.Classes.ApplicationUser")
-                        .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });

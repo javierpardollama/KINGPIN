@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
-
-using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
@@ -25,11 +23,10 @@ namespace Kingpin.Tier.Services.Classes
         private readonly RoleManager<ApplicationRole> RoleManager;
 
         public ApplicationUserService(IMapper iMapper,
-                          IApplicationContext iContext,
                           ILogger<ApplicationUserService> iLogger,
                           UserManager<ApplicationUser> userManager,
                           RoleManager<ApplicationRole> roleManager
-                          ) : base(iContext, iMapper, iLogger)
+                          ) : base(iMapper, iLogger)
         {
             UserManager = userManager;
             RoleManager = roleManager;
@@ -83,8 +80,6 @@ namespace Kingpin.Tier.Services.Classes
 
             await UserManager.DeleteAsync(applicationUser);
 
-            await IContext.SaveChangesAsync();
-
             // Log
             string logData = applicationUser.GetType().Name
                 + " with Id "
@@ -104,8 +99,6 @@ namespace Kingpin.Tier.Services.Classes
             await UserManager.UpdateAsync(applicationUser);
 
             await UpdateApplicationUserRole(viewModel, applicationUser);
-
-            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationUser.GetType().Name

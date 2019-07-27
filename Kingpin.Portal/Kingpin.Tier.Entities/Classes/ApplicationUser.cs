@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
 
 using Kingpin.Tier.Entities.Interfaces;
 
@@ -8,17 +6,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Kingpin.Tier.Entities.Classes
 {
-    public partial class ApplicationUser : IdentityUser<int>, IBase
+    public partial class ApplicationUser : IdentityUser<int>, IKey
     {
         public ApplicationUser()
         {
         }
-
-        [Required]
-        public DateTime LastModified { get; set; }
-
-        [Required]
-        public bool Deleted { get; set; }
 
         public virtual ICollection<ApplicationUserRole> ApplicationUserRoles { get; set; }
 

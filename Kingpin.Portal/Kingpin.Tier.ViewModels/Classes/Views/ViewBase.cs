@@ -2,10 +2,8 @@
 
 namespace Kingpin.Tier.ViewModels.Classes.Views
 {
-    public class ViewBase
+    public class ViewBase : ViewKey
     {
-        public int Id { get; set; }
-
         public DateTime LastModified { get; set; }
     }
 }

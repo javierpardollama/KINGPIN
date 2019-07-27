@@ -1,8 +1,7 @@
 import { ViewApplicationRole } from './viewapplicationrole';
 import { ViewApplicationUser } from './viewapplicationuser';
-import { ViewBase } from './viewbase';
 
-export interface ViewApplicationUserRole extends ViewBase {
+export interface ViewApplicationUserRole {
     ApplicationRole: ViewApplicationRole;
     ApplicationUser: ViewApplicationUser;
 }

@@ -1,15 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Kingpin.Tier.Entities.Interfaces
 {
-    public interface IBase
+    public interface IBase : IKey
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
-        int Id { get; set; }
-
         [Required]
         DateTime LastModified { get; set; }
 

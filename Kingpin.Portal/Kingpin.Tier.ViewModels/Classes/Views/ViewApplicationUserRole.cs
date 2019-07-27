@@ -1,6 +1,6 @@
 ﻿namespace Kingpin.Tier.ViewModels.Classes.Views
 {
-    public class ViewApplicationUserRole : ViewBase
+    public class ViewApplicationUserRole
     {
         public ViewApplicationUserRole()
         {

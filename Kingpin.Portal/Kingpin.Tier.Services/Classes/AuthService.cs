@@ -3,8 +3,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
-
-using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
@@ -28,11 +26,10 @@ namespace Kingpin.Tier.Services.Classes
         private readonly ITokenService ITokenService;
 
         public AuthService(IMapper iMapper,
-                           IApplicationContext iContext,
                            ILogger<AuthService> iLogger,
                            UserManager<ApplicationUser> userManager,
                            SignInManager<ApplicationUser> signInManager,
-                           ITokenService iTokenService) : base(iContext, iMapper, iLogger)
+                           ITokenService iTokenService) : base(iMapper, iLogger)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -44,7 +41,7 @@ namespace Kingpin.Tier.Services.Classes
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email,
                                                                                 viewModel.Password,
                                                                                 false,
-                                                                                false);
+                                                                                true);
 
             if (signInResult.Succeeded)
             {
@@ -79,7 +76,7 @@ namespace Kingpin.Tier.Services.Classes
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email,
                                                                                 viewModel.Password,
                                                                                 false,
-                                                                                false);
+                                                                                true);
 
             if (signInResult.Succeeded)
             {
@@ -127,8 +124,6 @@ namespace Kingpin.Tier.Services.Classes
 
             if (identityResult.Succeeded)
             {
-                await IContext.SaveChangesAsync();
-
                 return await SignIn(viewModel);
             }
             else

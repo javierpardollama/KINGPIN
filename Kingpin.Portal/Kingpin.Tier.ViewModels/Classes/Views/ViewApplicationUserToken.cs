@@ -1,6 +1,6 @@
 ﻿namespace Kingpin.Tier.ViewModels.Classes.Views
 {
-    public class ViewApplicationUserToken : ViewBase
+    public class ViewApplicationUserToken
     {
         public ViewApplicationUserToken()
         {

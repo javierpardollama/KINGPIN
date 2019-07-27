@@ -33,6 +33,15 @@ namespace Kingpin.Tier.Services.Classes
         }
 
         public BaseService(
+            IMapper iMapper,
+            ILogger iLogger
+           )
+        {
+            IMapper = iMapper;
+            ILogger = iLogger;
+        }
+
+        public BaseService(
             IConfiguration iConfiguration
            )
         {

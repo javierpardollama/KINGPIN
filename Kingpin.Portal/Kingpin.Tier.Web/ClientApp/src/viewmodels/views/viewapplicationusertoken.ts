@@ -1,7 +1,6 @@
-import { ViewBase } from './viewbase';
 import { ViewApplicationUser } from './viewapplicationuser';
 
-export interface ViewApplicationUserToken extends ViewBase {
+export interface ViewApplicationUserToken {
     Value: string;
     ApplicationUser: ViewApplicationUser;
 }

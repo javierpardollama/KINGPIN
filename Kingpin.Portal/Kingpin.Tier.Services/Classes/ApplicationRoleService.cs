@@ -4,8 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
-
-using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
@@ -24,9 +22,8 @@ namespace Kingpin.Tier.Services.Classes
         private readonly RoleManager<ApplicationRole> RoleManager;
 
         public ApplicationRoleService(IMapper iMapper,
-                                      IApplicationContext iContext,
                                       ILogger<ApplicationRoleService> iLogger,
-                                      RoleManager<ApplicationRole> roleManager) : base(iContext, iMapper, iLogger) => RoleManager = roleManager;
+                                      RoleManager<ApplicationRole> roleManager) : base(iMapper, iLogger) => RoleManager = roleManager;
 
         public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole viewModel)
         {
@@ -40,8 +37,6 @@ namespace Kingpin.Tier.Services.Classes
             };
 
             await RoleManager.CreateAsync(applicationRole);
-
-            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name
@@ -120,8 +115,6 @@ namespace Kingpin.Tier.Services.Classes
 
             await RoleManager.DeleteAsync(applicationRole);
 
-            await IContext.SaveChangesAsync();
-
             // Log
             string logData = applicationRole.GetType().Name
                 + " with Id "
@@ -140,8 +133,6 @@ namespace Kingpin.Tier.Services.Classes
             applicationRole.NormalizedName = viewModel.Name;
 
             await RoleManager.UpdateAsync(applicationRole);
-
-            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name
