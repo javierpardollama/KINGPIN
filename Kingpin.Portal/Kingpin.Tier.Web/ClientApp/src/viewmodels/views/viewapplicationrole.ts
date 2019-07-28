@@ -1,8 +1,9 @@
 import { ViewKey } from './viewkey';
+import { ViewBase } from './viewbase';
 import { ViewApplicationUserRole } from './viewapplicationuserrole';
 import { ViewApplicationUser } from './viewapplicationuser';
 
-export interface ViewApplicationRole extends ViewKey {
+export interface ViewApplicationRole extends ViewKey, ViewBase {
   Name: string;
   ApplicationUserRoles: ViewApplicationUserRole[];
   ApplicationUsers: ViewApplicationUser[];

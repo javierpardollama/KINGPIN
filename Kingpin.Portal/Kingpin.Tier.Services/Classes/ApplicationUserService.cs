@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
+using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
@@ -17,24 +18,18 @@ using Microsoft.Extensions.Logging;
 namespace Kingpin.Tier.Services.Classes
 {
     public class ApplicationUserService : BaseService, IApplicationUserService
-    {
-        private readonly UserManager<ApplicationUser> UserManager;
-
-        private readonly RoleManager<ApplicationRole> RoleManager;
+    { 
 
         public ApplicationUserService(IMapper iMapper,
-                          ILogger<ApplicationUserService> iLogger,
-                          UserManager<ApplicationUser> userManager,
-                          RoleManager<ApplicationRole> roleManager
-                          ) : base(iMapper, iLogger)
-        {
-            UserManager = userManager;
-            RoleManager = roleManager;
+                          IApplicationContext iContext,
+                          ILogger<ApplicationUserService> iLogger                       
+                          ) : base(iContext, iMapper, iLogger)
+        {          
         }
 
         public async Task<ICollection<ViewApplicationUser>> FindAllApplicationUser()
         {
-            ICollection<ApplicationUser> applicationUsers = await UserManager.Users
+            ICollection<ApplicationUser> applicationUsers = await IContext.ApplicationUser
                .AsQueryable()
                .AsNoTracking()
                .Include(x => x.ApplicationUserTokens)
@@ -48,7 +43,7 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ApplicationUser> FindApplicationUserById(int id)
         {
-            ApplicationUser applicationUser = await UserManager.Users.AsQueryable()
+            ApplicationUser applicationUser = await IContext.ApplicationUser.AsQueryable()
                .Include(x => x.ApplicationUserTokens)
                .Include(x => x.ApplicationUserRoles)
                .ThenInclude(x => x.ApplicationRole)
@@ -78,7 +73,15 @@ namespace Kingpin.Tier.Services.Classes
         {
             ApplicationUser applicationUser = await FindApplicationUserById(id);
 
-            await UserManager.DeleteAsync(applicationUser);
+            // Override Identity ApplicationUser Unique Constraint Properties
+            applicationUser.Email = DateTime.Now.ToBinary().ToString();
+            applicationUser.NormalizedEmail = DateTime.Now.ToBinary().ToString();
+            applicationUser.UserName = DateTime.Now.ToBinary().ToString();
+            applicationUser.NormalizedUserName = DateTime.Now.ToBinary().ToString();
+
+            IContext.ApplicationUser.Remove(applicationUser);
+
+            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationUser.GetType().Name
@@ -96,9 +99,11 @@ namespace Kingpin.Tier.Services.Classes
 
             applicationUser.ApplicationUserRoles = new List<ApplicationUserRole>();
 
-            await UserManager.UpdateAsync(applicationUser);
+            IContext.ApplicationUser.Update(applicationUser);
 
             await UpdateApplicationUserRole(viewModel, applicationUser);
+
+            await IContext.SaveChangesAsync();
 
             // Log
             string logData = applicationUser.GetType().Name
@@ -112,7 +117,7 @@ namespace Kingpin.Tier.Services.Classes
             return IMapper.Map<ViewApplicationUser>(applicationUser); ;
         }
 
-        public async Task UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser entity)
+        public async Task UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser applicationUser)
         {
             await viewModel.ApplicationRolesId.ToAsyncEnumerable().ForEachAsync(async x =>
             {
@@ -120,17 +125,17 @@ namespace Kingpin.Tier.Services.Classes
 
                 ApplicationUserRole applicationUserRole = new ApplicationUserRole
                 {
-                    ApplicationUser = entity,
-                    ApplicationRole = applicationRole,
+                    UserId = applicationUser.Id,
+                    RoleId = applicationRole.Id,
                 };
 
-                await IContext.ApplicationUserRole.AddAsync(applicationUserRole);
+                applicationUser.ApplicationUserRoles.Add(applicationUserRole);
             });
         }
 
         public async Task<ApplicationRole> FindApplicationRoleById(int id)
         {
-            ApplicationRole applicationRole = await RoleManager.FindByIdAsync(id.ToString());
+            ApplicationRole applicationRole = await IContext.ApplicationRole.FirstOrDefaultAsync(x=>x.Id == id);
 
             if (applicationRole == null)
             {

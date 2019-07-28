@@ -1,13 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+
+using Kingpin.Tier.ViewModels.Interfaces.Views;
 
 namespace Kingpin.Tier.ViewModels.Classes.Views
 {
-    public class ViewApplicationUser : ViewKey
+    public class ViewApplicationUser : IViewKey, IViewBase
     {
         public ViewApplicationUser()
         {
         }
+
+        public int Id { get; set; }
+
+        public DateTime LastModified { get; set; }
 
         public string Email { get; set; }
 

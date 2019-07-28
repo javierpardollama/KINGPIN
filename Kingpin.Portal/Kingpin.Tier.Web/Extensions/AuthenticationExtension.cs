@@ -1,5 +1,7 @@
 ﻿using System.Text;
+
 using Kingpin.Tier.Settings.Classes;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;

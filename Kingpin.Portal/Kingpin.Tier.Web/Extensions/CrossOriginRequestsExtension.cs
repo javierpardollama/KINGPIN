@@ -1,4 +1,5 @@
 ﻿using Kingpin.Tier.Settings.Classes;
+
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Kingpin.Tier.Web.Extensions

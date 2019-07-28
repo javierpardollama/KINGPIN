@@ -1,4 +1,5 @@
 ﻿using Kingpin.Tier.ExceptionHandling.Middlewares;
+
 using Microsoft.AspNetCore.Builder;
 
 namespace Kingpin.Tier.Web.Extensions

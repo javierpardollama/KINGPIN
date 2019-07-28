@@ -19,7 +19,7 @@ export class ApplicationUserGridComponent implements OnInit {
 
   public ELEMENT_DATA: ViewApplicationUser[];
 
-  public displayedColumns: string[] = ['Id', 'Email', "ApplicationRoles"];
+  public displayedColumns: string[] = ['Id', 'Email', "ApplicationRoles", "LastModified"];
 
   public dataSource: MatTableDataSource<ViewApplicationUser>;
 

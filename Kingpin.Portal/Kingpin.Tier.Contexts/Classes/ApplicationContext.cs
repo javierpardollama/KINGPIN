@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
+using Kingpin.Tier.Contexts.Extensions;
 using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 
@@ -67,76 +68,15 @@ namespace Kingpin.Tier.Contexts.Classes
                         break;
                 }
             }
-        }
+        }      
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ApplicationUserRole>(applicationUserRole =>
-            {
-                applicationUserRole.ToTable("ApplicationUserRole");
+            modelBuilder.AddCustomizedIdentities();
 
-                applicationUserRole.HasOne(x => x.ApplicationUser)
-            .WithMany(x => x.ApplicationUserRoles)
-            .HasForeignKey(x => x.UserId);
-
-                applicationUserRole.HasOne(x => x.ApplicationRole)
-            .WithMany(x => x.ApplicationUserRoles)
-            .HasForeignKey(x => x.RoleId);
-            });
-
-            modelBuilder.Entity<ApplicationRoleClaim>(applicationRoleClaim =>
-            {
-                applicationRoleClaim.ToTable("ApplicationRoleClaim");
-
-                applicationRoleClaim.HasOne(x => x.ApplicationRole)
-           .WithMany(x => x.ApplicationRoleClaims)
-           .HasForeignKey(x => x.RoleId);
-            });
-
-            modelBuilder.Entity<ApplicationUserClaim>(applicationUserClaim =>
-            {
-                applicationUserClaim.ToTable("ApplicationUserClaim");
-
-                applicationUserClaim.HasOne(x => x.ApplicationUser)
-         .WithMany(x => x.ApplicationUserClaims)
-         .HasForeignKey(x => x.UserId);
-            });
-
-
-            modelBuilder.Entity<ApplicationUserLogin>(applicationUserLogin =>
-            {
-                applicationUserLogin.ToTable("ApplicationUserLogin");
-
-                applicationUserLogin.HasOne(x => x.ApplicationUser)
-      .WithMany(x => x.ApplicationUserLogins)
-      .HasForeignKey(x => x.UserId);
-
-            });
-
-
-            modelBuilder.Entity<ApplicationUserToken>(applicationUserToken =>
-            {
-                applicationUserToken.ToTable("ApplicationUserToken");
-
-                applicationUserToken.HasOne(x => x.ApplicationUser)
-     .WithMany(x => x.ApplicationUserTokens)
-     .HasForeignKey(x => x.UserId);
-            });
-
-            modelBuilder.Entity<ApplicationUser>(applicationUser =>
-            {
-                applicationUser.ToTable("ApplicationUser");
-            });
-
-            modelBuilder.Entity<ApplicationRole>(applicationRole =>
-            {
-                applicationRole.ToTable("ApplicationRole");
-            });
-
-
-            // Configure entity filters               
+            modelBuilder.AddCustomizedFilters();
         }
     }
 }

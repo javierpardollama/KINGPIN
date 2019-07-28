@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Kingpin.Tier.Entities.Interfaces
 {
-    public interface IBase : IKey
+    public interface IBase
     {
         [Required]
         DateTime LastModified { get; set; }

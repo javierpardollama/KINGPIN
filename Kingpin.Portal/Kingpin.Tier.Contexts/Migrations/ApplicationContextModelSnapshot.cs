@@ -24,6 +24,10 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<string>("Name")
                         .HasMaxLength(256);
 
@@ -48,6 +52,10 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<string>("ClaimValue");
 
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<int>("RoleId");
 
                     b.HasKey("Id");
@@ -67,10 +75,14 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<bool>("Deleted");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
+
+                    b.Property<DateTime>("LastModified");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -116,6 +128,10 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<string>("ClaimValue");
 
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("LastModified");
+
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");
@@ -130,6 +146,10 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<string>("LoginProvider");
 
                     b.Property<string>("ProviderKey");
+
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("ProviderDisplayName");
 
@@ -148,6 +168,10 @@ namespace Kingpin.Tier.Contexts.Migrations
 
                     b.Property<int>("RoleId");
 
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("LastModified");
+
                     b.HasKey("UserId", "RoleId");
 
                     b.HasIndex("RoleId");
@@ -162,6 +186,10 @@ namespace Kingpin.Tier.Contexts.Migrations
                     b.Property<string>("LoginProvider");
 
                     b.Property<string>("Name");
+
+                    b.Property<bool>("Deleted");
+
+                    b.Property<DateTime>("LastModified");
 
                     b.Property<string>("Value");
 

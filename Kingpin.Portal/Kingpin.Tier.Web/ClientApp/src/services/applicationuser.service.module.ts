@@ -26,7 +26,7 @@ export class ApplicationUserService extends BaseService {
   }
 
   public UpdateApplicationUser(viewModel: UpdateApplicationUser): Observable<ViewApplicationUser> {
-    return this.httpClient.put<ViewApplicationUser>('api/applicationuser/updateapplicationrole', viewModel)
+    return this.httpClient.put<ViewApplicationUser>('api/applicationuser/updateapplicationuser', viewModel)
       .pipe(catchError(this.HandleError<ViewApplicationUser>('UpdateApplicationUser', undefined)));
   }
 

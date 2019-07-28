@@ -1,5 +1,3 @@
-import { ViewKey } from './viewkey';
-
-export interface ViewBase extends ViewKey {
+export interface ViewBase {
   LastModified: Date;
 }

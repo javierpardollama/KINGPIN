@@ -1,13 +1,20 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+
+using Kingpin.Tier.ViewModels.Interfaces.Views;
 
 namespace Kingpin.Tier.ViewModels.Classes.Views
 {
-    public class ViewApplicationRole : ViewKey
+    public class ViewApplicationRole : IViewKey, IViewBase
     {
         public ViewApplicationRole()
         {
         }
+
+        public int Id { get; set; }
+
+        public DateTime LastModified { get; set; }
 
         public string Name { get; set; }
 

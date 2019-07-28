@@ -117,6 +117,8 @@ namespace Kingpin.Tier.Services.Classes
                 SecurityStamp = DateTime.Now.ToBinary().ToString(),
                 NormalizedEmail = viewModel.Email,
                 NormalizedUserName = viewModel.Email,
+                LastModified = DateTime.Now,
+                Deleted = false
             };
 
             IdentityResult identityResult = await UserManager.CreateAsync(applicationUser,
