@@ -7,7 +7,7 @@ namespace Kingpin.Tier.Web.Extensions
 {
     public static class ContextsExtension
     {
-        public static void AddCustomContexts(this IServiceCollection services)
+        public static void AddCustomizedContexts(this IServiceCollection services)
         {
             services.AddScoped<IApplicationContext, ApplicationContext>();
 

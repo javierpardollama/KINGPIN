@@ -21,21 +21,17 @@ namespace Kingpin.Tier.Services.Classes
 
         protected readonly JwtSettings JwtSettings;
 
-        public BaseService(
-            IApplicationContext iContext,
-            IMapper iMapper,
-            ILogger iLogger
-           )
+        public BaseService(IApplicationContext iContext,
+                           IMapper iMapper,
+                           ILogger iLogger)
         {
             IContext = iContext;
             IMapper = iMapper;
             ILogger = iLogger;
         }
 
-        public BaseService(
-            IMapper iMapper,
-            ILogger iLogger
-           )
+        public BaseService(IMapper iMapper,
+                           ILogger iLogger)
         {
             IMapper = iMapper;
             ILogger = iLogger;

@@ -22,8 +22,7 @@ namespace Kingpin.Tier.Services.Classes
     {
         public ApplicationRoleService(IMapper iMapper,
                                       IApplicationContext iContext,
-                                      ILogger<ApplicationRoleService> iLogger
-                                      ) : base(iContext, iMapper, iLogger)
+                                      ILogger<ApplicationRoleService> iLogger) : base(iContext, iMapper, iLogger)
         {
 
         }

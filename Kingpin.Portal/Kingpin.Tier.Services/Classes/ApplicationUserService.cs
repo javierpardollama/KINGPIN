@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
+
 using Kingpin.Tier.Contexts.Interfaces;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
@@ -11,7 +12,6 @@ using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Updates;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -21,9 +21,8 @@ namespace Kingpin.Tier.Services.Classes
     { 
 
         public ApplicationUserService(IMapper iMapper,
-                          IApplicationContext iContext,
-                          ILogger<ApplicationUserService> iLogger                       
-                          ) : base(iContext, iMapper, iLogger)
+                                      IApplicationContext iContext,
+                                      ILogger<ApplicationUserService> iLogger) : base(iContext, iMapper, iLogger)
         {          
         }
 

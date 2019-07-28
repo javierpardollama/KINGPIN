@@ -1,4 +1,5 @@
 using System;
+
 using AutoMapper;
 
 using Kingpin.Tier.Contexts.Classes;
@@ -62,19 +63,19 @@ namespace Kingpin.Tier.Web
             services.AddSingleton(Mapper);
 
             // Register the service and implementation for the database context
-            services.AddCustomContexts();
+            services.AddCustomizedContexts();
 
             // Add Entity Framework services to the services container.
-            services.AddCustomServices();
+            services.AddCustomizedServices();
 
             // Register the Jwt Settings to the configuration container
             JwtSettings = new JwtSettings();
             Configuration.GetSection("Jwt").Bind(JwtSettings);
 
             // Add Authentication to the services container.
-            services.AddCustomAuthentication(JwtSettings);
+            services.AddCustomizedAuthentication(JwtSettings);
 
-            services.AddCustomCrossOriginRequests(JwtSettings);
+            services.AddCustomizedCrossOriginRequests(JwtSettings);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
             .AddJsonOptions(options =>
@@ -96,12 +97,12 @@ namespace Kingpin.Tier.Web
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseCustomExceptionMiddlewares();
+                app.UseCustomizedExceptionMiddlewares();
 
             }
             else
             {
-                app.UseCustomExceptionMiddlewares();
+                app.UseCustomizedExceptionMiddlewares();
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }

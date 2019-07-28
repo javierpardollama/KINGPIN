@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
+
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;

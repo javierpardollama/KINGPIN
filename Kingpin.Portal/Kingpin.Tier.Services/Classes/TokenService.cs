@@ -20,7 +20,8 @@ namespace Kingpin.Tier.Services.Classes
         {
         }
 
-        public JwtSecurityToken GenerateJwtToken(string email, ApplicationUser applicationUser)
+        public JwtSecurityToken GenerateJwtToken(string email,
+                                                 ApplicationUser applicationUser)
         {
             return new JwtSecurityToken(
                 JwtSettings.JwtIssuer,
