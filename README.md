@@ -1,6 +1,6 @@
 # KINGPIN
 
-Este proyecto surge como una solución para gestionar el estado actual de las playas españolas, administrando datos como la temperatura del agua y el horario de las mareas, así como el color de la bandera instalada por los socorristas. 
+Este proyecto surge como una solución para gestionar el estado actual de los usuarios registrados, administrando datos como el suministro de roles, así como el cambio de contraseña establecida por los usuarios. 
 
 ## ARQUITECTURA
 
