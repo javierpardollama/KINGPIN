@@ -165,9 +165,9 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole viewModel)
         {
-            ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);
-
             await CheckName(viewModel);
+
+            ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);           
 
             applicationRole.Name = viewModel.Name;
             applicationRole.NormalizedName = viewModel.Name;
