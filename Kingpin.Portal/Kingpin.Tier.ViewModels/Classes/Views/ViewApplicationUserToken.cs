@@ -10,7 +10,7 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
         {
         }
 
-        public DateTime LastModified { get; set; }    
+        public DateTime LastModified { get; set; }
 
         public string Value { get; set; }
 

@@ -15,7 +15,7 @@ namespace Kingpin.Tier.Contexts.Extensions
             @this.Entity<ApplicationUserClaim>().HasQueryFilter(p => !p.Deleted);
             @this.Entity<ApplicationUserLogin>().HasQueryFilter(p => !p.Deleted);
             @this.Entity<ApplicationUserRole>().HasQueryFilter(p => !p.Deleted);
-            @this.Entity<ApplicationUserToken>().HasQueryFilter(p => !p.Deleted);           
+            @this.Entity<ApplicationUserToken>().HasQueryFilter(p => !p.Deleted);
         }
     }
 }

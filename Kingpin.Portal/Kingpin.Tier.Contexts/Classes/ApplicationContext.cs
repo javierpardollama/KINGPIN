@@ -68,7 +68,7 @@ namespace Kingpin.Tier.Contexts.Classes
                         break;
                 }
             }
-        }      
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

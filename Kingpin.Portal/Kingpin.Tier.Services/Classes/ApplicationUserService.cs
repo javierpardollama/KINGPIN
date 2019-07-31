@@ -18,12 +18,12 @@ using Microsoft.Extensions.Logging;
 namespace Kingpin.Tier.Services.Classes
 {
     public class ApplicationUserService : BaseService, IApplicationUserService
-    { 
+    {
 
         public ApplicationUserService(IMapper mapper,
                                       IApplicationContext context,
                                       ILogger<ApplicationUserService> logger) : base(context, mapper, logger)
-        {          
+        {
         }
 
         public async Task<ICollection<ViewApplicationUser>> FindAllApplicationUser()
@@ -73,7 +73,7 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task RemoveApplicationUserById(int id)
         {
-            ApplicationUser applicationUser = await FindApplicationUserById(id);           
+            ApplicationUser applicationUser = await FindApplicationUserById(id);
 
             Context.ApplicationUser.Remove(applicationUser);
 
@@ -133,7 +133,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             ApplicationRole applicationRole = await Context.ApplicationRole
                 .TagWith("FindApplicationRoleById")
-                .FirstOrDefaultAsync(x=>x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (applicationRole == null)
             {

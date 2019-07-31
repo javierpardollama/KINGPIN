@@ -75,7 +75,7 @@ namespace Kingpin.Tier.Contexts.Extensions
 
                 applicationRole.HasIndex(p => new { p.NormalizedName })
                .IsUnique(false);
-            });            
+            });
         }
     }
 }

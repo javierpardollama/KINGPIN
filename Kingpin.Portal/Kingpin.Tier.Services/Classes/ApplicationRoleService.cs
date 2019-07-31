@@ -121,7 +121,9 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ApplicationRole> FindApplicationRoleById(int id)
         {
-            ApplicationRole applicationRole = await Context.ApplicationRole.TagWith("FindApplicationRoleById").FirstOrDefaultAsync(x => x.Id == id);
+            ApplicationRole applicationRole = await Context.ApplicationRole.
+                TagWith("FindApplicationRoleById")
+                .FirstOrDefaultAsync(x => x.Id == id);
 
             if (applicationRole == null)
             {
@@ -145,7 +147,7 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task RemoveApplicationRoleById(int id)
         {
-            ApplicationRole applicationRole = await FindApplicationRoleById(id);           
+            ApplicationRole applicationRole = await FindApplicationRoleById(id);
 
             Context.ApplicationRole.Remove(applicationRole);
 
