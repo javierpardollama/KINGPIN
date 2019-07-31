@@ -28,7 +28,7 @@
         <mat-select formControlName="ApplicationRolesId" multiple>
 
           <mat-option *ngFor="let applicationrole of applicationroles" [value]="applicationrole.Id">
-            <img class="select-option-img" aria-hidden [src]="applicationrole.ImageUri" height="25">
+            <span class="select-option-img" height="25">{{applicationrole.Initial}}</span>
             <span>{{applicationrole.Name}}</span>
           </mat-option>
 

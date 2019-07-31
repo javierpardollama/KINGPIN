@@ -7,12 +7,12 @@ namespace Kingpin.Tier.Web.Extensions
 {
     public static class ServicesExtension
     {
-        public static void AddCustomizedServices(this IServiceCollection services)
+        public static void AddCustomizedServices(this IServiceCollection @this)
         {
-            services.AddTransient<ITokenService, TokenService>();
-            services.AddTransient<IAuthService, AuthService>();
-            services.AddTransient<IApplicationRoleService, ApplicationRoleService>();
-            services.AddTransient<IApplicationUserService, ApplicationUserService>();
+            @this.AddTransient<ITokenService, TokenService>();
+            @this.AddTransient<IAuthService, AuthService>();
+            @this.AddTransient<IApplicationRoleService, ApplicationRoleService>();
+            @this.AddTransient<IApplicationUserService, ApplicationUserService>();
 
             // Add other services here
         }

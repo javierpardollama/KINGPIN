@@ -11,40 +11,40 @@ namespace Kingpin.Tier.Services.Classes
 {
     public class BaseService : IBaseService
     {
-        protected readonly IApplicationContext IContext;
+        protected readonly IApplicationContext Context;
 
-        protected readonly IMapper IMapper;
+        protected readonly IMapper Mapper;
 
-        protected readonly ILogger ILogger;
+        protected readonly ILogger Logger;
 
-        protected readonly IConfiguration IConfiguration;
+        protected readonly IConfiguration Configuration;
 
         protected readonly JwtSettings JwtSettings;
 
-        public BaseService(IApplicationContext iContext,
-                           IMapper iMapper,
-                           ILogger iLogger)
+        public BaseService(IApplicationContext context,
+                           IMapper mapper,
+                           ILogger logger)
         {
-            IContext = iContext;
-            IMapper = iMapper;
-            ILogger = iLogger;
+            Context = context;
+            Mapper = mapper;
+            Logger = logger;
         }
 
-        public BaseService(IMapper iMapper,
-                           ILogger iLogger)
+        public BaseService(IMapper mapper,
+                           ILogger logger)
         {
-            IMapper = iMapper;
-            ILogger = iLogger;
+            Mapper = mapper;
+            Logger = logger;
         }
 
         public BaseService(
-            IConfiguration iConfiguration
+            IConfiguration configuration
            )
         {
-            IConfiguration = iConfiguration;
+            Configuration = configuration;
 
             JwtSettings = new JwtSettings();
-            IConfiguration.GetSection("Jwt").Bind(JwtSettings);
+            Configuration.GetSection("Jwt").Bind(JwtSettings);
         }
     }
 }

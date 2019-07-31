@@ -20,9 +20,9 @@ namespace Kingpin.Tier.Services.Classes
 {
     public class ApplicationRoleService : BaseService, IApplicationRoleService
     {
-        public ApplicationRoleService(IMapper iMapper,
-                                      IApplicationContext iContext,
-                                      ILogger<ApplicationRoleService> iLogger) : base(iContext, iMapper, iLogger)
+        public ApplicationRoleService(IMapper mapper,
+                                      IApplicationContext context,
+                                      ILogger<ApplicationRoleService> logger) : base(context, mapper, logger)
         {
 
         }
@@ -35,12 +35,13 @@ namespace Kingpin.Tier.Services.Classes
             {
                 Name = viewModel.Name,
                 NormalizedName = viewModel.Name,
-                ConcurrencyStamp = DateTime.Now.ToBinary().ToString()
+                ConcurrencyStamp = DateTime.Now.ToBinary().ToString(),
+                ImageUri = viewModel.ImageUri,
             };
 
-            await IContext.ApplicationRole.AddAsync(applicationRole);
+            await Context.ApplicationRole.AddAsync(applicationRole);
 
-            await IContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name
@@ -49,14 +50,16 @@ namespace Kingpin.Tier.Services.Classes
                 + " was added at "
                 + DateTime.Now.ToShortTimeString();
 
-            ILogger.WriteInsertItemLog(logData);
+            Logger.WriteInsertItemLog(logData);
 
-            return IMapper.Map<ViewApplicationRole>(applicationRole);
+            return Mapper.Map<ViewApplicationRole>(applicationRole);
         }
 
         public async Task<ApplicationRole> CheckName(AddApplicationRole viewModel)
         {
-            ApplicationRole applicationRole = await IContext.ApplicationRole.FirstOrDefaultAsync(x => x.Name == viewModel.Name);
+            ApplicationRole applicationRole = await Context.ApplicationRole
+                .TagWith("CheckName")
+                .FirstOrDefaultAsync(x => x.Name == viewModel.Name);
 
             if (applicationRole != null)
             {
@@ -67,7 +70,33 @@ namespace Kingpin.Tier.Services.Classes
                     + " was already found at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteGetItemFoundLog(logData);
+                Logger.WriteGetItemFoundLog(logData);
+
+                throw new Exception(applicationRole.GetType().Name
+                    + " with Name "
+                    + viewModel.Name
+                    + " already exists");
+            }
+
+            return applicationRole;
+        }
+
+        public async Task<ApplicationRole> CheckName(UpdateApplicationRole viewModel)
+        {
+            ApplicationRole applicationRole = await Context.ApplicationRole
+                 .TagWith("CheckName")
+                 .FirstOrDefaultAsync(x => x.Name == viewModel.Name && x.Id != viewModel.Id);
+
+            if (applicationRole != null)
+            {
+                // Log
+                string logData = applicationRole.GetType().Name
+                    + " with Name "
+                    + applicationRole.Name
+                    + " was already found at "
+                    + DateTime.Now.ToShortTimeString();
+
+                Logger.WriteGetItemFoundLog(logData);
 
                 throw new Exception(applicationRole.GetType().Name
                     + " with Name "
@@ -80,18 +109,19 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
-            ICollection<ApplicationRole> applicationRoles = await IContext.ApplicationRole
+            ICollection<ApplicationRole> applicationRoles = await Context.ApplicationRole
+                .TagWith("FindAllApplicationRole")
                 .AsQueryable()
                 .AsNoTracking()
                 .ToAsyncEnumerable()
                 .ToList();
 
-            return IMapper.Map<ICollection<ViewApplicationRole>>(applicationRoles);
+            return Mapper.Map<ICollection<ViewApplicationRole>>(applicationRoles);
         }
 
         public async Task<ApplicationRole> FindApplicationRoleById(int id)
         {
-            ApplicationRole applicationRole = await IContext.ApplicationRole.FirstOrDefaultAsync(x => x.Id == id);
+            ApplicationRole applicationRole = await Context.ApplicationRole.TagWith("FindApplicationRoleById").FirstOrDefaultAsync(x => x.Id == id);
 
             if (applicationRole == null)
             {
@@ -102,7 +132,7 @@ namespace Kingpin.Tier.Services.Classes
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(logData);
 
                 throw new Exception(applicationRole.GetType().Name
                     + " with Id "
@@ -115,15 +145,11 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task RemoveApplicationRoleById(int id)
         {
-            ApplicationRole applicationRole = await FindApplicationRoleById(id);
+            ApplicationRole applicationRole = await FindApplicationRoleById(id);           
 
-            // Override Identity ApplicationRole Unique Constraint Properties
-            applicationRole.Name = DateTime.Now.ToBinary().ToString();
-            applicationRole.NormalizedName = DateTime.Now.ToBinary().ToString();
+            Context.ApplicationRole.Remove(applicationRole);
 
-            IContext.ApplicationRole.Remove(applicationRole);
-
-            await IContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name
@@ -132,19 +158,22 @@ namespace Kingpin.Tier.Services.Classes
                 + " was removed at "
                 + DateTime.Now.ToShortTimeString();
 
-            ILogger.WriteDeleteItemLog(logData);
+            Logger.WriteDeleteItemLog(logData);
         }
 
         public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole viewModel)
         {
             ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);
 
+            await CheckName(viewModel);
+
             applicationRole.Name = viewModel.Name;
             applicationRole.NormalizedName = viewModel.Name;
+            applicationRole.ImageUri = viewModel.ImageUri;
 
-            IContext.ApplicationRole.Update(applicationRole);
+            Context.ApplicationRole.Update(applicationRole);
 
-            await IContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             // Log
             string logData = applicationRole.GetType().Name
@@ -153,9 +182,9 @@ namespace Kingpin.Tier.Services.Classes
                 + " was modified at "
                 + DateTime.Now.ToShortTimeString();
 
-            ILogger.WriteUpdateItemLog(logData);
+            Logger.WriteUpdateItemLog(logData);
 
-            return IMapper.Map<ViewApplicationRole>(applicationRole);
+            return Mapper.Map<ViewApplicationRole>(applicationRole);
         }
     }
 }

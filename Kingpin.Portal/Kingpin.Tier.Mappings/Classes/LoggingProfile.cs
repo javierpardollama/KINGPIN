@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Kingpin.Tier.Constants.Enums;
-
+﻿using Kingpin.Tier.Constants.Enums;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
 
 namespace Kingpin.Tier.Mappings.Classes
 {
@@ -14,9 +12,10 @@ namespace Kingpin.Tier.Mappings.Classes
     { ApplicationEvents.InsertItem, LogLevel.Information },
     { ApplicationEvents.UpdateItem, LogLevel.Information },
     { ApplicationEvents.DeleteItem, LogLevel.Information },
+    { ApplicationEvents.UserAuthenticated, LogLevel.Information },
     { ApplicationEvents.GetItemNotFound, LogLevel.Error },
-    { ApplicationEvents.GetItemFound, LogLevel.Error }
+    { ApplicationEvents.GetItemFound, LogLevel.Error },
+    { ApplicationEvents.UserNotAuthenticated, LogLevel.Error },
     };
-
     }
 }

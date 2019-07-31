@@ -20,15 +20,16 @@ namespace Kingpin.Tier.Services.Classes
     public class ApplicationUserService : BaseService, IApplicationUserService
     { 
 
-        public ApplicationUserService(IMapper iMapper,
-                                      IApplicationContext iContext,
-                                      ILogger<ApplicationUserService> iLogger) : base(iContext, iMapper, iLogger)
+        public ApplicationUserService(IMapper mapper,
+                                      IApplicationContext context,
+                                      ILogger<ApplicationUserService> logger) : base(context, mapper, logger)
         {          
         }
 
         public async Task<ICollection<ViewApplicationUser>> FindAllApplicationUser()
         {
-            ICollection<ApplicationUser> applicationUsers = await IContext.ApplicationUser
+            ICollection<ApplicationUser> applicationUsers = await Context.ApplicationUser
+               .TagWith("FindAllApplicationUser")
                .AsQueryable()
                .AsNoTracking()
                .Include(x => x.ApplicationUserTokens)
@@ -37,12 +38,14 @@ namespace Kingpin.Tier.Services.Classes
                .ToAsyncEnumerable()
                .ToList();
 
-            return IMapper.Map<ICollection<ViewApplicationUser>>(applicationUsers);
+            return Mapper.Map<ICollection<ViewApplicationUser>>(applicationUsers);
         }
 
         public async Task<ApplicationUser> FindApplicationUserById(int id)
         {
-            ApplicationUser applicationUser = await IContext.ApplicationUser.AsQueryable()
+            ApplicationUser applicationUser = await Context.ApplicationUser
+               .TagWith("FindApplicationUserById")
+               .AsQueryable()
                .Include(x => x.ApplicationUserTokens)
                .Include(x => x.ApplicationUserRoles)
                .ThenInclude(x => x.ApplicationRole)
@@ -57,7 +60,7 @@ namespace Kingpin.Tier.Services.Classes
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(logData);
 
                 throw new Exception(applicationUser.GetType().Name
                     + " with Email "
@@ -70,17 +73,11 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task RemoveApplicationUserById(int id)
         {
-            ApplicationUser applicationUser = await FindApplicationUserById(id);
+            ApplicationUser applicationUser = await FindApplicationUserById(id);           
 
-            // Override Identity ApplicationUser Unique Constraint Properties
-            applicationUser.Email = DateTime.Now.ToBinary().ToString();
-            applicationUser.NormalizedEmail = DateTime.Now.ToBinary().ToString();
-            applicationUser.UserName = DateTime.Now.ToBinary().ToString();
-            applicationUser.NormalizedUserName = DateTime.Now.ToBinary().ToString();
+            Context.ApplicationUser.Remove(applicationUser);
 
-            IContext.ApplicationUser.Remove(applicationUser);
-
-            await IContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             // Log
             string logData = applicationUser.GetType().Name
@@ -89,7 +86,7 @@ namespace Kingpin.Tier.Services.Classes
                 + " was removed at "
                 + DateTime.Now.ToShortTimeString();
 
-            ILogger.WriteDeleteItemLog(logData);
+            Logger.WriteDeleteItemLog(logData);
         }
 
         public async Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser viewModel)
@@ -98,11 +95,11 @@ namespace Kingpin.Tier.Services.Classes
 
             applicationUser.ApplicationUserRoles = new List<ApplicationUserRole>();
 
-            IContext.ApplicationUser.Update(applicationUser);
+            Context.ApplicationUser.Update(applicationUser);
 
             await UpdateApplicationUserRole(viewModel, applicationUser);
 
-            await IContext.SaveChangesAsync();
+            await Context.SaveChangesAsync();
 
             // Log
             string logData = applicationUser.GetType().Name
@@ -111,9 +108,9 @@ namespace Kingpin.Tier.Services.Classes
                 + " was modified at "
                 + DateTime.Now.ToShortTimeString();
 
-            ILogger.WriteUpdateItemLog(logData);
+            Logger.WriteUpdateItemLog(logData);
 
-            return IMapper.Map<ViewApplicationUser>(applicationUser); ;
+            return Mapper.Map<ViewApplicationUser>(applicationUser); ;
         }
 
         public async Task UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser applicationUser)
@@ -134,7 +131,9 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ApplicationRole> FindApplicationRoleById(int id)
         {
-            ApplicationRole applicationRole = await IContext.ApplicationRole.FirstOrDefaultAsync(x=>x.Id == id);
+            ApplicationRole applicationRole = await Context.ApplicationRole
+                .TagWith("FindApplicationRoleById")
+                .FirstOrDefaultAsync(x=>x.Id == id);
 
             if (applicationRole == null)
             {
@@ -145,7 +144,7 @@ namespace Kingpin.Tier.Services.Classes
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(logData);
 
                 throw new Exception(applicationRole.GetType().Name
                     + " with Id "

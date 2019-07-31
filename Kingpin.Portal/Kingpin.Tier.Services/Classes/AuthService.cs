@@ -24,17 +24,17 @@ namespace Kingpin.Tier.Services.Classes
 
         private readonly UserManager<ApplicationUser> UserManager;
 
-        private readonly ITokenService ITokenService;
+        private readonly ITokenService TokenService;
 
-        public AuthService(IMapper iMapper,
-                           ILogger<AuthService> iLogger,
+        public AuthService(IMapper mapper,
+                           ILogger<AuthService> logger,
                            UserManager<ApplicationUser> userManager,
                            SignInManager<ApplicationUser> signInManager,
-                           ITokenService iTokenService) : base(iMapper, iLogger)
+                           ITokenService tokenService) : base(mapper, logger)
         {
             UserManager = userManager;
             SignInManager = signInManager;
-            ITokenService = iTokenService;
+            TokenService = tokenService;
         }
 
         public async Task<ViewApplicationUser> SignIn(ApplicationUserSignIn viewModel)
@@ -52,7 +52,7 @@ namespace Kingpin.Tier.Services.Classes
                 {
                     ApplicationUser = applicationUser,
                     UserId = applicationUser.Id,
-                    Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email, applicationUser))
+                    Value = TokenService.WriteJwtToken(TokenService.GenerateJwtToken(viewModel.Email, applicationUser))
                 });
 
                 // Log
@@ -62,9 +62,9 @@ namespace Kingpin.Tier.Services.Classes
                     + " logged in at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteUserAuthenticatedLog(logData);
+                Logger.WriteUserAuthenticatedLog(logData);
 
-                return IMapper.Map<ViewApplicationUser>(applicationUser);
+                return Mapper.Map<ViewApplicationUser>(applicationUser);
             }
             else
             {
@@ -87,7 +87,7 @@ namespace Kingpin.Tier.Services.Classes
                 {
                     ApplicationUser = applicationUser,
                     UserId = applicationUser.Id,
-                    Value = ITokenService.WriteJwtToken(ITokenService.GenerateJwtToken(viewModel.Email,
+                    Value = TokenService.WriteJwtToken(TokenService.GenerateJwtToken(viewModel.Email,
                                                                                        applicationUser))
                 });
 
@@ -98,9 +98,9 @@ namespace Kingpin.Tier.Services.Classes
                     + " logged in at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteUserAuthenticatedLog(logData);
+                Logger.WriteUserAuthenticatedLog(logData);
 
-                return IMapper.Map<ViewApplicationUser>(applicationUser);
+                return Mapper.Map<ViewApplicationUser>(applicationUser);
             }
             else
             {
@@ -110,6 +110,8 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ViewApplicationUser> JoinIn(ApplicationUserJoinIn viewModel)
         {
+            await CheckEmail(viewModel);
+
             ApplicationUser applicationUser = new ApplicationUser
             {
                 UserName = viewModel.Email,
@@ -137,7 +139,9 @@ namespace Kingpin.Tier.Services.Classes
 
         public async Task<ApplicationUser> FindApplicationUserByEmail(string email)
         {
-            ApplicationUser applicationUser = await UserManager.Users.AsQueryable()
+            ApplicationUser applicationUser = await UserManager.Users
+                .TagWith("FindApplicationUserByEmail")
+                .AsQueryable()
                 .Include(x => x.ApplicationUserTokens)
                 .Include(x => x.ApplicationUserRoles)
                 .ThenInclude(x => x.ApplicationRole)
@@ -152,12 +156,42 @@ namespace Kingpin.Tier.Services.Classes
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                ILogger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(logData);
 
                 throw new Exception(applicationUser.GetType().Name
                     + " with Email "
                     + email
                     + " does not exist");
+            }
+
+            return applicationUser;
+        }
+
+        public async Task<ApplicationUser> CheckEmail(ApplicationUserJoinIn viewModel)
+        {
+            ApplicationUser applicationUser = await UserManager.Users
+              .TagWith("CheckEmail")
+              .AsQueryable()
+              .Include(x => x.ApplicationUserTokens)
+              .Include(x => x.ApplicationUserRoles)
+              .ThenInclude(x => x.ApplicationRole)
+              .FirstOrDefaultAsync(x => x.Email == viewModel.Email);
+
+            if (applicationUser != null)
+            {
+                // Log
+                string logData = applicationUser.GetType().Name
+                    + " with Email "
+                    + viewModel.Email
+                      + " was already found at "
+                    + DateTime.Now.ToShortTimeString();
+
+                Logger.WriteGetItemFoundLog(logData);
+
+                throw new Exception(applicationUser.GetType().Name
+                    + " with Email "
+                    + viewModel.Email
+                    + " already exists");
             }
 
             return applicationUser;

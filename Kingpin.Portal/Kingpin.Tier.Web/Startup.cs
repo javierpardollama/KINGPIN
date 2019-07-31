@@ -59,22 +59,23 @@ namespace Kingpin.Tier.Web
 
             Mapper = MapperConfiguration.CreateMapper();
 
-            // Add Mapping to the services container.
+            // Add customized Mapping to the services container.
             services.AddSingleton(Mapper);
 
             // Register the service and implementation for the database context
             services.AddCustomizedContexts();
 
-            // Add Entity Framework services to the services container.
+            // Add customized Entity Framework services to the services container.
             services.AddCustomizedServices();
 
-            // Register the Jwt Settings to the configuration container
+            // Register the Jwt Settings to the configuration container.
             JwtSettings = new JwtSettings();
             Configuration.GetSection("Jwt").Bind(JwtSettings);
 
-            // Add Authentication to the services container.
+            // Add customized Authentication to the services container.
             services.AddCustomizedAuthentication(JwtSettings);
 
+            // Add customized Cross Origin Requests to the services container.
             services.AddCustomizedCrossOriginRequests(JwtSettings);
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)

@@ -16,7 +16,7 @@ namespace Kingpin.Tier.Services.Classes
     public class TokenService : BaseService, ITokenService
     {
         public TokenService(
-           IConfiguration iConfiguration) : base(iConfiguration)
+           IConfiguration configuration) : base(configuration)
         {
         }
 

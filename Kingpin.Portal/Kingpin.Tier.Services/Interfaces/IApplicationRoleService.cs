@@ -21,5 +21,7 @@ namespace Kingpin.Tier.Services.Interfaces
         Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole viewModel);
 
         Task<ApplicationRole> CheckName(AddApplicationRole viewModel);
+
+        Task<ApplicationRole> CheckName(UpdateApplicationRole viewModel);
     }
 }

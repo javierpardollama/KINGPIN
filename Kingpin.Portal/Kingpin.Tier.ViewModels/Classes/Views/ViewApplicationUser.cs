@@ -18,6 +18,8 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
 
         public string Email { get; set; }
 
+        public string Initial => Email.Substring(0, 1).ToUpper();
+
         public virtual ICollection<ViewApplicationUserRole> ApplicationUserRoles { get; set; }
 
         public virtual ICollection<ViewApplicationRole> ApplicationRoles => ApplicationUserRoles?.AsQueryable().Select(x => x.ApplicationRole).ToList();

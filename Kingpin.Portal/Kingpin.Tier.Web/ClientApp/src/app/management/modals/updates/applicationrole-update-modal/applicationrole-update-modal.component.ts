@@ -34,7 +34,8 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
   CreateForm() {
     this.formGroup = this.formBuilder.group({
       'Id': [this.data.Id, [Validators.required]],
-      'Name': [this.data.Name, [Validators.required]],      
+      'Name': [this.data.Name, [Validators.required]],
+      'ImageUri': [this.data.ImageUri ,[Validators.required]]
     });
   }
 

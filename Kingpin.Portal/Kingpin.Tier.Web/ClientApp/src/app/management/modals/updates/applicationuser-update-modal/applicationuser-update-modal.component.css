@@ -1,6 +1,6 @@
 .select-option-img {
-vertical-align: middle;
-margin-right: 8px;
+  vertical-align: middle;
+  margin-right: 8px;
 }
 
 .form-button{
@@ -36,4 +36,5 @@ background-size: cover;
 .modal-role-image{
 background-image: url('/iconos/Role_500px.png');
 background-size: cover;
-} 
+}
+

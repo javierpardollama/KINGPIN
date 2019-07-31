@@ -6,6 +6,7 @@ import { ViewApplicationUserToken } from './viewapplicationusertoken';
 
 export interface ViewApplicationUser extends ViewKey, ViewBase {
   Email: string;
+  Initial: string;
   ApplicationUserRoles: ViewApplicationUserRole[];
   ApplicationRoles: ViewApplicationRole[];
   ApplicationUserTokens: ViewApplicationUserToken[];

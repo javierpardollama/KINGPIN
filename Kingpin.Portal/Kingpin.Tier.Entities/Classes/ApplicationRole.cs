@@ -15,6 +15,9 @@ namespace Kingpin.Tier.Entities.Classes
         }
 
         [Required]
+        public string ImageUri{get;set;}
+
+        [Required]
         public DateTime LastModified { get; set; }
 
         [Required]

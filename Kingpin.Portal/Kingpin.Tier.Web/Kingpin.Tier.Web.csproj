@@ -26,6 +26,7 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <None Remove="ClientApp\src\interceptors\auth.interceptor.ts" />
     <None Include="LICENSE">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
@@ -34,6 +35,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Kingpin.Tier.Services\Kingpin.Tier.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\src\interceptors\auth.interceptor.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

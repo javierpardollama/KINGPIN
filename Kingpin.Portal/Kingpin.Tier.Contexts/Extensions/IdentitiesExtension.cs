@@ -6,9 +6,9 @@ namespace Kingpin.Tier.Contexts.Extensions
 {
     public static class IdentitiesExtension
     {
-        public static void AddCustomizedIdentities(this ModelBuilder modelBuilder)
+        public static void AddCustomizedIdentities(this ModelBuilder @this)
         {
-            modelBuilder.Entity<ApplicationUserRole>(applicationUserRole =>
+            @this.Entity<ApplicationUserRole>(applicationUserRole =>
             {
                 applicationUserRole.ToTable("ApplicationUserRole");
 
@@ -21,7 +21,7 @@ namespace Kingpin.Tier.Contexts.Extensions
                 .HasForeignKey(x => x.RoleId);
             });
 
-            modelBuilder.Entity<ApplicationRoleClaim>(applicationRoleClaim =>
+            @this.Entity<ApplicationRoleClaim>(applicationRoleClaim =>
             {
                 applicationRoleClaim.ToTable("ApplicationRoleClaim");
 
@@ -30,7 +30,7 @@ namespace Kingpin.Tier.Contexts.Extensions
                 .HasForeignKey(x => x.RoleId);
             });
 
-            modelBuilder.Entity<ApplicationUserClaim>(applicationUserClaim =>
+            @this.Entity<ApplicationUserClaim>(applicationUserClaim =>
             {
                 applicationUserClaim.ToTable("ApplicationUserClaim");
 
@@ -39,8 +39,7 @@ namespace Kingpin.Tier.Contexts.Extensions
                 .HasForeignKey(x => x.UserId);
             });
 
-
-            modelBuilder.Entity<ApplicationUserLogin>(applicationUserLogin =>
+            @this.Entity<ApplicationUserLogin>(applicationUserLogin =>
             {
                 applicationUserLogin.ToTable("ApplicationUserLogin");
 
@@ -50,8 +49,7 @@ namespace Kingpin.Tier.Contexts.Extensions
 
             });
 
-
-            modelBuilder.Entity<ApplicationUserToken>(applicationUserToken =>
+            @this.Entity<ApplicationUserToken>(applicationUserToken =>
             {
                 applicationUserToken.ToTable("ApplicationUserToken");
 
@@ -60,14 +58,23 @@ namespace Kingpin.Tier.Contexts.Extensions
                 .HasForeignKey(x => x.UserId);
             });
 
-            modelBuilder.Entity<ApplicationUser>(applicationUser =>
+            @this.Entity<ApplicationUser>(applicationUser =>
             {
                 applicationUser.ToTable("ApplicationUser");
+
+                applicationUser.HasIndex(p => new { p.NormalizedEmail })
+                .IsUnique(false);
+
+                applicationUser.HasIndex(p => new { p.NormalizedUserName })
+               .IsUnique(false);
             });
 
-            modelBuilder.Entity<ApplicationRole>(applicationRole =>
+            @this.Entity<ApplicationRole>(applicationRole =>
             {
                 applicationRole.ToTable("ApplicationRole");
+
+                applicationRole.HasIndex(p => new { p.NormalizedName })
+               .IsUnique(false);
             });            
         }
     }

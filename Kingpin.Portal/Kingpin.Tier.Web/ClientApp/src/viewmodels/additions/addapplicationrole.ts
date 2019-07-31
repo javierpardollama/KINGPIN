@@ -1,3 +1,4 @@
 export interface AddApplicationRole {
-    Name: string;
+  Name: string;
+  ImageUri: string;
 }

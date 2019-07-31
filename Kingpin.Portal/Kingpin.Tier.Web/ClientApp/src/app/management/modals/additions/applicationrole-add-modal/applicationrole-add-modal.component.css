@@ -18,3 +18,8 @@ margin-right:8px;
 background-image: url('/iconos/Name_500px.png');
 background-size: cover;
 }
+
+.modal-portrait-image {
+  background-image: url('/iconos/Portrait_500px.png');
+  background-size: cover;
+} 

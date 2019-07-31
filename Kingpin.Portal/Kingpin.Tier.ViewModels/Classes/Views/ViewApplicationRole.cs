@@ -18,6 +18,8 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
 
         public string Name { get; set; }
 
+        public string ImageUri { get; set; }
+
         public virtual ICollection<ViewApplicationUserRole> ApplicationUserRoles { get; set; }
 
         public virtual ICollection<ViewApplicationUser> ApplicationUsers => ApplicationUserRoles?.AsQueryable().Select(x => x.ApplicationUser).ToList();

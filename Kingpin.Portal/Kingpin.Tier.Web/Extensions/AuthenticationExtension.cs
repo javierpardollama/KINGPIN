@@ -10,9 +10,9 @@ namespace Kingpin.Tier.Web.Extensions
 {
     public static class AuthenticationExtension
     {
-        public static void AddCustomizedAuthentication(this IServiceCollection services, JwtSettings JwtSettings)
+        public static void AddCustomizedAuthentication(this IServiceCollection @this, JwtSettings JwtSettings)
         {
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            @this.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
                {
                    options.TokenValidationParameters = new TokenValidationParameters

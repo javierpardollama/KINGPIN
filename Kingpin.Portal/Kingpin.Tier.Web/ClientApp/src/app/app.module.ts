@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 // Angular Material
@@ -13,6 +13,9 @@ import {
 
 // Guards
 import { SignInGuard } from './../guards/signin.guard';
+
+// Interceptors
+import { AuthInterceptor } from './../interceptors/auth.interceptor';
 
 // App
 import { AppComponent } from './app.component';
@@ -67,7 +70,7 @@ import { ApplicationUserUpdateModalComponent } from './management/modals/updates
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: SignInAuthComponent, pathMatch: 'full' },
+      { path: '', component: HomeComponent, pathMatch: 'full',  canActivate: [SignInGuard] },
       { path: 'auth/joinin', component: JoinInAuthComponent, pathMatch: 'full' },
       { path: 'auth/signin', component: SignInAuthComponent, pathMatch: 'full' },
       { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full', canActivate: [SignInGuard] },
@@ -75,7 +78,11 @@ import { ApplicationUserUpdateModalComponent } from './management/modals/updates
     ])
   ],
   entryComponents: [ApplicationRoleAddModalComponent, ApplicationRoleUpdateModalComponent, ApplicationUserUpdateModalComponent],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true,
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -6,9 +6,9 @@ namespace Kingpin.Tier.Web.Extensions
 {
     public static class CrossOriginRequestsExtension
     {
-        public static void AddCustomizedCrossOriginRequests(this IServiceCollection services, JwtSettings JwtSettings)
+        public static void AddCustomizedCrossOriginRequests(this IServiceCollection @this, JwtSettings JwtSettings)
         {
-            services.AddCors(options =>
+            @this.AddCors(options =>
             {
                 options.AddPolicy("Authentication", builder =>
                 {

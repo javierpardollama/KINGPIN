@@ -3,14 +3,16 @@ using System;
 using Kingpin.Tier.Contexts.Classes;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Kingpin.Tier.Contexts.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20190731065840_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace Kingpin.Tier.Contexts.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<bool>("Deleted");
-
-                    b.Property<string>("ImageUri")
-                        .IsRequired();
 
                     b.Property<DateTime>("LastModified");
 

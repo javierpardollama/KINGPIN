@@ -20,7 +20,7 @@ export class ApplicationRoleGridComponent implements OnInit {
 
   public ELEMENT_DATA: ViewApplicationRole[];
 
-  public displayedColumns: string[] = ['Id', 'Name', 'LastModified'];
+  public displayedColumns: string[] = ['Id', 'Name', 'ImageUri', 'LastModified'];
 
   public dataSource: MatTableDataSource<ViewApplicationRole>;
 
