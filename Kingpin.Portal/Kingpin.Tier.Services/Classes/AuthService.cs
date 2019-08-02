@@ -170,6 +170,7 @@ namespace Kingpin.Tier.Services.Classes
         public async Task<ApplicationUser> CheckEmail(ApplicationUserJoinIn viewModel)
         {
             ApplicationUser applicationUser = await UserManager.Users
+              .AsNoTracking()
               .TagWith("CheckEmail")
               .AsQueryable()
               .Include(x => x.ApplicationUserTokens)

@@ -58,6 +58,7 @@ namespace Kingpin.Tier.Services.Classes
         public async Task<ApplicationRole> CheckName(AddApplicationRole viewModel)
         {
             ApplicationRole applicationRole = await Context.ApplicationRole
+                .AsNoTracking()
                 .TagWith("CheckName")
                 .FirstOrDefaultAsync(x => x.Name == viewModel.Name);
 
@@ -84,6 +85,7 @@ namespace Kingpin.Tier.Services.Classes
         public async Task<ApplicationRole> CheckName(UpdateApplicationRole viewModel)
         {
             ApplicationRole applicationRole = await Context.ApplicationRole
+                 .AsNoTracking()
                  .TagWith("CheckName")
                  .FirstOrDefaultAsync(x => x.Name == viewModel.Name && x.Id != viewModel.Id);
 
