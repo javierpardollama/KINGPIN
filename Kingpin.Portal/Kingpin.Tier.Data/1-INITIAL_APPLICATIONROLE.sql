@@ -54,7 +54,7 @@ CONCURRENCYSTAMP)
 VALUES(date('now'),
 "Contributor",
 "Contributor",
-"roles\Author_600px.png",
+"roles\Contributor_600px.png",
 "0x0000AAA0008E37A0");
 
 INSERT INTO ApplicationRole (LASTMODIFIED,
