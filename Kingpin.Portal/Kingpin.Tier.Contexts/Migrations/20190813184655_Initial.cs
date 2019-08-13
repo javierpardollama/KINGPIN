@@ -16,6 +16,7 @@ namespace Kingpin.Tier.Contexts.Migrations
                     Name = table.Column<string>(maxLength: 256, nullable: true),
                     NormalizedName = table.Column<string>(maxLength: 256, nullable: true),
                     ConcurrencyStamp = table.Column<string>(nullable: true),
+                    ImageUri = table.Column<string>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
                     Deleted = table.Column<bool>(nullable: false)
                 },
@@ -171,8 +172,7 @@ namespace Kingpin.Tier.Contexts.Migrations
             migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "ApplicationRole",
-                column: "NormalizedName",
-                unique: true);
+                column: "NormalizedName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationRoleClaim_RoleId",
@@ -187,8 +187,7 @@ namespace Kingpin.Tier.Contexts.Migrations
             migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "ApplicationUser",
-                column: "NormalizedUserName",
-                unique: true);
+                column: "NormalizedUserName");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ApplicationUserClaim_UserId",

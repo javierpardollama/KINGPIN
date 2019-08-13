@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Kingpin.Tier.Contexts.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190731140219_ImageUri")]
-    partial class ImageUri
+    [Migration("20190813184655_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

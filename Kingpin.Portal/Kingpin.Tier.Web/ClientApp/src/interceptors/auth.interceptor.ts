@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
         setHeaders: {
           'Content-Type': 'application/json; charset=utf-8',
           'Accept': 'application/json',
-          'Authorization': `User ${this.User}`,
+          'Authorization': `User ${this.User.ApplicationUserToken.Value}`,
         },
       });
     });
