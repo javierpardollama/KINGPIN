@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from './../../services/auth.service.module';
 import { ViewApplicationUser } from './../../viewmodels/views/viewapplicationuser';
 
 @Component({
@@ -16,7 +15,7 @@ export class NavMenuComponent implements OnInit {
   public User: ViewApplicationUser;
 
   // Constructor
-  constructor(private authService: AuthService) {
+  constructor() {
 
   }
 
@@ -35,13 +34,11 @@ export class NavMenuComponent implements OnInit {
   }
 
   display() {
-    this.authService.User.subscribe(user => {
-      this.User = user;
+    this.User = JSON.parse(localStorage.getItem("User"));
 
-      if (this.User != undefined) {
-        this.isVisible = true;
-      }
-    });
+    if (this.User !== null) {
+      this.isVisible = true;
+    }
 
     return this.isVisible;
   }

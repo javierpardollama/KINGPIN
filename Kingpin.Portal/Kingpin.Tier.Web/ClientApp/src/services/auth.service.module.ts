@@ -3,7 +3,6 @@ import { ApplicationUserSignIn } from './../viewmodels/applicationusers/applicat
 
 import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
 
-import { BehaviorSubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';
 import { Injectable } from '@angular/core';
@@ -15,8 +14,6 @@ import { BaseService } from './base.service.module';
 })
 
 export class AuthService extends BaseService {
-
-  public User: BehaviorSubject<ViewApplicationUser> = new BehaviorSubject<ViewApplicationUser>(undefined);
 
   public constructor(
     protected httpClient: HttpClient,
