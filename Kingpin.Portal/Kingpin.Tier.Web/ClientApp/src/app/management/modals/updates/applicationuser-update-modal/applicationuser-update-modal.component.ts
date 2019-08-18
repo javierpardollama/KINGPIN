@@ -43,7 +43,8 @@ export class ApplicationUserUpdateModalComponent implements OnInit {
     this.formGroup = this.formBuilder.group({
       'Id': [this.data.Id, [Validators.required]],
       'Email': [this.data.Email, [Validators.required]],
-      'ApplicationRolesId': [this.data.ApplicationRoles.map(({ Id }) => Id), [Validators.required]]    });
+      'ApplicationRolesId': [this.data.ApplicationRoles.map(({ Id }) => Id), [Validators.required]]
+    });
   }
 
   // Form Actions
