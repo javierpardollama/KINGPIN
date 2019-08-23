@@ -6,7 +6,7 @@ import { ExpressionAppVariants } from './../variants/expression.app.variants';
 })
 export class NumericTypeDirective {
 
-  @Input('numericType') numericType: string; // number | decimal
+  @Input('app-numeric-type') numericType: string; // number | decimal
 
   private regex = {
     number: new RegExp(ExpressionAppVariants.AppNumberExpression),
