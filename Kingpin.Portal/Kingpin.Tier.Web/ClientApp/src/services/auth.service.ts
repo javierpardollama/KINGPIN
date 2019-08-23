@@ -1,7 +1,7 @@
-import { AuthJoinIn } from '../viewmodels/auth/authjoinin';
-import { AuthSignIn } from '../viewmodels/auth/authsignin';
+import { AuthJoinIn } from './../viewmodels/auth/authjoinin';
+import { AuthSignIn } from './../viewmodels/auth/authsignin';
 
-import { ViewApplicationUser } from '../viewmodels/views/viewapplicationuser';
+import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
 
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';

@@ -1,7 +1,7 @@
-import { ViewApplicationUser } from '../viewmodels/views/viewapplicationuser';
-import { SecurityPasswordChange } from '../viewmodels/security/securitypasswordchange';
-import { SecurityPasswordReset } from '../viewmodels/security/securitypasswordreset';
-import { SecurityEmailChange } from '../viewmodels/security/securityemailchange';
+import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
+import { SecurityPasswordChange } from './../viewmodels/security/securitypasswordchange';
+import { SecurityPasswordReset } from './../viewmodels/security/securitypasswordreset';
+import { SecurityEmailChange } from './../viewmodels/security/securityemailchange';
 
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';

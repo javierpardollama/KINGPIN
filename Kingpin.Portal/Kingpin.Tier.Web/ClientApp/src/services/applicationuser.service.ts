@@ -1,5 +1,5 @@
-import { ViewApplicationUser } from '../viewmodels/views/viewapplicationuser';
-import { UpdateApplicationUser } from '../viewmodels/updates/updateapplicationuser';
+import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
+import { UpdateApplicationUser } from './../viewmodels/updates/updateapplicationuser';
 
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material';

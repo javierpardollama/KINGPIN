@@ -40,7 +40,7 @@ import { ApplicationRoleUpdateModalComponent } from './management/modals/updates
 import { ApplicationUserGridComponent } from './management/grids/applicationuser-grid/applicationuser-grid.component';
 import { ApplicationUserUpdateModalComponent } from './management/modals/updates/applicationuser-update-modal/applicationuser-update-modal.component';
 
-// Security
+// App-Security
 import { ChangePasswordSecurityComponent } from './security/changepassword-security/changepassword-security.component';
 import { ResetPasswordSecurityComponent } from './security/resetpassword-security/resetpassword-security.component';
 import { ChangeEmailSecurityComponent } from './security/changeemail-security/changeemail-security.component';
@@ -53,7 +53,7 @@ import { ChangeEmailSecurityComponent } from './security/changeemail-security/ch
     AppComponent,
     NavMenuComponent,
     HomeComponent,
-    // Auth
+    // App-Auth
     JoinInAuthComponent,
     SignInAuthComponent,
     // App-Grid
@@ -64,7 +64,7 @@ import { ChangeEmailSecurityComponent } from './security/changeemail-security/ch
     // App-Modal-Update
     ApplicationRoleUpdateModalComponent,
     ApplicationUserUpdateModalComponent,
-    // Security
+    // App-Security
     ChangePasswordSecurityComponent,
     ResetPasswordSecurityComponent,
     ChangeEmailSecurityComponent],
@@ -94,10 +94,10 @@ import { ChangeEmailSecurityComponent } from './security/changeemail-security/ch
     ReactiveFormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [SignInGuard] },
-      // Auth
+      // App-Auth
       { path: 'auth/joinin', component: JoinInAuthComponent, pathMatch: 'full' },
       { path: 'auth/signin', component: SignInAuthComponent, pathMatch: 'full' },
-      // Security
+      // App-Security
       { path: 'security/changeemail', component: ChangeEmailSecurityComponent, pathMatch: 'full', canActivate: [SignInGuard] },
       { path: 'security/changepassword', component: ChangePasswordSecurityComponent, pathMatch: 'full', canActivate: [SignInGuard] },
       { path: 'security/resetpassword', component: ResetPasswordSecurityComponent, pathMatch: 'full' },
