@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthService } from './../../../services/auth.service.module';
+import { AuthService } from './../../../services/auth.service';
 
-import { ApplicationUserSignIn } from './../../../viewmodels/applicationusers/applicationusersignin';
+import { AuthSignIn } from './../../../viewmodels/auth/authsignin';
 
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
@@ -36,7 +36,7 @@ export class JoinInAuthComponent implements OnInit {
   }
 
   // Form Actions
-  onSubmit(viewModel: ApplicationUserSignIn) {
+  onSubmit(viewModel: AuthSignIn) {
     this.authService.JoinIn(viewModel).subscribe(user => localStorage.setItem("User", JSON.stringify(user)));
   }
 

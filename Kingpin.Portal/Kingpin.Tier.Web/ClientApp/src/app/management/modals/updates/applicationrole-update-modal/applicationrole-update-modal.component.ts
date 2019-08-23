@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewApplicationRole } from './../../../../../viewmodels/views/viewapplicationrole';
 import { UpdateApplicationRole } from './../../../../../viewmodels/updates/updateapplicationrole';
 
-import { ApplicationRoleService } from './../../../../../services/applicationrole.service.module';
+import { ApplicationRoleService } from './../../../../../services/applicationrole.service';
 import { TextAppVariants } from './../../../../../variants/text.app.variants';
 import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 

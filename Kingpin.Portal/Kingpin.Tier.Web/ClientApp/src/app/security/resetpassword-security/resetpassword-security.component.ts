@@ -2,24 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { AuthService } from './../../../services/auth.service';
+import { SecurityService } from './../../../services/security.service';
 
-import { AuthSignIn } from './../../../viewmodels/auth/authsignin';
+import { SecurityPasswordReset } from './../../../viewmodels/security/securitypasswordreset';
 
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
 @Component({
-  selector: 'app-signin-auth',
-  templateUrl: './signin-auth.component.html',
-  styleUrls: ['./signin-auth.component.css']
+  selector: 'app-resetpassword-security',
+  templateUrl: './resetpassword-security.component.html',
+  styleUrls: ['./resetpassword-security.component.css']
 })
-export class SignInAuthComponent implements OnInit {
+export class ResetPasswordSecurityComponent implements OnInit {
 
   public formGroup: FormGroup;
 
   // Constructor
   constructor(private router: Router,
-    private authService: AuthService,
+    private securityService: SecurityService,
     private formBuilder: FormBuilder) { }
 
   // Life Cicle
@@ -31,13 +31,13 @@ export class SignInAuthComponent implements OnInit {
   CreateForm() {
     this.formGroup = this.formBuilder.group({
       'Email': ['', [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
-      'Password': ['', [Validators.required]]
+      'NewPassword': ['', [Validators.required]]
     });
   }
 
   // Form Actions
-  onSubmit(viewModel: AuthSignIn) {
-    this.authService.SignIn(viewModel).subscribe(user => { localStorage.setItem("User", JSON.stringify(user)); });
+  onSubmit(viewModel: SecurityPasswordReset) {
+    this.securityService.ResetPassword(viewModel).subscribe(user => { localStorage.setItem("User", JSON.stringify(user)); });
   }
 
   onNavigate() {

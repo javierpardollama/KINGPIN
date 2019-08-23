@@ -7,7 +7,7 @@ using AutoMapper;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
-using Kingpin.Tier.ViewModels.Classes.ApplicationUsers;
+using Kingpin.Tier.ViewModels.Classes.Auth;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
 using Microsoft.AspNetCore.Identity;
@@ -37,7 +37,7 @@ namespace Kingpin.Tier.Services.Classes
             TokenService = tokenService;
         }
 
-        public async Task<ViewApplicationUser> SignIn(ApplicationUserSignIn viewModel)
+        public async Task<ViewApplicationUser> SignIn(AuthSignIn viewModel)
         {
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email,
                                                                                 viewModel.Password,
@@ -72,7 +72,7 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
-        public async Task<ViewApplicationUser> SignIn(ApplicationUserJoinIn viewModel)
+        public async Task<ViewApplicationUser> SignIn(AuthJoinIn viewModel)
         {
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(viewModel.Email,
                                                                                 viewModel.Password,
@@ -108,7 +108,7 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
-        public async Task<ViewApplicationUser> JoinIn(ApplicationUserJoinIn viewModel)
+        public async Task<ViewApplicationUser> JoinIn(AuthJoinIn viewModel)
         {
             await CheckEmail(viewModel);
 
@@ -167,7 +167,7 @@ namespace Kingpin.Tier.Services.Classes
             return applicationUser;
         }
 
-        public async Task<ApplicationUser> CheckEmail(ApplicationUserJoinIn viewModel)
+        public async Task<ApplicationUser> CheckEmail(AuthJoinIn viewModel)
         {
             ApplicationUser applicationUser = await UserManager.Users
               .AsNoTracking()

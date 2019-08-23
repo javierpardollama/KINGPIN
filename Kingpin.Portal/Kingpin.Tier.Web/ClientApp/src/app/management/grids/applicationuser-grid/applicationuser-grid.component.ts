@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { ViewApplicationUser } from './../../../../viewmodels/views/viewapplicationuser';
 
-import { ApplicationUserService } from './../../../../services/applicationuser.service.module';
+import { ApplicationUserService } from './../../../../services/applicationuser.service';
 
 import { ApplicationUserUpdateModalComponent } from './../../modals/updates/applicationuser-update-modal/applicationuser-update-modal.component';
 

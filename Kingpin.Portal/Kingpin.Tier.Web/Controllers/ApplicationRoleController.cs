@@ -20,24 +20,15 @@ namespace Kingpin.Tier.Web.Controllers
 
         [HttpPut]
         [Route("updateapplicationrole")]
-        public async Task<IActionResult> UpdateApplicationRole([FromBody]UpdateApplicationRole viewModel)
-        {
-            return new JsonResult(value: await Service.UpdateApplicationRole(viewModel));
-        }
+        public async Task<IActionResult> UpdateApplicationRole([FromBody]UpdateApplicationRole viewModel) => new JsonResult(value: await Service.UpdateApplicationRole(viewModel));
 
         [HttpGet]
         [Route("findallapplicationrole")]
-        public async Task<IActionResult> FindAllApplicationRole()
-        {
-            return new JsonResult(value: await Service.FindAllApplicationRole());
-        }
+        public async Task<IActionResult> FindAllApplicationRole() => new JsonResult(value: await Service.FindAllApplicationRole());
 
         [HttpPost]
         [Route("addapplicationrole")]
-        public async Task<IActionResult> AddApplicationRole([FromBody]AddApplicationRole viewModel)
-        {
-            return new JsonResult(value: await Service.AddApplicationRole(viewModel));
-        }
+        public async Task<IActionResult> AddApplicationRole([FromBody]AddApplicationRole viewModel) => new JsonResult(value: await Service.AddApplicationRole(viewModel));
 
         [HttpDelete]
         [Route("removeapplicationrolebyid/{id}")]

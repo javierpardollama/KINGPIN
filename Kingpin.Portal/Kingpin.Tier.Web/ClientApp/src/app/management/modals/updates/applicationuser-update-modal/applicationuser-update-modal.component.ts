@@ -7,8 +7,8 @@ import { ViewApplicationUser } from './../../../../../viewmodels/views/viewappli
 
 import { UpdateApplicationUser } from './../../../../../viewmodels/updates/updateapplicationuser';
 
-import { ApplicationRoleService } from './../../../../../services/applicationrole.service.module';
-import { ApplicationUserService } from './../../../../../services/applicationuser.service.module';
+import { ApplicationRoleService } from './../../../../../services/applicationrole.service';
+import { ApplicationUserService } from './../../../../../services/applicationuser.service';
 import { TextAppVariants } from './../../../../../variants/text.app.variants';
 import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 

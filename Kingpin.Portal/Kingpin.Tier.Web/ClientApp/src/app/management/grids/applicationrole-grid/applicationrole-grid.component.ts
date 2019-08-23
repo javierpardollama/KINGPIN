@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
 import { ViewApplicationRole } from './../../../../viewmodels/views/viewapplicationrole';
 
-import { ApplicationRoleService } from './../../../../services/applicationrole.service.module';
+import { ApplicationRoleService } from './../../../../services/applicationrole.service';
 
 import { ApplicationRoleUpdateModalComponent } from './../../modals/updates/applicationrole-update-modal/applicationrole-update-modal.component';
 import { ApplicationRoleAddModalComponent } from './../../modals/additions/applicationrole-add-modal/applicationrole-add-modal.component';

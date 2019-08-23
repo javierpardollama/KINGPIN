@@ -17,6 +17,9 @@ import { SignInGuard } from './../guards/signin.guard';
 // Interceptors
 import { AuthInterceptor } from './../interceptors/auth.interceptor';
 
+// Directives
+import { NumericTypeDirective } from './../directives/numeric-type.directive';
+
 // App
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -37,18 +40,38 @@ import { ApplicationRoleUpdateModalComponent } from './management/modals/updates
 import { ApplicationUserGridComponent } from './management/grids/applicationuser-grid/applicationuser-grid.component';
 import { ApplicationUserUpdateModalComponent } from './management/modals/updates/applicationuser-update-modal/applicationuser-update-modal.component';
 
+// Security
+import { ChangePasswordSecurityComponent } from './security/changepassword-security/changepassword-security.component';
+import { ResetPasswordSecurityComponent } from './security/resetpassword-security/resetpassword-security.component';
+import { ChangeEmailSecurityComponent } from './security/changeemail-security/changeemail-security.component';
+
 @NgModule({
   declarations: [
+    // Directives
+    NumericTypeDirective,
+    // App
     AppComponent,
     NavMenuComponent,
     HomeComponent,
+    // Auth
     JoinInAuthComponent,
     SignInAuthComponent,
+    // App-Grid
     ApplicationRoleGridComponent,
-    ApplicationRoleAddModalComponent,
-    ApplicationRoleUpdateModalComponent,
     ApplicationUserGridComponent,
-    ApplicationUserUpdateModalComponent],
+    // App-Modal-Adition
+    ApplicationRoleAddModalComponent,
+    // App-Modal-Update
+    ApplicationRoleUpdateModalComponent,
+    ApplicationUserUpdateModalComponent,
+    // Security
+    ChangePasswordSecurityComponent,
+    ResetPasswordSecurityComponent,
+    ChangeEmailSecurityComponent],
+  exports: [
+    // Directives
+    NumericTypeDirective
+  ],
   imports: [
     // Angular Material
     BrowserAnimationsModule,
@@ -70,9 +93,15 @@ import { ApplicationUserUpdateModalComponent } from './management/modals/updates
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full',  canActivate: [SignInGuard] },
+      { path: '', component: HomeComponent, pathMatch: 'full', canActivate: [SignInGuard] },
+      // Auth
       { path: 'auth/joinin', component: JoinInAuthComponent, pathMatch: 'full' },
       { path: 'auth/signin', component: SignInAuthComponent, pathMatch: 'full' },
+      // Security
+      { path: 'security/changeemail', component: ChangeEmailSecurityComponent, pathMatch: 'full', canActivate: [SignInGuard] },
+      { path: 'security/changepassword', component: ChangePasswordSecurityComponent, pathMatch: 'full', canActivate: [SignInGuard] },
+      { path: 'security/resetpassword', component: ResetPasswordSecurityComponent, pathMatch: 'full' },
+      // App-Grid
       { path: 'management/applicationroles', component: ApplicationRoleGridComponent, pathMatch: 'full', canActivate: [SignInGuard] },
       { path: 'management/applicationusers', component: ApplicationUserGridComponent, pathMatch: 'full', canActivate: [SignInGuard] }
     ])

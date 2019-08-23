@@ -8,6 +8,8 @@
         GetItemNotFound = 4,
         GetItemFound = 5,
         UserAuthenticated = 6,
-        UserNotAuthenticated = 7
+        UserNotAuthenticated = 7,
+        PasswordRestored = 8,
+        EmailRestored = 9
     }
 }

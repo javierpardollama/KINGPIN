@@ -3,7 +3,7 @@ import { MatDialogRef, MatSnackBar } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AddApplicationRole } from './../../../../../viewmodels/additions/addapplicationrole';
 
-import { ApplicationRoleService } from './../../../../../services/applicationrole.service.module';
+import { ApplicationRoleService } from './../../../../../services/applicationrole.service';
 import { TextAppVariants } from './../../../../../variants/text.app.variants';
 import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 

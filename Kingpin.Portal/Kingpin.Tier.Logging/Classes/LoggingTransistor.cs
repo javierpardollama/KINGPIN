@@ -75,6 +75,22 @@ namespace Kingpin.Tier.Logging.Classes
             WriteDiagnostics(logData);
         }
 
+        public static void WritePasswordRestoredLog(this ILogger @this,
+                                                        string logData)
+        {
+            @this.Emit(ApplicationEvents.PasswordRestored, logData);
+
+            WriteDiagnostics(logData);
+        }
+
+        public static void WriteEmailRestoredLog(this ILogger @this,
+                                                       string logData)
+        {
+            @this.Emit(ApplicationEvents.EmailRestored, logData);
+
+            WriteDiagnostics(logData);
+        }
+
         private static void WriteDiagnostics(string logData) => System.Diagnostics.Debug.WriteLine(logData);
 
         private static int GetApplicationEventCode(Enum appEventData) => (int)Convert.ChangeType(appEventData, appEventData.GetTypeCode());

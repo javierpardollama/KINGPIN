@@ -13,6 +13,7 @@ namespace Kingpin.Tier.Web.Extensions
             @this.AddTransient<IAuthService, AuthService>();
             @this.AddTransient<IApplicationRoleService, ApplicationRoleService>();
             @this.AddTransient<IApplicationUserService, ApplicationUserService>();
+            @this.AddTransient<ISecurityService, SecurityService>();
 
             // Add other services here
         }

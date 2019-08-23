@@ -19,17 +19,11 @@ namespace Kingpin.Tier.Web.Controllers
 
         [HttpPut]
         [Route("updateapplicationuser")]
-        public async Task<IActionResult> UpdateApplicationUser([FromBody]UpdateApplicationUser viewModel)
-        {
-            return new JsonResult(value: await Service.UpdateApplicationUser(viewModel));
-        }
+        public async Task<IActionResult> UpdateApplicationUser([FromBody]UpdateApplicationUser viewModel) => new JsonResult(value: await Service.UpdateApplicationUser(viewModel));
 
         [HttpGet]
         [Route("findallapplicationuser")]
-        public async Task<IActionResult> FindAllApplicationUser()
-        {
-            return new JsonResult(value: await Service.FindAllApplicationUser());
-        }
+        public async Task<IActionResult> FindAllApplicationUser() => new JsonResult(value: await Service.FindAllApplicationUser());
 
         [HttpDelete]
         [Route("removeapplicationuserbyid/{id}")]
