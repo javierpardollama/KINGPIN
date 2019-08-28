@@ -6,6 +6,7 @@ import { SecurityService } from './../../../services/security.service';
 
 import { SecurityPasswordReset } from './../../../viewmodels/security/securitypasswordreset';
 
+import { TextAppVariants } from './../../../variants/text.app.variants';
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
 @Component({
@@ -30,8 +31,8 @@ export class ResetPasswordSecurityComponent implements OnInit {
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
-      'Email': ['', [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
-      'NewPassword': ['', [Validators.required]]
+      'Email': [TextAppVariants.AppEmptyCoreText, [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
+      'NewPassword': [TextAppVariants.AppEmptyCoreText, [Validators.required]]
     });
   }
 

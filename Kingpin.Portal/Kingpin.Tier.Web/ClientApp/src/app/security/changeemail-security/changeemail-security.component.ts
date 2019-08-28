@@ -6,6 +6,7 @@ import { SecurityService } from './../../../services/security.service';
 import { SecurityEmailChange } from './../../../viewmodels/security/securityemailchange';
 import { ViewApplicationUser } from './../../../viewmodels/views/viewapplicationuser';
 
+import { TextAppVariants } from './../../../variants/text.app.variants';
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
 @Component({
@@ -27,14 +28,14 @@ export class ChangeEmailSecurityComponent implements OnInit {
   ngOnInit() {
     this.User = JSON.parse(localStorage.getItem("User"));
 
-    this.CreateForm();    
+    this.CreateForm();
   }
 
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
       'ApplicationUser': [this.User, Validators.required],
-      'NewEmail': ['', [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
+      'NewEmail': [TextAppVariants.AppEmptyCoreText, [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
     });
   }
 

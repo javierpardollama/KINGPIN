@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewApplicationRole } from './../../../../../viewmodels/views/viewapplicationrole';
 import { ViewApplicationUser } from './../../../../../viewmodels/views/viewapplicationuser';
 
-
 import { UpdateApplicationUser } from './../../../../../viewmodels/updates/updateapplicationuser';
 
 import { ApplicationRoleService } from './../../../../../services/applicationrole.service';
@@ -52,7 +51,7 @@ export class ApplicationUserUpdateModalComponent implements OnInit {
     this.applicationUserService.UpdateApplicationUser(viewModel).subscribe(poblacion => {
 
       if (poblacion !== undefined) {
-        this.matSnackBar.open(TextAppVariants.AppSuccessButtonText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+        this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
       }
 
       this.dialogRef.close();
@@ -61,7 +60,7 @@ export class ApplicationUserUpdateModalComponent implements OnInit {
 
   onDelete(viewModel: UpdateApplicationUser) {
     this.applicationUserService.RemoveApplicationUserById(viewModel.Id).subscribe(poblacion => {
-      this.matSnackBar.open(TextAppVariants.AppSuccessButtonText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+      this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
 
       this.dialogRef.close();
     });

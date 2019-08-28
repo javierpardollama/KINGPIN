@@ -1,5 +1,6 @@
 export class TextAppVariants {
-    // Text invariants
+    // Text variants
     public static readonly AppOkButtonText = 'Ok';
-    public static readonly AppSuccessButtonText = 'Operation Successful';
+    public static readonly AppOperationSuccessCoreText = 'Operation Successful';
+    public static readonly AppEmptyCoreText = '';
 }

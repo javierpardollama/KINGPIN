@@ -6,6 +6,8 @@ import { SecurityService } from './../../../services/security.service';
 import { SecurityPasswordChange } from './../../../viewmodels/security/securitypasswordchange';
 import { ViewApplicationUser } from './../../../viewmodels/views/viewapplicationuser';
 
+import { TextAppVariants } from './../../../variants/text.app.variants';
+
 @Component({
   selector: 'app-changepassword-security',
   templateUrl: './changepassword-security.component.html',
@@ -25,15 +27,15 @@ export class ChangePasswordSecurityComponent implements OnInit {
   ngOnInit() {
     this.User = JSON.parse(localStorage.getItem("User"));
 
-    this.CreateForm();    
+    this.CreateForm();
   }
 
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
       'ApplicationUser': [this.User, Validators.required],
-      'CurrentPassword': ['', [Validators.required]],
-      'NewPassword': ['', [Validators.required]]
+      'CurrentPassword': [TextAppVariants.AppEmptyCoreText, [Validators.required]],
+      'NewPassword': [TextAppVariants.AppEmptyCoreText, [Validators.required]]
     });
   }
 

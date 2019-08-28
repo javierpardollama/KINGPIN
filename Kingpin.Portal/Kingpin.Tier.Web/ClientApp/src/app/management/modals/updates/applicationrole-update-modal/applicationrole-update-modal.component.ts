@@ -44,7 +44,7 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
     this.applicationRoleService.UpdateApplicationRole(viewModel).subscribe(applicationRole => {
 
       if (applicationRole !== undefined) {
-        this.matSnackBar.open(TextAppVariants.AppSuccessButtonText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+        this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
       }
 
       this.dialogRef.close();
@@ -54,7 +54,7 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
   onDelete(viewModel: UpdateApplicationRole) {
     this.applicationRoleService.RemoveApplicationRoleById(viewModel.Id).subscribe(applicationRole => {
 
-      this.matSnackBar.open(TextAppVariants.AppSuccessButtonText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+      this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
 
       this.dialogRef.close();
     });
