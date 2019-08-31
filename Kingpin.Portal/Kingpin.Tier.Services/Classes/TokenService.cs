@@ -43,7 +43,7 @@ namespace Kingpin.Tier.Services.Classes
         public SigningCredentials GenerateSigningCredentials(SymmetricSecurityKey symmetricSecurityKey)
         {
             return new SigningCredentials(symmetricSecurityKey,
-                                          SecurityAlgorithms.HmacSha256); ;
+                                          SecurityAlgorithms.HmacSha256);
         }
 
         public DateTime GenerateTokenExpirationDate() => DateTime.Now.AddDays(JwtSettings.JwtExpireDays);
