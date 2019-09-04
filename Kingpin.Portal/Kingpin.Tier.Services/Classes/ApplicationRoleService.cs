@@ -112,8 +112,7 @@ namespace Kingpin.Tier.Services.Classes
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
             ICollection<ApplicationRole> applicationRoles = await Context.ApplicationRole
-                .TagWith("FindAllApplicationRole")
-                .AsQueryable()
+                .TagWith("FindAllApplicationRole")              
                 .AsNoTracking()
                 .ToAsyncEnumerable()
                 .ToList();
