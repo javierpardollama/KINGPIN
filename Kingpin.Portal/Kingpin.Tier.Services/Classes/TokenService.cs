@@ -53,12 +53,24 @@ namespace Kingpin.Tier.Services.Classes
         {
             return new List<Claim>
             {
-                new Claim(JwtRegisteredClaimNames.Sub,
-                          email),
-                new Claim(JwtRegisteredClaimNames.Jti,
-                          Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.NameIdentifier,
-                          applicationUser.Id.ToString())
+                new Claim(
+                    JwtRegisteredClaimNames.Sub,
+                    email),
+                new Claim(
+                    JwtRegisteredClaimNames.Jti,
+                    Guid.NewGuid().ToString()),
+                new Claim(
+                    ClaimTypes.NameIdentifier,
+                    applicationUser.Id.ToString()),
+                new Claim(
+                    ClaimTypes.Email,
+                    applicationUser.Email),                  
+                new Claim(
+                    JwtRegisteredClaimNames.Iss,
+                    JwtSettings.JwtIssuer),
+                new Claim(
+                    JwtRegisteredClaimNames.Aud,
+                    JwtSettings.JwtAudience),                
             };
         }
     }
