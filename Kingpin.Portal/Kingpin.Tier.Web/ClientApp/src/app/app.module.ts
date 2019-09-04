@@ -17,9 +17,6 @@ import { SignInGuard } from './../guards/signin.guard';
 // Interceptors
 import { AuthInterceptor } from './../interceptors/auth.interceptor';
 
-// Directives
-import { NumericTypeDirective } from './../directives/numeric-type.directive';
-
 // App
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
@@ -47,8 +44,6 @@ import { ChangeEmailSecurityComponent } from './security/changeemail-security/ch
 
 @NgModule({
   declarations: [
-    // Directives
-    NumericTypeDirective,
     // App
     AppComponent,
     NavMenuComponent,
@@ -68,10 +63,6 @@ import { ChangeEmailSecurityComponent } from './security/changeemail-security/ch
     ChangePasswordSecurityComponent,
     ResetPasswordSecurityComponent,
     ChangeEmailSecurityComponent],
-  exports: [
-    // Directives
-    NumericTypeDirective
-  ],
   imports: [
     // Angular Material
     BrowserAnimationsModule,
