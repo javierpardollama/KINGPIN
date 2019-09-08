@@ -25,7 +25,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             return new JwtSecurityToken(
                 JwtSettings.JwtIssuer,
-                JwtSettings.JwtIssuer,
+                JwtSettings.JwtAudience,
                 GenerateJwtClaims(email,
                                   applicationUser),
                 expires: GenerateTokenExpirationDate(),
