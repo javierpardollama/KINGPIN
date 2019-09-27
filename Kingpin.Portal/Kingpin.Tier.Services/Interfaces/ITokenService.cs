@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 
 using Kingpin.Tier.Entities.Classes;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Kingpin.Tier.Services.Interfaces
 {

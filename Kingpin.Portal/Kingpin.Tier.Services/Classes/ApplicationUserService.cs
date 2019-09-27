@@ -35,8 +35,7 @@ namespace Kingpin.Tier.Services.Classes
                .Include(x => x.ApplicationUserTokens)
                .Include(x => x.ApplicationUserRoles)
                .ThenInclude(x => x.ApplicationRole)
-               .ToAsyncEnumerable()
-               .ToList();
+               .ToListAsync();
 
             return Mapper.Map<ICollection<ViewApplicationUser>>(applicationUsers);
         }
@@ -97,7 +96,7 @@ namespace Kingpin.Tier.Services.Classes
 
             Context.ApplicationUser.Update(applicationUser);
 
-            await UpdateApplicationUserRole(viewModel, applicationUser);
+            UpdateApplicationUserRole(viewModel, applicationUser);
 
             await Context.SaveChangesAsync();
 
@@ -113,9 +112,9 @@ namespace Kingpin.Tier.Services.Classes
             return Mapper.Map<ViewApplicationUser>(applicationUser); ;
         }
 
-        public async Task UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser applicationUser)
+        public void UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser applicationUser)
         {
-            await viewModel.ApplicationRolesId.ToAsyncEnumerable().ForEachAsync(async x =>
+            viewModel.ApplicationRolesId.AsQueryable().ForEachAsync(async x =>
             {
                 ApplicationRole applicationRole = await FindApplicationRoleById(x);
 

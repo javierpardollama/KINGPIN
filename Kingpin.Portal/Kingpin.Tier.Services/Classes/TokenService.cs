@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
@@ -8,6 +9,7 @@ using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.Settings.Classes;
 
 using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Kingpin.Tier.Services.Classes
 {

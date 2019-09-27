@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 using AutoMapper;
@@ -114,8 +113,7 @@ namespace Kingpin.Tier.Services.Classes
             ICollection<ApplicationRole> applicationRoles = await Context.ApplicationRole
                 .TagWith("FindAllApplicationRole")
                 .AsNoTracking()
-                .ToAsyncEnumerable()
-                .ToList();
+                .ToListAsync();
 
             return Mapper.Map<ICollection<ViewApplicationRole>>(applicationRoles);
         }
