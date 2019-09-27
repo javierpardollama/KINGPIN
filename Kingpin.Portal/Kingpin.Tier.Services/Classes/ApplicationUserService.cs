@@ -114,7 +114,7 @@ namespace Kingpin.Tier.Services.Classes
 
         public void UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser applicationUser)
         {
-            viewModel.ApplicationRolesId.AsQueryable().ForEachAsync(async x =>
+            viewModel.ApplicationRolesId.AsQueryable().ToList().ForEach(async x =>
             {
                 ApplicationRole applicationRole = await FindApplicationRoleById(x);
 

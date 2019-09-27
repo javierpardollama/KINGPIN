@@ -114,9 +114,13 @@ namespace Kingpin.Tier.Web
 
             app.UseCors("Authentication");
 
+            app.UseAuthorization();
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+
+            app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
