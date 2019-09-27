@@ -1,7 +1,7 @@
-﻿using Kingpin.Tier.Entities.Classes;
+﻿using System.Threading.Tasks;
+using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.ViewModels.Classes.Security;
 using Kingpin.Tier.ViewModels.Classes.Views;
-using System.Threading.Tasks;
 
 namespace Kingpin.Tier.Services.Interfaces
 {

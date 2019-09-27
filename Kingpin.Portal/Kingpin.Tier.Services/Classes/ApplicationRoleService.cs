@@ -112,7 +112,7 @@ namespace Kingpin.Tier.Services.Classes
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
             ICollection<ApplicationRole> applicationRoles = await Context.ApplicationRole
-                .TagWith("FindAllApplicationRole")              
+                .TagWith("FindAllApplicationRole")
                 .AsNoTracking()
                 .ToAsyncEnumerable()
                 .ToList();
@@ -168,7 +168,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             await CheckName(viewModel);
 
-            ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);           
+            ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);
 
             applicationRole.Name = viewModel.Name;
             applicationRole.NormalizedName = viewModel.Name;
