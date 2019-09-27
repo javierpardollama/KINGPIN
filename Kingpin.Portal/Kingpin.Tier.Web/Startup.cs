@@ -37,6 +37,8 @@ namespace Kingpin.Tier.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
             services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -78,8 +80,8 @@ namespace Kingpin.Tier.Web
             // Add customized Cross Origin Requests to the services container.
             services.AddCustomizedCrossOriginRequests(JwtSettings);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-            .AddJsonOptions(options =>
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.Formatting = Formatting.Indented;
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
@@ -116,11 +118,11 @@ namespace Kingpin.Tier.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            app.UseMvc(routes =>
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

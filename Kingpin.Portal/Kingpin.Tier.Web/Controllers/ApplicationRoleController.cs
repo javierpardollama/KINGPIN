@@ -12,7 +12,8 @@ namespace Kingpin.Tier.Web.Controllers
     [Route("api/applicationrole")]
     [Produces("application/json")]
     [Authorize]
-    public class ApplicationRoleController : Controller
+    [ApiController]
+    public class ApplicationRoleController : ControllerBase
     {
         private readonly IApplicationRoleService Service;
 

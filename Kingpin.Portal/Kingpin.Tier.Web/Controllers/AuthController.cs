@@ -9,7 +9,8 @@ namespace Kingpin.Tier.Web.Controllers
 {
     [Route("api/auth")]
     [Produces("application/json")]
-    public class AuthController
+    [ApiController]
+    public class AuthController : ControllerBase
     {
         private readonly IAuthService Service;
 

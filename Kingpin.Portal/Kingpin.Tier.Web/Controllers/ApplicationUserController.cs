@@ -11,7 +11,8 @@ namespace Kingpin.Tier.Web.Controllers
     [Route("api/applicationuser")]
     [Produces("application/json")]
     [Authorize]
-    public class ApplicationUserController : Controller
+    [ApiController]
+    public class ApplicationUserController : ControllerBase
     {
         private readonly IApplicationUserService Service;
 

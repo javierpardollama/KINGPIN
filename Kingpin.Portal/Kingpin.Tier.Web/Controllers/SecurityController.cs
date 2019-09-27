@@ -9,8 +9,9 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kingpin.Tier.Web.Controllers
 {
     [Route("api/security")]
-    [Produces("application/json")]   
-    public class SecurityController
+    [Produces("application/json")]
+    [ApiController]
+    public class SecurityController : ControllerBase
     {
         private readonly ISecurityService Service;
 
