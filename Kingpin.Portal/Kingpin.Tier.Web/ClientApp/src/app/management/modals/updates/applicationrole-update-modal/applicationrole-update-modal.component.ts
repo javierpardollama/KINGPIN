@@ -1,11 +1,29 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit,
+  Inject
+} from '@angular/core';
+
+import {
+  MatDialogRef,
+  MAT_DIALOG_DATA,
+  MatSnackBar
+} from '@angular/material';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
 import { ViewApplicationRole } from './../../../../../viewmodels/views/viewapplicationrole';
+
 import { UpdateApplicationRole } from './../../../../../viewmodels/updates/updateapplicationrole';
 
 import { ApplicationRoleService } from './../../../../../services/applicationrole.service';
+
 import { TextAppVariants } from './../../../../../variants/text.app.variants';
+
 import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 
 @Component({
@@ -18,7 +36,8 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
   public formGroup: FormGroup;
 
   // Constructor
-  constructor(private applicationRoleService: ApplicationRoleService,
+  constructor(
+    private applicationRoleService: ApplicationRoleService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ApplicationRoleUpdateModalComponent>,
     private matSnackBar: MatSnackBar,
@@ -33,9 +52,12 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
-      'Id': [this.data.Id, [Validators.required]],
-      'Name': [this.data.Name, [Validators.required]],
-      'ImageUri': [this.data.ImageUri, [Validators.required]]
+      Id: [this.data.Id,
+      [Validators.required]],
+      Name: [this.data.Name,
+      [Validators.required]],
+      ImageUri: [this.data.ImageUri,
+      [Validators.required]]
     });
   }
 
@@ -44,7 +66,10 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
     this.applicationRoleService.UpdateApplicationRole(viewModel).subscribe(applicationRole => {
 
       if (applicationRole !== undefined) {
-        this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+        this.matSnackBar.open(
+          TextAppVariants.AppOperationSuccessCoreText,
+          TextAppVariants.AppOkButtonText,
+          { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
       }
 
       this.dialogRef.close();
@@ -54,7 +79,10 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
   onDelete(viewModel: UpdateApplicationRole) {
     this.applicationRoleService.RemoveApplicationRoleById(viewModel.Id).subscribe(applicationRole => {
 
-      this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+      this.matSnackBar.open(
+        TextAppVariants.AppOperationSuccessCoreText,
+        TextAppVariants.AppOkButtonText,
+        { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
 
       this.dialogRef.close();
     });

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
 import { ViewApplicationUser } from './../../viewmodels/views/viewapplicationuser';
 
 @Component({
@@ -8,9 +12,9 @@ import { ViewApplicationUser } from './../../viewmodels/views/viewapplicationuse
 })
 export class NavMenuComponent implements OnInit {
 
-  public isExpanded: boolean = false;
+  public isExpanded = false;
 
-  public isVisible: boolean = false;
+  public isVisible = false;
 
   public User: ViewApplicationUser;
 
@@ -34,7 +38,7 @@ export class NavMenuComponent implements OnInit {
   }
 
   display() {
-    this.User = JSON.parse(localStorage.getItem("User"));
+    this.User = JSON.parse(localStorage.getItem('User'));
 
     if (this.User !== null) {
       this.isVisible = true;

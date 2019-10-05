@@ -1,12 +1,30 @@
 
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
-import { ViewApplicationRole } from './../../../../viewmodels/views/viewapplicationrole';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+
+import {
+  MatTableDataSource,
+  MatPaginator,
+  MatSort,
+  MatDialog
+} from '@angular/material';
+
+import {
+  ViewApplicationRole
+} from './../../../../viewmodels/views/viewapplicationrole';
 
 import { ApplicationRoleService } from './../../../../services/applicationrole.service';
 
-import { ApplicationRoleUpdateModalComponent } from './../../modals/updates/applicationrole-update-modal/applicationrole-update-modal.component';
-import { ApplicationRoleAddModalComponent } from './../../modals/additions/applicationrole-add-modal/applicationrole-add-modal.component';
+import {
+  ApplicationRoleUpdateModalComponent
+} from './../../modals/updates/applicationrole-update-modal/applicationrole-update-modal.component';
+
+import {
+  ApplicationRoleAddModalComponent
+} from './../../modals/additions/applicationrole-add-modal/applicationrole-add-modal.component';
 
 @Component({
   selector: 'app-applicationrole-grid',
@@ -25,7 +43,8 @@ export class ApplicationRoleGridComponent implements OnInit {
   public dataSource: MatTableDataSource<ViewApplicationRole>;
 
   // Constructor
-  constructor(private applicationRoleService: ApplicationRoleService,
+  constructor(
+    private applicationRoleService: ApplicationRoleService,
     public matDialog: MatDialog) {
 
   }

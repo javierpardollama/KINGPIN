@@ -1,6 +1,15 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import { Router } from '@angular/router';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { AuthService } from './../../../services/auth.service';
 
@@ -19,7 +28,8 @@ export class JoinInAuthComponent implements OnInit {
   public formGroup: FormGroup;
 
   // Constructor
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private authService: AuthService,
     private formBuilder: FormBuilder) { }
 
@@ -31,17 +41,20 @@ export class JoinInAuthComponent implements OnInit {
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
-      'Email': [TextAppVariants.AppEmptyCoreText, [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
-      'Password': [TextAppVariants.AppEmptyCoreText, [Validators.required]]
+      Email: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required,
+      Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
+      Password: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required]]
     });
   }
 
   // Form Actions
   onSubmit(viewModel: AuthSignIn) {
-    this.authService.JoinIn(viewModel).subscribe(user => localStorage.setItem("User", JSON.stringify(user)));
+    this.authService.JoinIn(viewModel).subscribe(user => localStorage.setItem('User', JSON.stringify(user)));
   }
 
   onNavigate() {
-    this.router.navigate(["/auth/signin"]);
+    this.router.navigate(['/auth/signin']);
   }
 }

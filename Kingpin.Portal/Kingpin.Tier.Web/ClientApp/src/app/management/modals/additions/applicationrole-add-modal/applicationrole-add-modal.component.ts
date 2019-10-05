@@ -1,10 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef, MatSnackBar } from '@angular/material';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import {
+  MatDialogRef,
+  MatSnackBar
+} from '@angular/material';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+
 import { AddApplicationRole } from './../../../../../viewmodels/additions/addapplicationrole';
 
 import { ApplicationRoleService } from './../../../../../services/applicationrole.service';
+
 import { TextAppVariants } from './../../../../../variants/text.app.variants';
+
 import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 
 @Component({
@@ -17,7 +32,8 @@ export class ApplicationRoleAddModalComponent implements OnInit {
   public formGroup: FormGroup;
 
   // Constructor
-  constructor(private applicationRoleService: ApplicationRoleService,
+  constructor(
+    private applicationRoleService: ApplicationRoleService,
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<ApplicationRoleAddModalComponent>,
     private matSnackBar: MatSnackBar) { }
@@ -31,8 +47,10 @@ export class ApplicationRoleAddModalComponent implements OnInit {
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
-      'Name': [TextAppVariants.AppEmptyCoreText, [Validators.required]],
-      'ImageUri': [TextAppVariants.AppEmptyCoreText, [Validators.required]]
+      Name: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required]],
+      ImageUri: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required]]
     });
   }
 
@@ -41,7 +59,10 @@ export class ApplicationRoleAddModalComponent implements OnInit {
     this.applicationRoleService.AddApplicationRole(viewModel).subscribe(applicationRole => {
 
       if (applicationRole !== undefined) {
-        this.matSnackBar.open(TextAppVariants.AppOperationSuccessCoreText, TextAppVariants.AppOkButtonText, { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+        this.matSnackBar.open(
+          TextAppVariants.AppOperationSuccessCoreText,
+          TextAppVariants.AppOkButtonText,
+          { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
       }
 
       this.dialogRef.close();

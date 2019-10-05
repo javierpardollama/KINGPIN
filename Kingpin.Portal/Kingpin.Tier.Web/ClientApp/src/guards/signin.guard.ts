@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, Router } from '@angular/router';
+
+import {
+    CanActivate,
+    Router
+} from '@angular/router';
+
 import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
 
 @Injectable({
@@ -10,16 +15,16 @@ export class SignInGuard implements CanActivate {
 
     private User: ViewApplicationUser;
 
-    private Activated: boolean = false;
+    private Activated = false;
 
     constructor(private router: Router) { }
 
     canActivate() {
 
-        this.User = JSON.parse(localStorage.getItem("User"));
+        this.User = JSON.parse(localStorage.getItem('User'));
 
         if (this.User === null) {
-            this.router.navigateByUrl("auth/signin");
+            this.router.navigateByUrl('auth/signin');
         } else {
             this.Activated = true;
         }

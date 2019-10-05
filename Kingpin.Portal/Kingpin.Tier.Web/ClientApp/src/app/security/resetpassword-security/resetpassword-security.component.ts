@@ -1,12 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import { Router } from '@angular/router';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { SecurityService } from './../../../services/security.service';
 
 import { SecurityPasswordReset } from './../../../viewmodels/security/securitypasswordreset';
 
 import { TextAppVariants } from './../../../variants/text.app.variants';
+
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
 @Component({
@@ -19,7 +29,8 @@ export class ResetPasswordSecurityComponent implements OnInit {
   public formGroup: FormGroup;
 
   // Constructor
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private securityService: SecurityService,
     private formBuilder: FormBuilder) { }
 
@@ -31,17 +42,20 @@ export class ResetPasswordSecurityComponent implements OnInit {
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
-      'Email': [TextAppVariants.AppEmptyCoreText, [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
-      'NewPassword': [TextAppVariants.AppEmptyCoreText, [Validators.required]]
+      Email: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required,
+      Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
+      NewPassword: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required]]
     });
   }
 
   // Form Actions
   onSubmit(viewModel: SecurityPasswordReset) {
-    this.securityService.ResetPassword(viewModel).subscribe(user => { localStorage.setItem("User", JSON.stringify(user)); });
+    this.securityService.ResetPassword(viewModel).subscribe(user => { localStorage.setItem('User', JSON.stringify(user)); });
   }
 
   onNavigate() {
-    this.router.navigate(["/auth/joinin"]);
+    this.router.navigate(['/auth/joinin']);
   }
 }

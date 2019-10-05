@@ -1,12 +1,19 @@
 import { ViewApplicationRole } from './../viewmodels/views/viewapplicationrole';
+
 import { AddApplicationRole } from './../viewmodels/additions/addapplicationrole';
+
 import { UpdateApplicationRole } from './../viewmodels/updates/updateapplicationrole';
 
 import { HttpClient } from '@angular/common/http';
+
 import { MatSnackBar } from '@angular/material';
+
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
+
 import { BaseService } from './base.service';
 
 @Injectable({

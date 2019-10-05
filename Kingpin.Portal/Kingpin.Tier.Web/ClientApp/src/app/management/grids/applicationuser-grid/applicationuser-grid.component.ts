@@ -1,10 +1,23 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialog } from '@angular/material';
+import {
+  Component,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+
+import {
+  MatTableDataSource,
+  MatPaginator,
+  MatSort,
+  MatDialog
+} from '@angular/material';
+
 import { ViewApplicationUser } from './../../../../viewmodels/views/viewapplicationuser';
 
 import { ApplicationUserService } from './../../../../services/applicationuser.service';
 
-import { ApplicationUserUpdateModalComponent } from './../../modals/updates/applicationuser-update-modal/applicationuser-update-modal.component';
+import {
+  ApplicationUserUpdateModalComponent
+} from './../../modals/updates/applicationuser-update-modal/applicationuser-update-modal.component';
 
 
 @Component({
@@ -19,12 +32,13 @@ export class ApplicationUserGridComponent implements OnInit {
 
   public ELEMENT_DATA: ViewApplicationUser[];
 
-  public displayedColumns: string[] = ['Id', 'Email', "ApplicationRoles", "LastModified"];
+  public displayedColumns: string[] = ['Id', 'Email', 'ApplicationRoles', 'LastModified'];
 
   public dataSource: MatTableDataSource<ViewApplicationUser>;
 
   // Constructor
-  constructor(private applicationUserService: ApplicationUserService,
+  constructor(
+    private applicationUserService: ApplicationUserService,
     public matDialog: MatDialog) {
 
   }

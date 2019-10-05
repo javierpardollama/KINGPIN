@@ -1,4 +1,3 @@
-export interface UpdateBase
-{
+export interface UpdateBase {
     Id: number;
 }

@@ -1,13 +1,21 @@
 import { ViewApplicationUser } from './../viewmodels/views/viewapplicationuser';
+
 import { SecurityPasswordChange } from './../viewmodels/security/securitypasswordchange';
+
 import { SecurityPasswordReset } from './../viewmodels/security/securitypasswordreset';
+
 import { SecurityEmailChange } from './../viewmodels/security/securityemailchange';
 
 import { HttpClient } from '@angular/common/http';
+
 import { MatSnackBar } from '@angular/material';
+
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
+
 import { catchError } from 'rxjs/operators';
+
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -35,5 +43,5 @@ export class SecurityService extends BaseService {
   public ChangeEmail(viewModel: SecurityEmailChange): Observable<ViewApplicationUser> {
     return this.httpClient.put<ViewApplicationUser>('api/applicationuser/changeemail', viewModel)
       .pipe(catchError(this.HandleError<ViewApplicationUser>('ChangeEmail', undefined)));
-  }  
+  }
 }

@@ -1,12 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+
+import {
+  FormBuilder,
+  FormGroup,
+  Validators
+} from '@angular/forms';
 
 import { SecurityService } from './../../../services/security.service';
 
 import { SecurityEmailChange } from './../../../viewmodels/security/securityemailchange';
+
 import { ViewApplicationUser } from './../../../viewmodels/views/viewapplicationuser';
 
 import { TextAppVariants } from './../../../variants/text.app.variants';
+
 import { ExpressionAppVariants } from './../../../variants/expression.app.variants';
 
 @Component({
@@ -21,12 +31,13 @@ export class ChangeEmailSecurityComponent implements OnInit {
   public User: ViewApplicationUser;
 
   // Constructor
-  constructor(private securityService: SecurityService,
+  constructor(
+    private securityService: SecurityService,
     private formBuilder: FormBuilder) { }
 
   // Life Cicle
   ngOnInit() {
-    this.User = JSON.parse(localStorage.getItem("User"));
+    this.User = JSON.parse(localStorage.getItem('User'));
 
     this.CreateForm();
   }
@@ -34,13 +45,16 @@ export class ChangeEmailSecurityComponent implements OnInit {
   // Form
   CreateForm() {
     this.formGroup = this.formBuilder.group({
-      'ApplicationUser': [this.User, Validators.required],
-      'NewEmail': [TextAppVariants.AppEmptyCoreText, [Validators.required, Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
+      ApplicationUser: [this.User,
+      Validators.required],
+      NewEmail: [TextAppVariants.AppEmptyCoreText,
+      [Validators.required,
+      Validators.pattern(ExpressionAppVariants.AppMailExpression)]],
     });
   }
 
   // Form Actions
   onSubmit(viewModel: SecurityEmailChange) {
-    this.securityService.ChangeEmail(viewModel).subscribe(user => { localStorage.setItem("User", JSON.stringify(user)); });
+    this.securityService.ChangeEmail(viewModel).subscribe(user => { localStorage.setItem('User', JSON.stringify(user)); });
   }
 }
