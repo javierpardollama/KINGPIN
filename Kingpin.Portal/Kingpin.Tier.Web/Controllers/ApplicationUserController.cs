@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Net;
+using System.Threading.Tasks;
 
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.ViewModels.Classes.Updates;
@@ -32,7 +33,7 @@ namespace Kingpin.Tier.Web.Controllers
         {
             await Service.RemoveApplicationUserById(id);
 
-            return new JsonResult(StatusCode(200));
+            return new JsonResult((int)HttpStatusCode.OK);
         }
     }
 }
