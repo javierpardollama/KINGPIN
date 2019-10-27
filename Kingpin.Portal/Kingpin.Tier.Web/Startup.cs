@@ -102,7 +102,6 @@ namespace Kingpin.Tier.Web
             {
                 app.UseDeveloperExceptionPage();
                 app.UseCustomizedExceptionMiddlewares();
-
             }
             else
             {
