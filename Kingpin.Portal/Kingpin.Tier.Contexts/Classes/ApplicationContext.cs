@@ -17,19 +17,19 @@ namespace Kingpin.Tier.Contexts.Classes
         {
         }
 
-        public DbSet<ApplicationRole> ApplicationRole { get; set; }
+        public virtual DbSet<ApplicationRole> ApplicationRole { get; set; }
 
-        public DbSet<ApplicationRoleClaim> ApplicationRoleClaim { get; set; }
+        public virtual DbSet<ApplicationRoleClaim> ApplicationRoleClaim { get; set; }
 
-        public DbSet<ApplicationUser> ApplicationUser { get; set; }
+        public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
 
-        public DbSet<ApplicationUserClaim> ApplicationUserClaim { get; set; }
+        public virtual DbSet<ApplicationUserClaim> ApplicationUserClaim { get; set; }
 
-        public DbSet<ApplicationUserLogin> ApplicationUserLogin { get; set; }
+        public virtual DbSet<ApplicationUserLogin> ApplicationUserLogin { get; set; }
 
-        public DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
+        public virtual DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
 
-        public DbSet<ApplicationUserToken> ApplicationUserToken { get; set; }
+        public virtual DbSet<ApplicationUserToken> ApplicationUserToken { get; set; }
 
         public override int SaveChanges()
         {
