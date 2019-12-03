@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
     <PackageProjectUrl>https://github.com/javierpardollama/KINGPIN/tree/master/Kinpin.Portal/Kingpin.Tier.ExceptionHandling</PackageProjectUrl>
     <RepositoryUrl>https://github.com/javierpardollama/KINGPIN/tree/master/Kinpin.Portal/Kingpin.Tier.ExceptionHandling</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
