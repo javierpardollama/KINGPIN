@@ -59,18 +59,17 @@ export class ApplicationRoleUpdateModalComponent implements OnInit {
   }
 
   // Form Actions
-  onSubmit(viewModel: UpdateApplicationRole) {
-    this.applicationRoleService.UpdateApplicationRole(viewModel).subscribe(applicationRole => {
+  async onSubmit(viewModel: UpdateApplicationRole) {
+    let applicationRole = await this.applicationRoleService.UpdateApplicationRole(viewModel);
 
-      if (applicationRole !== undefined) {
-        this.matSnackBar.open(
-          TextAppVariants.AppOperationSuccessCoreText,
-          TextAppVariants.AppOkButtonText,
-          { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
-      }
+    if (applicationRole !== undefined) {
+      this.matSnackBar.open(
+        TextAppVariants.AppOperationSuccessCoreText,
+        TextAppVariants.AppOkButtonText,
+        { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+    }
 
-      this.dialogRef.close();
-    });
+    this.dialogRef.close();
   }
 
   onDelete(viewModel: UpdateApplicationRole) {

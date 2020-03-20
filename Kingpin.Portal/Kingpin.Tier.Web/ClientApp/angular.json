@@ -121,5 +121,8 @@
       }
     }
   },
-  "defaultProject": "Kingpin.Tier.Web"
+  "defaultProject": "Kingpin.Tier.Web",
+  "cli": {
+    "analytics": "48cdd0b7-8b46-41fc-aebb-11d6787a9122"
+  }
 }

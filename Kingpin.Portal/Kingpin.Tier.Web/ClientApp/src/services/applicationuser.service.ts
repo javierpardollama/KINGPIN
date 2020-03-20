@@ -26,14 +26,14 @@ export class ApplicationUserService extends BaseService {
     super(httpClient, matSnackBar);
   }
 
-  public FindAllApplicationUser(): Observable<ViewApplicationUser[]> {
+  public FindAllApplicationUser(): Promise<ViewApplicationUser[]> {
     return this.httpClient.get<ViewApplicationUser[]>('api/applicationuser/findallapplicationuser')
-      .pipe(catchError(this.HandleError<ViewApplicationUser[]>('FindAllApplicationUser', [])));
+      .pipe(catchError(this.HandleError<ViewApplicationUser[]>('FindAllApplicationUser', []))).toPromise();
   }
 
-  public UpdateApplicationUser(viewModel: UpdateApplicationUser): Observable<ViewApplicationUser> {
+  public UpdateApplicationUser(viewModel: UpdateApplicationUser): Promise<ViewApplicationUser> {
     return this.httpClient.put<ViewApplicationUser>('api/applicationuser/updateapplicationuser', viewModel)
-      .pipe(catchError(this.HandleError<ViewApplicationUser>('UpdateApplicationUser', undefined)));
+      .pipe(catchError(this.HandleError<ViewApplicationUser>('UpdateApplicationUser', undefined))).toPromise();
   }
 
   public RemoveApplicationUserById(id: number) {

@@ -67,18 +67,17 @@ export class ApplicationUserUpdateModalComponent implements OnInit {
   }
 
   // Form Actions
-  onSubmit(viewModel: UpdateApplicationUser) {
-    this.applicationUserService.UpdateApplicationUser(viewModel).subscribe(poblacion => {
+  async onSubmit(viewModel: UpdateApplicationUser) {
+    let poblacion = await this.applicationUserService.UpdateApplicationUser(viewModel);
 
-      if (poblacion !== undefined) {
-        this.matSnackBar.open(
-          TextAppVariants.AppOperationSuccessCoreText,
-          TextAppVariants.AppOkButtonText,
-          { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
-      }
+    if (poblacion !== undefined) {
+      this.matSnackBar.open(
+        TextAppVariants.AppOperationSuccessCoreText,
+        TextAppVariants.AppOkButtonText,
+        { duration: TimeAppVariants.AppToastSecondTicks * TimeAppVariants.AppTimeSecondTicks });
+    }
 
-      this.dialogRef.close();
-    });
+    this.dialogRef.close();
   }
 
   onDelete(viewModel: UpdateApplicationUser) {
@@ -93,9 +92,7 @@ export class ApplicationUserUpdateModalComponent implements OnInit {
   }
 
   // Get Data from Service
-  public FindAllApplicationRole() {
-    this.applicationRoleService.FindAllApplicationRole().subscribe(applicationroles => {
-      this.applicationroles = applicationroles;
-    });
+  public async FindAllApplicationRole() {
+    this.applicationroles = await this.applicationRoleService.FindAllApplicationRole();
   }
 }

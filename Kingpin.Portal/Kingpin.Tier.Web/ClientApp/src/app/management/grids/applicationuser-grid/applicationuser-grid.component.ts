@@ -47,12 +47,10 @@ export class ApplicationUserGridComponent implements OnInit {
   }
 
   // Get Data from Service
-  public FindAllApplicationUser() {
-    this.applicationUserService.FindAllApplicationUser().subscribe(applicationUsers => {
-      this.ELEMENT_DATA = applicationUsers;
+  public async FindAllApplicationUser() {
+    this.ELEMENT_DATA = await this.applicationUserService.FindAllApplicationUser();
 
-      this.SetupMyTableSettings();
-    });
+    this.SetupMyTableSettings();
   }
 
   // Setup Table Settings

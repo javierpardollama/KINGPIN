@@ -53,12 +53,10 @@ export class ApplicationRoleGridComponent implements OnInit {
   }
 
   // Get Data from Service
-  public FindAllApplicationRole() {
-    this.applicationRoleService.FindAllApplicationRole().subscribe(applicationRoles => {
-      this.ELEMENT_DATA = applicationRoles;
+  public async FindAllApplicationRole() {
+    this.ELEMENT_DATA = await this.applicationRoleService.FindAllApplicationRole();
 
-      this.SetupMyTableSettings();
-    });
+    this.SetupMyTableSettings();
   }
 
   // Setup Table Settings

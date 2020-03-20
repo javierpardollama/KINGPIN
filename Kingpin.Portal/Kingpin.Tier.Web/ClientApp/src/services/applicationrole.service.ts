@@ -28,19 +28,19 @@ export class ApplicationRoleService extends BaseService {
     super(httpClient, matSnackBar);
   }
 
-  public FindAllApplicationRole(): Observable<ViewApplicationRole[]> {
+  public FindAllApplicationRole(): Promise<ViewApplicationRole[]> {
     return this.httpClient.get<ViewApplicationRole[]>('api/applicationrole/findallapplicationrole')
-      .pipe(catchError(this.HandleError<ViewApplicationRole[]>('FindAllApplicationRole', [])));
+      .pipe(catchError(this.HandleError<ViewApplicationRole[]>('FindAllApplicationRole', []))).toPromise();
   }
 
-  public UpdateApplicationRole(viewModel: UpdateApplicationRole): Observable<ViewApplicationRole> {
+  public UpdateApplicationRole(viewModel: UpdateApplicationRole): Promise<ViewApplicationRole> {
     return this.httpClient.put<ViewApplicationRole>('api/applicationrole/updateapplicationrole', viewModel)
-      .pipe(catchError(this.HandleError<ViewApplicationRole>('UpdateApplicationRole', undefined)));
+      .pipe(catchError(this.HandleError<ViewApplicationRole>('UpdateApplicationRole', undefined))).toPromise();
   }
 
-  public AddApplicationRole(viewModel: AddApplicationRole): Observable<ViewApplicationRole> {
+  public AddApplicationRole(viewModel: AddApplicationRole): Promise<ViewApplicationRole> {
     return this.httpClient.post<ViewApplicationRole>('api/applicationrole/addapplicationrole', viewModel)
-      .pipe(catchError(this.HandleError<ViewApplicationRole>('AddApplicationRole', undefined)));
+      .pipe(catchError(this.HandleError<ViewApplicationRole>('AddApplicationRole', undefined))).toPromise();
   }
 
   public RemoveApplicationRoleById(id: number) {
