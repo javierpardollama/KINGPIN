@@ -30,6 +30,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // Guards
 import { SignInGuard } from './../guards/signin.guard';
@@ -50,6 +51,11 @@ import {
 } from './auth/joinin-auth/joinin-auth.component';
 
 import { SignInAuthComponent } from './auth/signin-auth/signin-auth.component';
+
+// App-Management
+import {
+  ManagementComponent
+} from './management/management.component';
 
 // App-Grid
 import {
@@ -76,6 +82,10 @@ import {
 
 // App-Security
 import {
+  SecurityComponent
+} from './security/security.component';
+
+import {
   ChangePasswordSecurityComponent
 } from './security/changepassword-security/changepassword-security.component';
 
@@ -87,6 +97,8 @@ import {
   ChangeEmailSecurityComponent
 } from './security/changeemail-security/changeemail-security.component';
 
+
+
 @NgModule({
   declarations: [
     // App
@@ -96,6 +108,8 @@ import {
     // App-Auth
     JoinInAuthComponent,
     SignInAuthComponent,
+    // App-Management
+    ManagementComponent,
     // App-Grid
     ApplicationRoleGridComponent,
     ApplicationUserGridComponent,
@@ -105,9 +119,11 @@ import {
     ApplicationRoleUpdateModalComponent,
     ApplicationUserUpdateModalComponent,
     // App-Security
+    SecurityComponent,
     ChangePasswordSecurityComponent,
     ResetPasswordSecurityComponent,
-    ChangeEmailSecurityComponent],
+    ChangeEmailSecurityComponent
+  ],
   imports: [
     // Angular Material
     BrowserAnimationsModule,
@@ -121,6 +137,7 @@ import {
     MatChipsModule,
     MatAutocompleteModule,
     MatCardModule,
+    MatTabsModule,
     MatTableModule,
     MatSortModule,
     MatFormFieldModule,
@@ -148,28 +165,41 @@ import {
       },
       // App-Security
       {
-        path: 'security/changeemail',
+        path: 'security',
+        component: SecurityComponent,
+        pathMatch: 'full',
+        canActivate: [SignInGuard]
+      },
+      {
+        path: 'changeemail',
         component: ChangeEmailSecurityComponent,
         pathMatch: 'full',
         canActivate: [SignInGuard]
       },
       {
-        path: 'security/changepassword',
+        path: 'changepassword',
         component: ChangePasswordSecurityComponent,
         pathMatch: 'full',
         canActivate: [SignInGuard]
       },
       {
-        path: 'security/resetpassword',
+        path: 'resetpassword',
         component: ResetPasswordSecurityComponent,
         pathMatch: 'full'
       },
-      // App-Grid
+      // App-Management
       {
+        path: 'management',
+        component: ManagementComponent,
+        pathMatch: 'full',
+        canActivate: [SignInGuard],
+      },
+       // App-Grid
+       {
         path: 'management/applicationroles',
         component: ApplicationRoleGridComponent,
         pathMatch: 'full',
-        canActivate: [SignInGuard]
+        canActivate: [SignInGuard],
       },
       {
         path: 'management/applicationusers',
@@ -177,14 +207,14 @@ import {
         pathMatch: 'full',
         canActivate: [SignInGuard]
       }
-    ])
+    ]),   
   ],
   entryComponents: [
     ApplicationRoleAddModalComponent,
     ApplicationRoleUpdateModalComponent,
     ApplicationUserUpdateModalComponent],
   providers: [{
-    provide: HTTP_INTERCEPTORS,
+    provide: HTTP_INTERCEPTORS, 
     useClass: AuthInterceptor,
     multi: true,
   }],

@@ -1,0 +1,10 @@
+<div *ngIf="!NavigationTabs" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
+<nav mat-tab-nav-bar>
+  <a mat-tab-link *ngFor="let Tab of NavigationTabs" [routerLink]="Tab.Link" routerLinkActive #rla="routerLinkActive"
+    [active]="rla.isActive">
+    {{Tab.Label}}
+  </a>
+</nav>
