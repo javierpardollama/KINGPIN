@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { ViewLink } from './../../viewmodels/views/viewlink';
+import { NavigationService } from './../../services/navigation.service';
 
 @Component({
   selector: 'app-home',
@@ -6,4 +8,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+
+  NavigationLinks: ViewLink[];
+
+  // Constructor
+  constructor(
+    private navigationService: NavigationService) {
+    this.NavigationLinks = this.navigationService.GetHomeNavigationLinks();
+  }
+
+  // Life Cicle
+  ngOnInit() {
+  }
 }

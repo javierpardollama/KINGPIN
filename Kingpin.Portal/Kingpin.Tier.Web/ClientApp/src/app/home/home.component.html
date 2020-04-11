@@ -1,15 +1,13 @@
+<div *ngIf="!NavigationLinks" class="spinner-container">
+  <div class="spinner"></div>
+</div>
+
 <div class="home-menu">
   <ul>
-    <li [routerLinkActive]='["link-active"]'>
-      <a class="text-dark" [routerLink]='["/management"]'>
-        <div class="home-menu-option-image home-menu-management-image"></div>
-        <span class="home-option-link">Managenent</span>
-      </a>
-    </li>
-    <li [routerLinkActive]='["link-active"]'>
-      <a class="text-dark" [routerLink]='["/security"]'>
-        <div class="home-menu-option-image home-menu-security-image"></div>
-        <span class="home-option-link">Security</span>
+    <li *ngFor="let Link of NavigationLinks" [routerLinkActive]='Link.Link'>
+      <a class="text-dark" [routerLink]='Link.Link'>
+        <div class={{Link.Class}}></div>
+        <span class="home-option-link">{{Link.Label}}</span>
       </a>
     </li>
   </ul>
