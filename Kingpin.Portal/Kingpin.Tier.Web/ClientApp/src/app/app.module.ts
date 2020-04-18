@@ -194,8 +194,8 @@ import {
         pathMatch: 'full',
         canActivate: [SignInGuard],
       },
-       // App-Grid
-       {
+      // App-Grid
+      {
         path: 'management/applicationroles',
         component: ApplicationRoleGridComponent,
         pathMatch: 'full',
@@ -207,14 +207,10 @@ import {
         pathMatch: 'full',
         canActivate: [SignInGuard]
       }
-    ]),   
+    ]),
   ],
-  entryComponents: [
-    ApplicationRoleAddModalComponent,
-    ApplicationRoleUpdateModalComponent,
-    ApplicationUserUpdateModalComponent],
   providers: [{
-    provide: HTTP_INTERCEPTORS, 
+    provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,
     multi: true,
   }],
