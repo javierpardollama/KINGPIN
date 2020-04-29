@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Security;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
@@ -99,9 +97,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// </summary>
         private void SetUpContext()
         {
-            Context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
-            Context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
-            Context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { PasswordHash = "dcb97c304778b75e4309bdd51d61c906dc184cd37df1256fdafd3e54cf6218bb", UserName = "firstuser@email.com", Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, ConcurrencyStamp = new Guid().ToString(), SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { PasswordHash = "dcb97c304778b75e4309bdd51d61c906dc184cd37df1256fdafd3e54cf6218bb", UserName = "seconduser@email.com", Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, ConcurrencyStamp = new Guid().ToString(), SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { PasswordHash = "dcb97c304778b75e4309bdd51d61c906dc184cd37df1256fdafd3e54cf6218bb", UserName = "thirstuser@email.com", Email = "thirdtuser@email.com", LastModified = DateTime.Now, Deleted = false, ConcurrencyStamp = new Guid().ToString(), SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
 
             Context.SaveChanges();
         }
@@ -119,9 +117,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             SecurityPasswordReset viewModel = new SecurityPasswordReset()
             {
-                Email = "firstuser@email.com",
+                Email = Context.ApplicationUser.FirstOrDefault(x=>x.Email =="firstuser@email.com").Email,
                 NewPassword = "P@55w0rd"
-            };           
+            };
 
             await Service.ResetPassword(viewModel);
 
@@ -129,7 +127,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         }
 
         [Test]
-        public async Task ChangePassword()
+        public void ChangePassword()
         {
             SecurityPasswordChange viewModel = new SecurityPasswordChange()
             {
@@ -137,12 +135,12 @@ namespace Kingpin.Tier.Services.Tests.Classes
                 NewPassword = "P@55w0rd",
                 ApplicationUser = new ViewApplicationUser
                 {
-                    Id = 1,
-                    Email = "firstuser@email.com"
+                    Id = Context.ApplicationUser.FirstOrDefault(x => x.Email == "seconduser@email.com").Id,
+                    Email = Context.ApplicationUser.FirstOrDefault(x => x.Email == "seconduser@email.com").Email
                 }
             };
 
-            await Service.ChangePassword(viewModel);
+            Exception exception = Assert.ThrowsAsync<Exception>(async () => await Service.ChangePassword(viewModel));
 
             Assert.Pass();
         }
@@ -152,11 +150,11 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             SecurityEmailChange viewModel = new SecurityEmailChange()
             {
-                NewEmail = "newfirstuser@email.com",
+                NewEmail = "newthirduser@email.com",
                 ApplicationUser = new ViewApplicationUser
                 {
-                    Id = 1,
-                    Email = "firstuser@email.com"
+                    Id = Context.ApplicationUser.FirstOrDefault(x => x.Email == "thirdtuser@email.com").Id,
+                    Email = Context.ApplicationUser.FirstOrDefault(x => x.Email == "thirdtuser@email.com").Email
                 }
             };
 

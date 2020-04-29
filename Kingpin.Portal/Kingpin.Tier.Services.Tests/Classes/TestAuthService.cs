@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Auth;
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
@@ -62,6 +60,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
             SetUpLogger();
 
             SetUpContext();
+
             TokenService = new TokenService(Configuration);
 
             Service = new AuthService(Mapper, Logger, UserManager, SignInManager, TokenService);
@@ -97,23 +96,23 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// </summary>
         private void SetUpContext()
         {
-            Context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
-            Context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
-            Context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { PasswordHash = "dcb97c304778b75e4309bdd51d61c906dc184cd37df1256fdafd3e54cf6218bb", UserName = "firstuser@email.com", Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, ConcurrencyStamp = new Guid().ToString(), SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { PasswordHash = "dcb97c304778b75e4309bdd51d61c906dc184cd37df1256fdafd3e54cf6218bb", UserName = "seconduser@email.com", Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, ConcurrencyStamp = new Guid().ToString(), SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { PasswordHash = "dcb97c304778b75e4309bdd51d61c906dc184cd37df1256fdafd3e54cf6218bb", UserName = "thirstuser@email.com", Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, ConcurrencyStamp = new Guid().ToString(), SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
 
             Context.SaveChanges();
         }
 
         [Test]
-        public async Task SignIn()
+        public void SignIn()
         {
             AuthSignIn viewModel = new AuthSignIn()
             {
                 Email = "firstuser@email.com",
                 Password = "P@55w0rd"
-            };
+            };          
 
-            await Service.SignIn(viewModel);
+            Exception exception = Assert.ThrowsAsync<Exception>(async () => await Service.SignIn(viewModel));
 
             Assert.Pass();
         }

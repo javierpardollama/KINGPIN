@@ -51,7 +51,12 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// <summary>
         /// Instance of <see cref="ServiceCollection"/>
         /// </summary>
-        public ServiceCollection Services;
+        private ServiceCollection Services;
+
+        /// <summary>
+        /// Instance of <see cref="ServiceProvider"/>
+        /// </summary>
+        private ServiceProvider ServiceProvider;
 
         /// <summary>
         /// Sets Up Services
@@ -69,7 +74,6 @@ namespace Kingpin.Tier.Services.Tests.Classes
 
             Services.AddLogging();
 
-
             Services.Configure<IdentityOptions>(config =>
             {
                 config.Password.RequiredLength = 6;
@@ -79,11 +83,11 @@ namespace Kingpin.Tier.Services.Tests.Classes
                 config.Password.RequireUppercase = false;
             });
 
-            var provider = Services.BuildServiceProvider();
+            ServiceProvider = Services.BuildServiceProvider();
 
-            Context = provider.GetRequiredService<ApplicationContext>();
-            UserManager = provider.GetRequiredService<UserManager<ApplicationUser>>();
-            SignInManager = provider.GetRequiredService<SignInManager<ApplicationUser>>();           
+            Context = ServiceProvider.GetRequiredService<ApplicationContext>();
+            UserManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
+            SignInManager = ServiceProvider.GetRequiredService<SignInManager<ApplicationUser>>();           
         }  
 
         /// <summary>

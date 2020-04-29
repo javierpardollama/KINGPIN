@@ -14,8 +14,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
-
 namespace Kingpin.Tier.Services.Classes
 {
     /// <summary>

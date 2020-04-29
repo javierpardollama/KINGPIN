@@ -8,8 +8,6 @@ using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 
-using Microsoft.EntityFrameworkCore;
-
 using NUnit.Framework;
 
 namespace Kingpin.Tier.Services.Tests.Classes

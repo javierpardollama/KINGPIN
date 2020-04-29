@@ -2,13 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 
-using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Additions;
 using Kingpin.Tier.ViewModels.Classes.Updates;
 
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
