@@ -74,6 +74,8 @@ namespace Kingpin.Tier.Services.Tests.Classes
         public void TearDown()
         {
             Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
+
+            Context.SaveChanges();
         }
 
         /// <summary>

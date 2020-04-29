@@ -45,6 +45,8 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             SetUpJwtSettings();
 
+            SetUpConfiguration();
+
             SetUpServices();
 
             SetUpMapper();

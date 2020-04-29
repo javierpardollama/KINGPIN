@@ -31,7 +31,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// <summary>
         /// Instance of <see cref="Dictionary{string, string}"/>
         /// </summary>
-        public Dictionary<string, string> JwtSettings;
+        private Dictionary<string, string> JwtSettings;
 
         /// <summary>
         /// Instance of <see cref="ApplicationContext"/>
@@ -66,7 +66,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Services = new ServiceCollection();
 
             Services
-                .AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection(JwtSettings).Build())
+                .AddSingleton(Configuration)
                 .AddDbContext<ApplicationContext>(o => o.UseSqlite("Data Source=kingpin.db"))
                 .AddIdentity<ApplicationUser, ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationContext>()

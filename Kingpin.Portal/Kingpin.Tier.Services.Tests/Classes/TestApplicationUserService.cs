@@ -66,6 +66,8 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
             Context.ApplicationRole.RemoveRange(Context.ApplicationRole.ToList());
+
+            Context.SaveChanges();
         }
 
         /// <summary>

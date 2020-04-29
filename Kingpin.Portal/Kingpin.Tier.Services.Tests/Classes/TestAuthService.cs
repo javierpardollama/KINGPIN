@@ -73,6 +73,8 @@ namespace Kingpin.Tier.Services.Tests.Classes
         public void TearDown()
         {
             Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
+
+            Context.SaveChanges();
         }
 
         /// <summary>
@@ -122,7 +124,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             AuthJoinIn viewModel = new AuthJoinIn()
             {
-                Email = "fourthuser@email.com",
+                Email = "fifthuser@email.com",
                 Password = "P@55w0rd"
             };
 
