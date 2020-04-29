@@ -7,12 +7,12 @@ namespace Kingpin.Tier.Services.Interfaces
 {
     public interface ISecurityService : IBaseService
     {
-        Task<ApplicationUser> FindApplicationUserByEmail(string email);
+        Task<ApplicationUser> FindApplicationUserByEmail(string @email);
 
-        Task<ViewApplicationUser> ResetPassword(SecurityPasswordReset viewModel);
+        Task<ViewApplicationUser> ResetPassword(SecurityPasswordReset @viewModel);
 
-        Task<ViewApplicationUser> ChangePassword(SecurityPasswordChange viewModel);
+        Task<ViewApplicationUser> ChangePassword(SecurityPasswordChange @viewModel);
 
-        Task<ViewApplicationUser> ChangeEmail(SecurityEmailChange viewModel);
+        Task<ViewApplicationUser> ChangeEmail(SecurityEmailChange @viewModel);
     }
 }

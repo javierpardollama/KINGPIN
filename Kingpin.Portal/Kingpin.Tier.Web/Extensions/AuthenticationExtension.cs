@@ -9,7 +9,7 @@ namespace Kingpin.Tier.Web.Extensions
 {
     public static class AuthenticationExtension
     {
-        public static void AddCustomizedAuthentication(this IServiceCollection @this, JwtSettings JwtSettings)
+        public static void AddCustomizedAuthentication(this IServiceCollection @this, JwtSettings @JwtSettings)
         {
             @this.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                .AddJwtBearer(options =>
@@ -21,9 +21,9 @@ namespace Kingpin.Tier.Web.Extensions
                        ValidateLifetime = true,
                        ValidateIssuerSigningKey = true,
 
-                       ValidIssuer = JwtSettings.JwtIssuer,
-                       ValidAudience = JwtSettings.JwtAudience,
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(JwtSettings.JwtKey))
+                       ValidIssuer = @JwtSettings.JwtIssuer,
+                       ValidAudience = @JwtSettings.JwtAudience,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(@JwtSettings.JwtKey))
                    };
                });
         }

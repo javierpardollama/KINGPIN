@@ -19,173 +19,173 @@ namespace Kingpin.Tier.Services.Classes
 {
     public class ApplicationRoleService : BaseService, IApplicationRoleService
     {
-        public ApplicationRoleService(IMapper mapper,
-                                      IApplicationContext context,
-                                      ILogger<ApplicationRoleService> logger) : base(context, mapper, logger)
+        public ApplicationRoleService(IMapper @mapper,
+                                      IApplicationContext @context,
+                                      ILogger<ApplicationRoleService> @logger) : base(@context, @mapper, @logger)
         {
 
         }
 
-        public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole viewModel)
+        public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole @viewModel)
         {
-            await CheckName(viewModel);
+            await CheckName(@viewModel);
 
-            ApplicationRole applicationRole = new ApplicationRole
+            ApplicationRole @applicationRole = new ApplicationRole
             {
-                Name = viewModel.Name,
-                NormalizedName = viewModel.Name,
+                Name = @viewModel.Name,
+                NormalizedName = @viewModel.Name,
                 ConcurrencyStamp = DateTime.Now.ToBinary().ToString(),
-                ImageUri = viewModel.ImageUri,
+                ImageUri = @viewModel.ImageUri,
             };
 
-            await Context.ApplicationRole.AddAsync(applicationRole);
+            await Context.ApplicationRole.AddAsync(@applicationRole);
 
             await Context.SaveChangesAsync();
 
             // Log
-            string logData = applicationRole.GetType().Name
+            string @logData = @applicationRole.GetType().Name
                 + " with Id "
-                + applicationRole.Id
+                + @applicationRole.Id
                 + " was added at "
                 + DateTime.Now.ToShortTimeString();
 
-            Logger.WriteInsertItemLog(logData);
+            Logger.WriteInsertItemLog(@logData);
 
-            return Mapper.Map<ViewApplicationRole>(applicationRole);
+            return Mapper.Map<ViewApplicationRole>(@applicationRole);
         }
 
-        public async Task<ApplicationRole> CheckName(AddApplicationRole viewModel)
+        public async Task<ApplicationRole> CheckName(AddApplicationRole @viewModel)
         {
-            ApplicationRole applicationRole = await Context.ApplicationRole
+            ApplicationRole @applicationRole = await Context.ApplicationRole
                 .AsNoTracking()
                 .TagWith("CheckName")
-                .FirstOrDefaultAsync(x => x.Name == viewModel.Name);
+                .FirstOrDefaultAsync(x => x.Name == @viewModel.Name);
 
-            if (applicationRole != null)
+            if (@applicationRole != null)
             {
                 // Log
-                string logData = applicationRole.GetType().Name
+                string @logData = @applicationRole.GetType().Name
                     + " with Name "
-                    + applicationRole.Name
+                    + @applicationRole.Name
                     + " was already found at "
                     + DateTime.Now.ToShortTimeString();
 
-                Logger.WriteGetItemFoundLog(logData);
+                Logger.WriteGetItemFoundLog(@logData);
 
-                throw new Exception(applicationRole.GetType().Name
+                throw new Exception(@applicationRole.GetType().Name
                     + " with Name "
                     + viewModel.Name
                     + " already exists");
             }
 
-            return applicationRole;
+            return @applicationRole;
         }
 
-        public async Task<ApplicationRole> CheckName(UpdateApplicationRole viewModel)
+        public async Task<ApplicationRole> CheckName(UpdateApplicationRole @viewModel)
         {
-            ApplicationRole applicationRole = await Context.ApplicationRole
+            ApplicationRole @applicationRole = await Context.ApplicationRole
                  .AsNoTracking()
                  .TagWith("CheckName")
-                 .FirstOrDefaultAsync(x => x.Name == viewModel.Name && x.Id != viewModel.Id);
+                 .FirstOrDefaultAsync(x => x.Name == @viewModel.Name && x.Id != @viewModel.Id);
 
-            if (applicationRole != null)
+            if (@applicationRole != null)
             {
                 // Log
-                string logData = applicationRole.GetType().Name
+                string @logData = @applicationRole.GetType().Name
                     + " with Name "
                     + applicationRole.Name
                     + " was already found at "
                     + DateTime.Now.ToShortTimeString();
 
-                Logger.WriteGetItemFoundLog(logData);
+                Logger.WriteGetItemFoundLog(@logData);
 
-                throw new Exception(applicationRole.GetType().Name
+                throw new Exception(@applicationRole.GetType().Name
                     + " with Name "
                     + viewModel.Name
                     + " already exists");
             }
 
-            return applicationRole;
+            return @applicationRole;
         }
 
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
-            ICollection<ApplicationRole> applicationRoles = await Context.ApplicationRole
+            ICollection<ApplicationRole> @applicationRoles = await Context.ApplicationRole
                 .TagWith("FindAllApplicationRole")
                 .AsNoTracking()
                 .ToListAsync();
 
-            return Mapper.Map<ICollection<ViewApplicationRole>>(applicationRoles);
+            return Mapper.Map<ICollection<ViewApplicationRole>>(@applicationRoles);
         }
 
-        public async Task<ApplicationRole> FindApplicationRoleById(int id)
+        public async Task<ApplicationRole> FindApplicationRoleById(int @id)
         {
-            ApplicationRole applicationRole = await Context.ApplicationRole.
+            ApplicationRole @applicationRole = await Context.ApplicationRole.
                 TagWith("FindApplicationRoleById")
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == @id);
 
-            if (applicationRole == null)
+            if (@applicationRole == null)
             {
                 // Log
-                string logData = applicationRole.GetType().Name
+                string @logData = @applicationRole.GetType().Name
                     + " with Id "
-                    + id
+                    + @id
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                Logger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(@logData);
 
-                throw new Exception(applicationRole.GetType().Name
+                throw new Exception(@applicationRole.GetType().Name
                     + " with Id "
                     + id
                     + " does not exist");
             }
 
-            return applicationRole;
+            return @applicationRole;
         }
 
-        public async Task RemoveApplicationRoleById(int id)
+        public async Task RemoveApplicationRoleById(int @id)
         {
-            ApplicationRole applicationRole = await FindApplicationRoleById(id);
+            ApplicationRole @applicationRole = await FindApplicationRoleById(@id);
 
-            Context.ApplicationRole.Remove(applicationRole);
+            Context.ApplicationRole.Remove(@applicationRole);
 
             await Context.SaveChangesAsync();
 
             // Log
-            string logData = applicationRole.GetType().Name
+            string @logData = @applicationRole.GetType().Name
                 + " with Id "
-                + applicationRole.Id
+                + @applicationRole.Id
                 + " was removed at "
                 + DateTime.Now.ToShortTimeString();
 
-            Logger.WriteDeleteItemLog(logData);
+            Logger.WriteDeleteItemLog(@logData);
         }
 
-        public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole viewModel)
+        public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole @viewModel)
         {
-            await CheckName(viewModel);
+            await CheckName(@viewModel);
 
-            ApplicationRole applicationRole = await FindApplicationRoleById(viewModel.Id);
+            ApplicationRole @applicationRole = await FindApplicationRoleById(@viewModel.Id);
 
-            applicationRole.Name = viewModel.Name;
-            applicationRole.NormalizedName = viewModel.Name;
-            applicationRole.ImageUri = viewModel.ImageUri;
+            @applicationRole.Name = @viewModel.Name;
+            @applicationRole.NormalizedName = @viewModel.Name;
+            @applicationRole.ImageUri = @viewModel.ImageUri;
 
-            Context.ApplicationRole.Update(applicationRole);
+            Context.ApplicationRole.Update(@applicationRole);
 
             await Context.SaveChangesAsync();
 
             // Log
-            string logData = applicationRole.GetType().Name
+            string @logData = @applicationRole.GetType().Name
                 + " with Id "
-                + applicationRole.Id
+                + @applicationRole.Id
                 + " was modified at "
                 + DateTime.Now.ToShortTimeString();
 
-            Logger.WriteUpdateItemLog(logData);
+            Logger.WriteUpdateItemLog(@logData);
 
-            return Mapper.Map<ViewApplicationRole>(applicationRole);
+            return Mapper.Map<ViewApplicationRole>(@applicationRole);
         }
     }
 }

@@ -9,14 +9,14 @@ namespace Kingpin.Tier.Services.Interfaces
 {
     public interface ITokenService : IBaseService
     {
-        JwtSecurityToken GenerateJwtToken(ApplicationUser applicationUser);
+        JwtSecurityToken GenerateJwtToken(ApplicationUser @applicationUser);
 
-        string WriteJwtToken(JwtSecurityToken jwtSecurityToken);
+        string WriteJwtToken(JwtSecurityToken @jwtSecurityToken);
 
         SymmetricSecurityKey GenerateSymmetricSecurityKey();
 
-        SigningCredentials GenerateSigningCredentials(SymmetricSecurityKey symmetricSecurityKey);
+        SigningCredentials GenerateSigningCredentials(SymmetricSecurityKey @symmetricSecurityKey);
 
-        List<Claim> GenerateJwtClaims(ApplicationUser applicationUser);
+        List<Claim> GenerateJwtClaims(ApplicationUser @applicationUser);
     }
 }

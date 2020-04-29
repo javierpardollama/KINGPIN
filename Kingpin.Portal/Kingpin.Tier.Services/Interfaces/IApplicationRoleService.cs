@@ -12,16 +12,16 @@ namespace Kingpin.Tier.Services.Interfaces
     {
         Task<ICollection<ViewApplicationRole>> FindAllApplicationRole();
 
-        Task<ApplicationRole> FindApplicationRoleById(int id);
+        Task<ApplicationRole> FindApplicationRoleById(int @id);
 
-        Task RemoveApplicationRoleById(int id);
+        Task RemoveApplicationRoleById(int @id);
 
-        Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole viewModel);
+        Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole @viewModel);
 
-        Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole viewModel);
+        Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole @viewModel);
 
-        Task<ApplicationRole> CheckName(AddApplicationRole viewModel);
+        Task<ApplicationRole> CheckName(AddApplicationRole @viewModel);
 
-        Task<ApplicationRole> CheckName(UpdateApplicationRole viewModel);
+        Task<ApplicationRole> CheckName(UpdateApplicationRole @viewModel);
     }
 }

@@ -13,7 +13,7 @@ namespace Kingpin.Tier.Contexts.Classes
 {
     public class ApplicationContext : IdentityDbContext<ApplicationUser, ApplicationRole, int, ApplicationUserClaim, ApplicationUserRole, ApplicationUserLogin, ApplicationRoleClaim, ApplicationUserToken>, IApplicationContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> @options) : base(@options)
         {
         }
 
@@ -70,13 +70,13 @@ namespace Kingpin.Tier.Contexts.Classes
             }
         }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder @modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            base.OnModelCreating(@modelBuilder);
 
-            modelBuilder.AddCustomizedIdentities();
+            @modelBuilder.AddCustomizedIdentities();
 
-            modelBuilder.AddCustomizedFilters();
+            @modelBuilder.AddCustomizedFilters();
         }
     }
 }

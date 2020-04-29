@@ -11,14 +11,14 @@ namespace Kingpin.Tier.Services.Interfaces
     {
         Task<ICollection<ViewApplicationUser>> FindAllApplicationUser();
 
-        Task<ApplicationUser> FindApplicationUserById(int id);
+        Task<ApplicationUser> FindApplicationUserById(int @id);
 
-        Task RemoveApplicationUserById(int id);
+        Task RemoveApplicationUserById(int @id);
 
-        Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser viewModel);
+        Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser @viewModel);
 
-        void UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser entity);
+        void UpdateApplicationUserRole(UpdateApplicationUser @viewModel, ApplicationUser @entity);
 
-        Task<ApplicationRole> FindApplicationRoleById(int id);
+        Task<ApplicationRole> FindApplicationRoleById(int @id);
     }
 }

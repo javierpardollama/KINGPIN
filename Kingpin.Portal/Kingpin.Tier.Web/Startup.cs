@@ -24,7 +24,7 @@ namespace Kingpin.Tier.Web
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration) => Configuration = configuration;
+        public Startup(IConfiguration @configuration) => Configuration = @configuration;
 
         public IConfiguration Configuration { get; }
 
@@ -35,14 +35,14 @@ namespace Kingpin.Tier.Web
         public JwtSettings JwtSettings { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
+        public void ConfigureServices(IServiceCollection @services)
         {
-            services.AddControllers();
+            @services.AddControllers();
 
-            services.AddDbContext<ApplicationContext>(options =>
+            @services.AddDbContext<ApplicationContext>(options =>
                 options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
+            @services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Lockout = new LockoutOptions()
                 {
@@ -62,25 +62,25 @@ namespace Kingpin.Tier.Web
             Mapper = MapperConfiguration.CreateMapper();
 
             // Add customized Mapping to the services container.
-            services.AddSingleton(Mapper);
+            @services.AddSingleton(Mapper);
 
             // Register the service and implementation for the database context
-            services.AddCustomizedContexts();
+            @services.AddCustomizedContexts();
 
             // Add customized Entity Framework services to the services container.
-            services.AddCustomizedServices();
+            @services.AddCustomizedServices();
 
             // Register the Jwt Settings to the configuration container.
             JwtSettings = new JwtSettings();
             Configuration.GetSection("Jwt").Bind(JwtSettings);
 
             // Add customized Authentication to the services container.
-            services.AddCustomizedAuthentication(JwtSettings);
+            @services.AddCustomizedAuthentication(JwtSettings);
 
             // Add customized Cross Origin Requests to the services container.
-            services.AddCustomizedCrossOriginRequests(JwtSettings);
+            @services.AddCustomizedCrossOriginRequests(JwtSettings);
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+            @services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
             .AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.Formatting = Formatting.Indented;
@@ -88,54 +88,54 @@ namespace Kingpin.Tier.Web
                 options.SerializerSettings.ContractResolver = new DefaultContractResolver();
             });
             // In production, the Angular files will be served from this directory
-            services.AddSpaStaticFiles(configuration =>
+            @services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder @app, IWebHostEnvironment @env)
         {
-            if (env.IsDevelopment())
+            if (@env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
-                app.UseCustomizedExceptionMiddlewares();
+                @app.UseDeveloperExceptionPage();
+                @app.UseCustomizedExceptionMiddlewares();
             }
             else
             {
-                app.UseCustomizedExceptionMiddlewares();
+                @app.UseCustomizedExceptionMiddlewares();
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
+                @app.UseHsts();
             }
 
-            app.UseAuthentication();
+            @app.UseAuthentication();
 
-            app.UseCors("Authentication");                       
+            @app.UseCors("Authentication");
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
-            app.UseSpaStaticFiles();
+            @app.UseHttpsRedirection();
+            @app.UseStaticFiles();
+            @app.UseSpaStaticFiles();
 
-            app.UseRouting();
+            @app.UseRouting();
 
-            app.UseAuthorization();
+            @app.UseAuthorization();
 
-            app.UseEndpoints(endpoints =>
+            @app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
             });
 
-            app.UseSpa(spa =>
+            @app.UseSpa(spa =>
             {
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "ClientApp";
 
-                if (env.IsDevelopment())
+                if (@env.IsDevelopment())
                 {
                     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }

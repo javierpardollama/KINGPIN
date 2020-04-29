@@ -20,15 +20,15 @@ namespace Kingpin.Tier.Services.Classes
     public class ApplicationUserService : BaseService, IApplicationUserService
     {
 
-        public ApplicationUserService(IMapper mapper,
-                                      IApplicationContext context,
-                                      ILogger<ApplicationUserService> logger) : base(context, mapper, logger)
+        public ApplicationUserService(IMapper @mapper,
+                                      IApplicationContext @context,
+                                      ILogger<ApplicationUserService> @logger) : base(@context, @mapper, @logger)
         {
         }
 
         public async Task<ICollection<ViewApplicationUser>> FindAllApplicationUser()
         {
-            ICollection<ApplicationUser> applicationUsers = await Context.ApplicationUser
+            ICollection<ApplicationUser> @applicationUsers = await Context.ApplicationUser
                .TagWith("FindAllApplicationUser")
                .AsQueryable()
                .AsNoTracking()
@@ -37,121 +37,121 @@ namespace Kingpin.Tier.Services.Classes
                .ThenInclude(x => x.ApplicationRole)
                .ToListAsync();
 
-            return Mapper.Map<ICollection<ViewApplicationUser>>(applicationUsers);
+            return Mapper.Map<ICollection<ViewApplicationUser>>(@applicationUsers);
         }
 
-        public async Task<ApplicationUser> FindApplicationUserById(int id)
+        public async Task<ApplicationUser> FindApplicationUserById(int @id)
         {
-            ApplicationUser applicationUser = await Context.ApplicationUser
+            ApplicationUser @applicationUser = await Context.ApplicationUser
                .TagWith("FindApplicationUserById")
                .AsQueryable()
                .Include(x => x.ApplicationUserTokens)
                .Include(x => x.ApplicationUserRoles)
                .ThenInclude(x => x.ApplicationRole)
-               .FirstOrDefaultAsync(x => x.Id == id);
+               .FirstOrDefaultAsync(x => x.Id == @id);
 
-            if (applicationUser == null)
+            if (@applicationUser == null)
             {
                 // Log
-                string logData = applicationUser.GetType().Name
+                string @logData = @applicationUser.GetType().Name
                     + " with Email "
-                    + applicationUser.Email
+                    + @applicationUser.Email
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                Logger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(@logData);
 
-                throw new Exception(applicationUser.GetType().Name
+                throw new Exception(@applicationUser.GetType().Name
                     + " with Email "
                     + applicationUser.Email
                     + " does not exist");
             }
 
-            return applicationUser;
+            return @applicationUser;
         }
 
-        public async Task RemoveApplicationUserById(int id)
+        public async Task RemoveApplicationUserById(int @id)
         {
-            ApplicationUser applicationUser = await FindApplicationUserById(id);
+            ApplicationUser @applicationUser = await FindApplicationUserById(@id);
 
-            Context.ApplicationUser.Remove(applicationUser);
+            Context.ApplicationUser.Remove(@applicationUser);
 
             await Context.SaveChangesAsync();
 
             // Log
-            string logData = applicationUser.GetType().Name
+            string @logData = @applicationUser.GetType().Name
                 + " with Id "
-                + applicationUser.Id
+                + @applicationUser.Id
                 + " was removed at "
                 + DateTime.Now.ToShortTimeString();
 
-            Logger.WriteDeleteItemLog(logData);
+            Logger.WriteDeleteItemLog(@logData);
         }
 
-        public async Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser viewModel)
+        public async Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser @viewModel)
         {
-            ApplicationUser applicationUser = await FindApplicationUserById(viewModel.Id);
+            ApplicationUser @applicationUser = await FindApplicationUserById(@viewModel.Id);
 
-            applicationUser.ApplicationUserRoles = new List<ApplicationUserRole>();
+            @applicationUser.ApplicationUserRoles = new List<ApplicationUserRole>();
 
-            Context.ApplicationUser.Update(applicationUser);
+            Context.ApplicationUser.Update(@applicationUser);
 
-            UpdateApplicationUserRole(viewModel, applicationUser);
+            UpdateApplicationUserRole(@viewModel, @applicationUser);
 
             await Context.SaveChangesAsync();
 
             // Log
-            string logData = applicationUser.GetType().Name
+            string logData = @applicationUser.GetType().Name
                 + " with Id"
-                + applicationUser.Id
+                + @applicationUser.Id
                 + " was modified at "
                 + DateTime.Now.ToShortTimeString();
 
-            Logger.WriteUpdateItemLog(logData);
+            Logger.WriteUpdateItemLog(@logData);
 
-            return Mapper.Map<ViewApplicationUser>(applicationUser); ;
+            return Mapper.Map<ViewApplicationUser>(@applicationUser); ;
         }
 
-        public void UpdateApplicationUserRole(UpdateApplicationUser viewModel, ApplicationUser applicationUser)
+        public void UpdateApplicationUserRole(UpdateApplicationUser @viewModel, ApplicationUser @applicationUser)
         {
-            viewModel.ApplicationRolesId.AsQueryable().ToList().ForEach(async x =>
+            @viewModel.ApplicationRolesId.AsQueryable().ToList().ForEach(async x =>
             {
-                ApplicationRole applicationRole = await FindApplicationRoleById(x);
+                ApplicationRole @applicationRole = await FindApplicationRoleById(x);
 
-                ApplicationUserRole applicationUserRole = new ApplicationUserRole
+                ApplicationUserRole @applicationUserRole = new ApplicationUserRole
                 {
-                    UserId = applicationUser.Id,
-                    RoleId = applicationRole.Id,
+                    UserId = @applicationUser.Id,
+                    RoleId = @applicationUser.Id,
                 };
 
-                applicationUser.ApplicationUserRoles.Add(applicationUserRole);
+                @applicationUser.ApplicationUserRoles.Add(@applicationUserRole);
             });
         }
 
-        public async Task<ApplicationRole> FindApplicationRoleById(int id)
+        public async Task<ApplicationRole> FindApplicationRoleById(int @id)
         {
-            ApplicationRole applicationRole = await Context.ApplicationRole
+            ApplicationRole @applicationRole = await Context.ApplicationRole
                 .TagWith("FindApplicationRoleById")
-                .FirstOrDefaultAsync(x => x.Id == id);
+                .FirstOrDefaultAsync(x => x.Id == @id);
 
-            if (applicationRole == null)
+            if (@applicationRole == null)
             {
                 // Log
-                string logData = applicationRole.GetType().Name
+                string @logData = @applicationRole.GetType().Name
                     + " with Id "
-                    + id
+                    + @id
                     + " was not found at "
                     + DateTime.Now.ToShortTimeString();
 
-                Logger.WriteGetItemNotFoundLog(logData);
+                Logger.WriteGetItemNotFoundLog(@logData);
 
-                throw new Exception(applicationRole.GetType().Name
+                throw new Exception(@applicationRole.GetType().Name
                     + " with Id "
-                    + id
+                    + @id
                     + " does not exist");
             }
 
-            return applicationRole;
+            return @applicationRole;
         }
     }
 }

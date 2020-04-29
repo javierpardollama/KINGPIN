@@ -17,11 +17,11 @@ namespace Kingpin.Tier.Web.Controllers
     {
         private readonly IApplicationUserService Service;
 
-        public ApplicationUserController(IApplicationUserService service) => Service = service;
+        public ApplicationUserController(IApplicationUserService @service) => Service = @service;
 
         [HttpPut]
         [Route("updateapplicationuser")]
-        public async Task<IActionResult> UpdateApplicationUser([FromBody]UpdateApplicationUser viewModel) => new JsonResult(value: await Service.UpdateApplicationUser(viewModel));
+        public async Task<IActionResult> UpdateApplicationUser([FromBody]UpdateApplicationUser @viewModel) => new JsonResult(value: await Service.UpdateApplicationUser(@viewModel));
 
         [HttpGet]
         [Route("findallapplicationuser")]
@@ -29,9 +29,9 @@ namespace Kingpin.Tier.Web.Controllers
 
         [HttpDelete]
         [Route("removeapplicationuserbyid/{id}")]
-        public async Task<IActionResult> RemoveApplicationUserById(int id)
+        public async Task<IActionResult> RemoveApplicationUserById(int @id)
         {
-            await Service.RemoveApplicationUserById(id);
+            await Service.RemoveApplicationUserById(@id);
 
             return new JsonResult((int)HttpStatusCode.OK);
         }
