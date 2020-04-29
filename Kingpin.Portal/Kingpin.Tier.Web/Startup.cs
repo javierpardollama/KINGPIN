@@ -22,19 +22,42 @@ using Newtonsoft.Json.Serialization;
 
 namespace Kingpin.Tier.Web
 {
+    /// <summary>
+    /// Represents a <see cref="Startup"/> class.
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Initializes a new Instance of<see cref="Startup"/>
+        /// </summary>
+        /// <param name="configuration">Injected <see cref="IConfiguration"/></param>
         public Startup(IConfiguration @configuration) => Configuration = @configuration;
 
+        /// <summary>
+        /// Gets <see cref="IConfiguration"/>
+        /// </summary>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Gets or Sets <see cref="MapperConfiguration"/>
+        /// </summary>
         public MapperConfiguration MapperConfiguration { get; private set; }
 
+        /// <summary>
+        /// Gets or Sets <see cref="JwtSettings"/>
+        /// </summary>
         public IMapper Mapper { get; set; }
 
+        /// <summary>
+        /// Gets or Sets <see cref="JwtSettings"/>
+        /// </summary>
         public JwtSettings JwtSettings { get; private set; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
+        /// <summary>
+        /// Configures Services
+        /// </summary>
+        /// <param name="services">Injected <see cref="IServiceCollection"/></param>
         public void ConfigureServices(IServiceCollection @services)
         {
             @services.AddControllers();
@@ -95,6 +118,11 @@ namespace Kingpin.Tier.Web
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures
+        /// </summary>
+        /// <param name="app">Injected <see cref="IApplicationBuilder"/></param>
+        /// <param name="env">Injected <see cref="IWebHostEnvironment"/></param>
         public void Configure(IApplicationBuilder @app, IWebHostEnvironment @env)
         {
             if (@env.IsDevelopment())

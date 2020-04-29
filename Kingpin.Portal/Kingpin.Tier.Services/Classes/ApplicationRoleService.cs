@@ -17,8 +17,17 @@ using Microsoft.Extensions.Logging;
 
 namespace Kingpin.Tier.Services.Classes
 {
+    /// <summary>
+    /// Represents a <see cref="ApplicationRoleService"/> interface. Inherits <see cref="BaseService"/>. Implemenets <see cref="IApplicationRoleService"/>
+    /// </summary>
     public class ApplicationRoleService : BaseService, IApplicationRoleService
     {
+        /// <summary>
+        /// Initializes a new Instance of <see cref="ApplicationRoleService"/>
+        /// </summary>
+        /// <param name="mapper">Injected <see cref="IMapper"/></param>
+        /// <param name="context">Injected <see cref="IApplicationContext"/></param>
+        /// <param name="logger">Injected <see cref="ILogger{ApplicationRoleService}"/></param>
         public ApplicationRoleService(IMapper @mapper,
                                       IApplicationContext @context,
                                       ILogger<ApplicationRoleService> @logger) : base(@context, @mapper, @logger)
@@ -26,6 +35,11 @@ namespace Kingpin.Tier.Services.Classes
 
         }
 
+        /// <summary>
+        /// Adds Application Role
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
+        /// <returns>Instance of <see cref="ViewApplicationRole"/></returns>
         public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole @viewModel)
         {
             await CheckName(@viewModel);
@@ -54,6 +68,11 @@ namespace Kingpin.Tier.Services.Classes
             return Mapper.Map<ViewApplicationRole>(@applicationRole);
         }
 
+        /// <summary>
+        /// Checks Name
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
+        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
         public async Task<ApplicationRole> CheckName(AddApplicationRole @viewModel)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole
@@ -81,6 +100,11 @@ namespace Kingpin.Tier.Services.Classes
             return @applicationRole;
         }
 
+        /// <summary>
+        /// Checks Name
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
+        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
         public async Task<ApplicationRole> CheckName(UpdateApplicationRole @viewModel)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole
@@ -108,6 +132,10 @@ namespace Kingpin.Tier.Services.Classes
             return @applicationRole;
         }
 
+        /// <summary>
+        /// Finds All Application Role
+        /// </summary>
+        /// <returns>Instance of <see cref="ICollection{ViewApplicationRole}"/></returns>
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
             ICollection<ApplicationRole> @applicationRoles = await Context.ApplicationRole
@@ -118,6 +146,11 @@ namespace Kingpin.Tier.Services.Classes
             return Mapper.Map<ICollection<ViewApplicationRole>>(@applicationRoles);
         }
 
+        /// <summary>
+        /// Finds Application Role By Id
+        /// </summary>
+        /// <param name="id">Injected <see cref="int"/></param>
+        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
         public async Task<ApplicationRole> FindApplicationRoleById(int @id)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole.
@@ -144,6 +177,11 @@ namespace Kingpin.Tier.Services.Classes
             return @applicationRole;
         }
 
+        /// <summary>
+        /// Removes Application Role By Id
+        /// </summary>
+        /// <param name="id">Injected <see cref="int"/></param>
+        /// <returns>Instance of <see cref="Task"/></returns>
         public async Task RemoveApplicationRoleById(int @id)
         {
             ApplicationRole @applicationRole = await FindApplicationRoleById(@id);
@@ -162,6 +200,11 @@ namespace Kingpin.Tier.Services.Classes
             Logger.WriteDeleteItemLog(@logData);
         }
 
+        /// <summary>
+        /// Updates Application Role
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
+        /// <returns>Instance of <see cref="ViewApplicationRole"/></returns>
         public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole @viewModel)
         {
             await CheckName(@viewModel);

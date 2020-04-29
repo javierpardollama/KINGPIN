@@ -18,6 +18,9 @@ using SignInResult = Microsoft.AspNetCore.Identity.SignInResult;
 
 namespace Kingpin.Tier.Services.Classes
 {
+    /// <summary>
+    /// Represents a <see cref="AuthService"/> interface. Inherits <see cref="BaseService"/>. Implemenets <see cref="IAuthService"/>
+    /// </summary>
     public class AuthService : BaseService, IAuthService
     {
         private readonly SignInManager<ApplicationUser> SignInManager;
@@ -26,6 +29,14 @@ namespace Kingpin.Tier.Services.Classes
 
         private readonly ITokenService TokenService;
 
+        /// <summary>
+        /// Initializes a new Instance of <see cref="AuthService"/>
+        /// </summary>
+        /// <param name="mapper">Injected <see cref="IMapper"/></param>
+        /// <param name="logger">Injected <see cref="ILogger{AuthService}"/></param>
+        /// <param name="userManager">Injected <see cref=" UserManager{ApplicationUser}"/></param>
+        /// <param name="signInManager">Injected <see cref=" SignInManager{ApplicationUser}"/></param>
+        /// <param name="tokenService">Injected <see cref="ITokenService"/></param>
         public AuthService(IMapper @mapper,
                            ILogger<AuthService> @logger,
                            UserManager<ApplicationUser> @userManager,
@@ -37,6 +48,11 @@ namespace Kingpin.Tier.Services.Classes
             TokenService = @tokenService;
         }
 
+        /// <summary>
+        /// Signs In
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="AuthSignIn"/></param>
+        /// <returns>Instance of <see cref="ViewApplicationUser"/></returns>
         public async Task<ViewApplicationUser> SignIn(AuthSignIn @viewModel)
         {
             SignInResult signInResult = await SignInManager.PasswordSignInAsync(@viewModel.Email,
@@ -72,6 +88,11 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
+        /// <summary>
+        /// Signs In
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="AuthJoinIn"/></param>
+        /// <returns>Instance of <see cref="ViewApplicationUser"/></returns>
         public async Task<ViewApplicationUser> SignIn(AuthJoinIn @viewModel)
         {
             SignInResult @signInResult = await SignInManager.PasswordSignInAsync(@viewModel.Email,
@@ -107,6 +128,11 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
+        /// <summary>
+        /// Joins In
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="AuthJoinIn"/></param>
+        /// <returns>Instance of <see cref="ViewApplicationUser"/></returns>
         public async Task<ViewApplicationUser> JoinIn(AuthJoinIn @viewModel)
         {
             await CheckEmail(@viewModel);
@@ -136,6 +162,11 @@ namespace Kingpin.Tier.Services.Classes
             }
         }
 
+        /// <summary>
+        /// Finds Application User By Email
+        /// </summary>
+        /// <param name="email">Injected <see cref="string"/></param>
+        /// <returns>Instance of <see cref="ApplicationUser"/></returns>
         public async Task<ApplicationUser> FindApplicationUserByEmail(string @email)
         {
             ApplicationUser @applicationUser = await UserManager.Users
@@ -166,6 +197,11 @@ namespace Kingpin.Tier.Services.Classes
             return @applicationUser;
         }
 
+        /// <summary>
+        /// Checks Email
+        /// </summary>
+        /// <param name="viewModel">Injected <see cref="AuthJoinIn"/></param>
+        /// <returns>Instance of <see cref="ApplicationUser"/></returns>
         public async Task<ApplicationUser> CheckEmail(AuthJoinIn @viewModel)
         {
             ApplicationUser @applicationUser = await UserManager.Users
