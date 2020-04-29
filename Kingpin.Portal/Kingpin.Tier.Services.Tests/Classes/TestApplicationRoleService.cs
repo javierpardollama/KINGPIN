@@ -7,6 +7,8 @@ using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Additions;
 using Kingpin.Tier.ViewModels.Classes.Updates;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
@@ -25,11 +27,16 @@ namespace Kingpin.Tier.Services.Tests.Classes
         private ILogger<ApplicationRoleService> Logger;
 
         /// <summary>
+        /// Instance of <see cref="ApplicationRoleService"/>
+        /// </summary>
+        private ApplicationRoleService Service;
+
+        /// <summary>
         /// Initializes a new Instance of <see cref="TestApplicationRoleService"/>
         /// </summary>
         public TestApplicationRoleService()
         {
-
+           
         }
 
         /// <summary>
@@ -38,11 +45,29 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [SetUp]
         public void Setup()
         {
+            SetUpJwtSettings();
+
+            SetUpServices();
+
             SetUpMapper();
 
-            SetUpOptions();
-
             SetUpLogger();
+
+            SetUpContext();
+
+            Service = new ApplicationRoleService(Mapper, Context, Logger);          
+        }
+
+        /// <summary>
+        /// Tears Down
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
+            Context.ApplicationRole.RemoveRange(Context.ApplicationRole.ToList());
+
+            Context.SaveChanges();
         }
 
         /// <summary>
@@ -64,106 +89,70 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// <summary>
         /// Sets Up Context
         /// </summary>
-        /// <param name="context">Injected <see cref="ApplicationContext"/></param>
-        private void SetUpContext(ApplicationContext @context)
+        private void SetUpContext()
         {
-            @context.ApplicationRole.Add(new ApplicationRole { Name = "Role 1", LastModified = DateTime.Now, Deleted = false });
-            @context.ApplicationRole.Add(new ApplicationRole { Name = "Role 2", LastModified = DateTime.Now, Deleted = false });
-            @context.ApplicationRole.Add(new ApplicationRole { Name = "Role 3", LastModified = DateTime.Now, Deleted = false });
+            Context.ApplicationRole.Add(new ApplicationRole { Name = "Role 1", LastModified = DateTime.Now, Deleted = false, ImageUri = "URL/Role_1_500px.png" });
+            Context.ApplicationRole.Add(new ApplicationRole { Name = "Role 2", LastModified = DateTime.Now, Deleted = false, ImageUri = "URL/Role_2_500px.png" });
+            Context.ApplicationRole.Add(new ApplicationRole { Name = "Role 3", LastModified = DateTime.Now, Deleted = false, ImageUri = "URL/Role_3_500px.png" });
 
-            @context.SaveChanges();
+            Context.SaveChanges();
         }
 
         [Test]
-        public async Task FindAllApplicationRole() 
+        public async Task FindAllApplicationRole()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationRoleService @service = new ApplicationRoleService(Mapper, @context, Logger);
-
-                await @service.FindAllApplicationRole();
-            };
+            await Service.FindAllApplicationRole();
 
             Assert.Pass();
         }
 
         [Test]
-        public async Task FindApplicationRoleById() 
+        public async Task FindApplicationRoleById()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationRoleService @service = new ApplicationRoleService(Mapper, @context, Logger);
-
-                await @service.FindApplicationRoleById(@context.ApplicationRole.FirstOrDefault().Id);
-            };
+            await Service.FindApplicationRoleById(Context.ApplicationRole.FirstOrDefault().Id);
 
             Assert.Pass();
         }
 
         [Test]
-        public async Task RemoveApplicationRoleById() 
+        public async Task RemoveApplicationRoleById()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationRoleService @service = new ApplicationRoleService(Mapper, @context, Logger);
-
-                await @service.RemoveApplicationRoleById(@context.ApplicationRole.FirstOrDefault().Id);
-            };
+            await Service.RemoveApplicationRoleById(Context.ApplicationRole.FirstOrDefault().Id);
 
             Assert.Pass();
         }
 
         [Test]
-        public async Task UpdateApplicationRole() 
+        public async Task UpdateApplicationRole()
         {
             UpdateApplicationRole viewModel = new UpdateApplicationRole()
             {
-                Id = 2,
+                Id = Context.ApplicationRole.FirstOrDefault().Id,
                 Name = "Role 21",
                 ImageUri = "URL/Role_21_500px.png",
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationRoleService @service = new ApplicationRoleService(Mapper, @context, Logger);
-
-                await @service.UpdateApplicationRole(viewModel);
-            };
+            await Service.UpdateApplicationRole(viewModel);
 
             Assert.Pass();
         }
 
         [Test]
-        public async Task AddApplicationRole() 
+        public async Task AddApplicationRole()
         {
             AddApplicationRole viewModel = new AddApplicationRole()
             {
-                Name = "Role 31",
-                ImageUri = "URL/Role_31_500px.png",
+                Name = "Role 41",
+                ImageUri = "URL/Role_41_500px.png",
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationRoleService @service = new ApplicationRoleService(Mapper, @context, Logger);
-
-                await @service.AddApplicationRole(viewModel);
-            };
+            await Service.AddApplicationRole(viewModel);
 
             Assert.Pass();
         }
 
         [Test]
-        public void CheckName() 
+        public void CheckName()
         {
             AddApplicationRole viewModel = new AddApplicationRole()
             {
@@ -171,14 +160,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
                 ImageUri = "URL/Role_2_500px.png",
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationRoleService @service = new ApplicationRoleService(Mapper, @context, Logger);
-
-                Exception exception = Assert.ThrowsAsync<Exception>(async () => await @service.CheckName(viewModel));
-            };
+            Exception exception = Assert.ThrowsAsync<Exception>(async () => await Service.CheckName(viewModel));
 
             Assert.Pass();
         }

@@ -3,10 +3,13 @@
 using AutoMapper;
 
 using Kingpin.Tier.Contexts.Classes;
+using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Mappings.Classes;
 
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Kingpin.Tier.Services.Tests.Classes
 {
@@ -16,24 +19,72 @@ namespace Kingpin.Tier.Services.Tests.Classes
     public class TestBaseService
     {
         /// <summary>
-        /// Instance of <see cref="DbContextOptions{ApplicationContext}"/>
-        /// </summary>
-        public DbContextOptions<ApplicationContext> Options;
-
-        /// <summary>
         /// Instance of <see cref="IMapper"/>
         /// </summary>
-        public IMapper Mapper;
-
-        /// <summary>
-        /// Instance of <see cref="ConfigurationBuilder"/>
-        /// </summary>
-        public ConfigurationBuilder ConfigurationBuilder;
+        public IMapper Mapper;        
 
         /// <summary>
         /// Instance of <see cref="IConfiguration"/>
         /// </summary>
         public IConfiguration Configuration;
+
+        /// <summary>
+        /// Instance of <see cref="Dictionary{string, string}"/>
+        /// </summary>
+        public Dictionary<string, string> JwtSettings;
+
+        /// <summary>
+        /// Instance of <see cref="ApplicationContext"/>
+        /// </summary>
+        public ApplicationContext Context;
+
+        /// <summary>
+        /// Instance of <see cref="UserManager{ApplicationUser}"/>
+        /// </summary>
+        public UserManager<ApplicationUser> UserManager;
+
+        /// <summary>
+        /// Instance of <see cref="UserManager{ApplicationUser}"/>
+        /// </summary>
+        public SignInManager<ApplicationUser> SignInManager;
+
+        /// <summary>
+        /// Instance of <see cref="ServiceCollection"/>
+        /// </summary>
+        public ServiceCollection Services;
+
+        /// <summary>
+        /// Sets Up Services
+        /// </summary>
+        public void SetUpServices() 
+        {
+            Services = new ServiceCollection();
+
+            Services
+                .AddSingleton<IConfiguration>(new ConfigurationBuilder().AddInMemoryCollection(JwtSettings).Build())
+                .AddDbContext<ApplicationContext>(o => o.UseSqlite("Data Source=kingpin.db"))
+                .AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddEntityFrameworkStores<ApplicationContext>()
+                .AddDefaultTokenProviders(); ;
+
+            Services.AddLogging();
+
+
+            Services.Configure<IdentityOptions>(config =>
+            {
+                config.Password.RequiredLength = 6;
+                config.Password.RequireDigit = false;
+                config.Password.RequireLowercase = false;
+                config.Password.RequireNonAlphanumeric = false;
+                config.Password.RequireUppercase = false;
+            });
+
+            var provider = Services.BuildServiceProvider();
+
+            Context = provider.GetRequiredService<ApplicationContext>();
+            UserManager = provider.GetRequiredService<UserManager<ApplicationUser>>();
+            SignInManager = provider.GetRequiredService<SignInManager<ApplicationUser>>();           
+        }  
 
         /// <summary>
         /// Sets Up Mapper
@@ -49,28 +100,24 @@ namespace Kingpin.Tier.Services.Tests.Classes
         }
 
         /// <summary>
-        /// Sets Up Options
+        /// Sets Up Jwt Settings
         /// </summary>
-        public void SetUpOptions()
+        public void SetUpJwtSettings()
         {
-            Options = new DbContextOptionsBuilder<ApplicationContext>()
-           .UseInMemoryDatabase(databaseName: "Data Source=kingpin.db")
-           .Options;
-        }
-
-        /// <summary>
-        /// Sets Up Configuration
-        /// </summary>
-        public void SetUpConfiguration()
-        {
-            Dictionary<string, string> JwtSettings = new Dictionary<string, string>           
+            JwtSettings = new Dictionary<string, string>           
             {
                 { "Jwt:JwtKey", "SOME_RANDOM_KEY_DO_NOT_SHARE"},
                 { "Jwt:JwtIssuer", "http://localhost:15208"},
                 { "Jwt:JwtAudience", " http://localhost:4200"},
                 { "Jwt:JwtExpireDays", "30"},               
             };
+        }
 
+        /// <summary>
+        /// Sets Up Configuration
+        /// </summary>
+        public void SetUpConfiguration()
+        {     
             Configuration = new ConfigurationBuilder().AddInMemoryCollection(JwtSettings).Build();
         }
     }

@@ -8,6 +8,8 @@ using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Security;
 using Kingpin.Tier.ViewModels.Classes.Views;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
@@ -26,11 +28,22 @@ namespace Kingpin.Tier.Services.Tests.Classes
         private ILogger<SecurityService> Logger;
 
         /// <summary>
+        /// Instance of <see cref="TokenService"/>
+        /// </summary>>
+        private TokenService TokenService;
+
+        /// <summary>
+        /// Instance of <see cref="SecurityService"/>
+        /// </summary>
+        private SecurityService Service;
+
+
+        /// <summary>
         /// Initializes a new Instance of <see cref="TestSecurityService"/>
         /// </summary>
         public TestSecurityService()
         {
-
+           
         }
 
         /// <summary>
@@ -39,11 +52,30 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [SetUp]
         public void Setup()
         {
+            SetUpJwtSettings();
+
+            SetUpConfiguration();
+
+            SetUpServices();
+
             SetUpMapper();
 
-            SetUpOptions();
-
             SetUpLogger();
+
+            SetUpContext();
+
+            TokenService = new TokenService(Configuration);
+
+            Service = new SecurityService(Mapper, Logger, UserManager, TokenService);
+        }
+
+        /// <summary>
+        /// Tears Down
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
         }
 
         /// <summary>
@@ -65,27 +97,19 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// <summary>
         /// Sets Up Context
         /// </summary>
-        /// <param name="context">Injected <see cref="ApplicationContext"/></param>
-        private void SetUpContext(ApplicationContext @context)
+        private void SetUpContext()
         {
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
 
-            @context.SaveChanges();
+            Context.SaveChanges();
         }
 
         [Test]
         public async Task FindApplicationUserByEmail()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SecurityService @service = new SecurityService(Mapper, Logger, null, null);
-
-                await @service.FindApplicationUserByEmail(@context.ApplicationUser.FirstOrDefault().Email);
-            };
+            await Service.FindApplicationUserByEmail(Context.ApplicationUser.FirstOrDefault().Email);
 
             Assert.Pass();
         }
@@ -97,16 +121,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             {
                 Email = "firstuser@email.com",
                 NewPassword = "P@55w0rd"
-            };
+            };           
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SecurityService @service = new SecurityService(Mapper, Logger, null, null);
-
-                await @service.ResetPassword(viewModel);
-            };
+            await Service.ResetPassword(viewModel);
 
             Assert.Pass();
         }
@@ -125,14 +142,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
                 }
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SecurityService @service = new SecurityService(Mapper, Logger, null, null);
-
-                await @service.ChangePassword(viewModel);
-            };
+            await Service.ChangePassword(viewModel);
 
             Assert.Pass();
         }
@@ -142,7 +152,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             SecurityEmailChange viewModel = new SecurityEmailChange()
             {
-                NewEmail= "newfirstuser@email.com",
+                NewEmail = "newfirstuser@email.com",
                 ApplicationUser = new ViewApplicationUser
                 {
                     Id = 1,
@@ -150,14 +160,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
                 }
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SecurityService @service = new SecurityService(Mapper, Logger, null, null);
-
-                await @service.ChangeEmail(viewModel);
-            };
+            await Service.ChangeEmail(viewModel);
 
             Assert.Pass();
         }

@@ -8,6 +8,8 @@ using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 
+using Microsoft.EntityFrameworkCore;
+
 using NUnit.Framework;
 
 namespace Kingpin.Tier.Services.Tests.Classes
@@ -18,12 +20,15 @@ namespace Kingpin.Tier.Services.Tests.Classes
     [TestFixture]
     public class TestTokenService : TestBaseService
     {
+
+        private TokenService Service;
+
         /// <summary>
         /// Initializes a new Instance of <see cref="TestTokenService"/>
         /// </summary>
         public TestTokenService()
         {
-
+           
         }
 
         /// <summary>
@@ -32,9 +37,26 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [SetUp]
         public void Setup()
         {
+            SetUpJwtSettings();
+
+            SetUpConfiguration();
+
+            SetUpServices();
+
             SetUpMapper();
 
-            SetUpOptions();
+            SetUpContext(Context);
+
+            Service = new TokenService(Configuration);
+        }
+
+        /// <summary>
+        /// Tears Down
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
         }
 
         /// <summary>
@@ -53,16 +75,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public void GenerateJwtToken()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SetUpConfiguration();
-
-                TokenService @service = new TokenService(Configuration);
-
-                @service.GenerateJwtToken(@context.ApplicationUser.FirstOrDefault());
-            };
+            Service.GenerateJwtToken(Context.ApplicationUser.FirstOrDefault());
 
             Assert.Pass();
         }
@@ -72,16 +85,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             JwtSecurityToken JwtSecurityToken = new JwtSecurityToken();
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SetUpConfiguration();
-
-                TokenService @service = new TokenService(Configuration);
-
-                @service.WriteJwtToken(JwtSecurityToken);
-            };
+            Service.WriteJwtToken(JwtSecurityToken);
 
             Assert.Pass();
         }
@@ -89,16 +93,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public void GenerateSymmetricSecurityKey()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SetUpConfiguration();
-
-                TokenService @service = new TokenService(Configuration);
-
-                @service.GenerateSymmetricSecurityKey();
-            };
+            Service.GenerateSymmetricSecurityKey();
 
             Assert.Pass();
         }
@@ -106,16 +101,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public void GenerateSigningCredentials()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SetUpConfiguration();
-
-                TokenService @service = new TokenService(Configuration);
-
-                @service.GenerateSigningCredentials(@service.GenerateSymmetricSecurityKey());
-            };
+            Service.GenerateSigningCredentials(Service.GenerateSymmetricSecurityKey());
 
             Assert.Pass();
         }
@@ -123,16 +109,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public void GenerateTokenExpirationDate()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SetUpConfiguration();
-
-                TokenService @service = new TokenService(Configuration);
-
-                @service.GenerateTokenExpirationDate();
-            };
+            Service.GenerateTokenExpirationDate();
 
             Assert.Pass();
         }
@@ -140,18 +117,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public void GenerateJwtClaims()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                SetUpConfiguration();
-
-                TokenService @service = new TokenService(Configuration);
-
-                @service.GenerateJwtClaims(@context.ApplicationUser.FirstOrDefault());
-            };
+            Service.GenerateJwtClaims(Context.ApplicationUser.FirstOrDefault());
 
             Assert.Pass();
         }
-    }    
+    }
 }

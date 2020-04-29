@@ -7,6 +7,8 @@ using Kingpin.Tier.Contexts.Classes;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Updates;
+
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
@@ -25,11 +27,16 @@ namespace Kingpin.Tier.Services.Tests.Classes
         private ILogger<ApplicationUserService> Logger;
 
         /// <summary>
+        /// Instance of <see cref="ApplicationUserService"/>
+        /// </summary>
+        private ApplicationUserService Service;
+
+        /// <summary>
         /// Initializes a new Instance of <see cref="TestApplicationUserService"/>
         /// </summary>
         public TestApplicationUserService()
         {
-
+           
         }
 
         /// <summary>
@@ -38,11 +45,29 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [SetUp]
         public void Setup()
         {
+            SetUpJwtSettings();
+
+            SetUpConfiguration();
+
+            SetUpServices();
+
             SetUpMapper();
 
-            SetUpOptions();
-
             SetUpLogger();
+            
+            SetUpContext();
+
+            Service = new ApplicationUserService(Mapper, Context, Logger);          
+        }
+
+        /// <summary>
+        /// Tears Down
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
+            Context.ApplicationRole.RemoveRange(Context.ApplicationRole.ToList());
         }
 
         /// <summary>
@@ -64,31 +89,23 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// <summary>
         /// Sets Up Context
         /// </summary>
-        /// <param name="context">Injected <see cref="ApplicationContext"/></param>
-        private void SetUpContext(ApplicationContext @context)
+        private void SetUpContext()
         {
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
 
-            @context.ApplicationRole.Add(new ApplicationRole { Name = "Role 1", LastModified = DateTime.Now, Deleted = false });
-            @context.ApplicationRole.Add(new ApplicationRole { Name = "Role 2", LastModified = DateTime.Now, Deleted = false });
-            @context.ApplicationRole.Add(new ApplicationRole { Name = "Role 3", LastModified = DateTime.Now, Deleted = false });
+            Context.ApplicationRole.Add(new ApplicationRole { Name = "Role 1", LastModified = DateTime.Now, Deleted = false, ImageUri = "URL/Role_1_500px.png" });
+            Context.ApplicationRole.Add(new ApplicationRole { Name = "Role 2", LastModified = DateTime.Now, Deleted = false, ImageUri = "URL/Role_2_500px.png" });
+            Context.ApplicationRole.Add(new ApplicationRole { Name = "Role 3", LastModified = DateTime.Now, Deleted = false, ImageUri = "URL/Role_3_500px.png" });
 
-            @context.SaveChanges();
+            Context.SaveChanges();
         }
 
         [Test]
         public async Task FindAllApplicationUser()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationUserService @service = new ApplicationUserService(Mapper, @context, Logger);
-
-                await @service.FindAllApplicationUser();
-            };
+            await Service.FindAllApplicationUser();
 
             Assert.Pass();
         }
@@ -96,14 +113,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public async Task FindApplicationUserById()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationUserService @service = new ApplicationUserService(Mapper, @context, Logger);
-
-                await @service.FindApplicationUserById(@context.ApplicationUser.FirstOrDefault().Id);
-            };
+            await Service.FindApplicationUserById(Context.ApplicationUser.FirstOrDefault().Id);
 
             Assert.Pass();
         }
@@ -111,14 +121,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public async Task RemoveApplicationUserById()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationUserService @service = new ApplicationUserService(Mapper, @context, Logger);
-
-                await @service.RemoveApplicationUserById(@context.ApplicationUser.FirstOrDefault().Id);
-            };
+            await Service.RemoveApplicationUserById(Context.ApplicationUser.FirstOrDefault().Id);
 
             Assert.Pass();
         }
@@ -128,18 +131,11 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             UpdateApplicationUser viewModel = new UpdateApplicationUser()
             {
-                Id = 2,
-                ApplicationRolesId = new List<int> { 1 }
+                Id = Context.ApplicationUser.FirstOrDefault().Id,
+                ApplicationRolesId = new List<int> { Context.ApplicationRole.FirstOrDefault().Id }
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationUserService @service = new ApplicationUserService(Mapper, @context, Logger);
-
-                await @service.UpdateApplicationUser(viewModel);
-            };
+            await Service.UpdateApplicationUser(viewModel);
 
             Assert.Pass();
         }
@@ -149,18 +145,11 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             UpdateApplicationUser viewModel = new UpdateApplicationUser()
             {
-                Id = 2,
+                Id = Context.ApplicationUser.FirstOrDefault().Id,
                 ApplicationRolesId = new List<int> { 2 }
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationUserService @service = new ApplicationUserService(Mapper, @context, Logger);
-
-                @service.UpdateApplicationUserRole(viewModel, @context.ApplicationUser.FirstOrDefault());
-            };
+            Service.UpdateApplicationUserRole(viewModel, Context.ApplicationUser.FirstOrDefault());
 
             Assert.Pass();
         }
@@ -168,14 +157,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public async Task FindApplicationRoleById()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                ApplicationUserService @service = new ApplicationUserService(Mapper, @context, Logger);
-
-                await @service.FindApplicationRoleById(@context.ApplicationRole.FirstOrDefault().Id);
-            };
+            await Service.FindApplicationRoleById(Context.ApplicationRole.FirstOrDefault().Id);
 
             Assert.Pass();
         }

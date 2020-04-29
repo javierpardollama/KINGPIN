@@ -8,7 +8,7 @@ using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Classes;
 using Kingpin.Tier.ViewModels.Classes.Auth;
 
-using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 using NUnit.Framework;
@@ -26,14 +26,23 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// </summary>
         private ILogger<AuthService> Logger;
 
-        private IUserStore<ApplicationUser> UserStore;
+        /// <summary>
+        /// Instance of <see cref="TokenService"/>
+        /// </summary>>
+        private TokenService TokenService;
+
+        /// <summary>
+        /// Instance of <see cref="AuthService"/>
+        /// </summary>
+        private AuthService Service;
+
 
         /// <summary>
         /// Initializes a new Instance of <see cref="TestAuthService"/>
         /// </summary>
         public TestAuthService()
         {
-           
+            
         }
 
         /// <summary>
@@ -42,11 +51,29 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [SetUp]
         public void Setup()
         {
+            SetUpJwtSettings();
+
+            SetUpConfiguration();
+
+            SetUpServices();
+
             SetUpMapper();
 
-            SetUpOptions();
-
             SetUpLogger();
+
+            SetUpContext();
+            TokenService = new TokenService(Configuration);
+
+            Service = new AuthService(Mapper, Logger, UserManager, SignInManager, TokenService);
+        }
+
+        /// <summary>
+        /// Tears Down
+        /// </summary>
+        [TearDown]
+        public void TearDown()
+        {
+            Context.ApplicationUser.RemoveRange(Context.ApplicationUser.ToList());
         }
 
         /// <summary>
@@ -68,33 +95,25 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// <summary>
         /// Sets Up Context
         /// </summary>
-        /// <param name="context">Injected <see cref="ApplicationContext"/></param>
-        private void SetUpContext(ApplicationContext @context)
+        private void SetUpContext()
         {
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
-            @context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "firstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "seconduser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
+            Context.ApplicationUser.Add(new ApplicationUser { Email = "thirstuser@email.com", LastModified = DateTime.Now, Deleted = false, SecurityStamp = new Guid().ToString(), ApplicationUserRoles = new List<ApplicationUserRole>() });
 
-            @context.SaveChanges();
-        }          
+            Context.SaveChanges();
+        }
 
         [Test]
-        public async Task SignIn() 
+        public async Task SignIn()
         {
             AuthSignIn viewModel = new AuthSignIn()
             {
                 Email = "firstuser@email.com",
-                Password ="P@55w0rd"
+                Password = "P@55w0rd"
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                AuthService @service = new AuthService(Mapper, Logger,null, null,null );
-
-                await @service.SignIn(viewModel);
-            };
+            await Service.SignIn(viewModel);
 
             Assert.Pass();
         }
@@ -104,18 +123,11 @@ namespace Kingpin.Tier.Services.Tests.Classes
         {
             AuthJoinIn viewModel = new AuthJoinIn()
             {
-                Email = "firstuser@email.com",
+                Email = "fourthuser@email.com",
                 Password = "P@55w0rd"
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                AuthService @service = new AuthService(Mapper, Logger, null, null, null);
-
-                await @service.JoinIn(viewModel);
-            };
+            await Service.JoinIn(viewModel);
 
             Assert.Pass();
         }
@@ -123,20 +135,13 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [Test]
         public async Task FindApplicationUserByEmail()
         {
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                AuthService @service = new AuthService(Mapper, Logger, null, null, null);
-
-                await @service.FindApplicationUserByEmail(@context.ApplicationUser.FirstOrDefault().Email);
-            };
+            await Service.FindApplicationUserByEmail(Context.ApplicationUser.FirstOrDefault().Email);
 
             Assert.Pass();
         }
 
         [Test]
-        public async Task CheckEmail()
+        public void CheckEmail()
         {
             AuthJoinIn viewModel = new AuthJoinIn()
             {
@@ -144,14 +149,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
                 Password = "P@55w0rd"
             };
 
-            using (ApplicationContext @context = new ApplicationContext(this.Options))
-            {
-                SetUpContext(@context);
-
-                AuthService @service = new AuthService(Mapper, Logger, null, null, null);
-
-                await @service.CheckEmail(viewModel);
-            };
+            Exception exception = Assert.ThrowsAsync<Exception>(async () => await Service.CheckEmail(viewModel));
 
             Assert.Pass();
         }
