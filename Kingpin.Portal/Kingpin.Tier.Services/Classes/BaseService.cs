@@ -69,6 +69,23 @@ namespace Kingpin.Tier.Services.Classes
         /// <summary>
         /// Initializes a new Instance of <see cref="BaseService"/>
         /// </summary>
+        /// <param name="mapper">Injected <see cref="IMapper"/></param>
+        /// <param name="logger">Injected <see cref="ILogger"/></param>
+        /// <param name="configuration">Injected <see cref="IConfiguration"/></param>
+        public BaseService(IMapper @mapper,
+                           ILogger @logger,
+                           IConfiguration @configuration)
+        {
+            Mapper = @mapper;
+            Logger = @logger;
+            Configuration = @configuration;
+            JwtSettings = new JwtSettings();
+            Configuration.GetSection("Jwt").Bind(JwtSettings);
+        }
+
+        /// <summary>
+        /// Initializes a new Instance of <see cref="BaseService"/>
+        /// </summary>
         /// <param name="configuration">Injected <see cref="IConfiguration"/></param>
         public BaseService(
             IConfiguration @configuration

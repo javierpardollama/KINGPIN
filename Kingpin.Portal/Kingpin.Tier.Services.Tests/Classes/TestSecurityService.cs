@@ -64,7 +64,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
 
             TokenService = new TokenService(Configuration);
 
-            Service = new SecurityService(Mapper, Logger, UserManager, TokenService);
+            Service = new SecurityService(Mapper, Logger, Configuration, UserManager, TokenService);
         }
 
         /// <summary>

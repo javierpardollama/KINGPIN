@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 using AutoMapper;
 
@@ -68,20 +69,19 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Services
                 .AddSingleton(Configuration)
                 .AddDbContext<ApplicationContext>(o => o.UseSqlite("Data Source=kingpin.db"))
-                .AddIdentity<ApplicationUser, ApplicationRole>()
+                .AddIdentity<ApplicationUser, ApplicationRole>(options =>
+                {
+                    options.Lockout = new LockoutOptions()
+                    {
+                        AllowedForNewUsers = true,
+                        DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5),
+                        MaxFailedAccessAttempts = 5
+                    };
+                })
                 .AddEntityFrameworkStores<ApplicationContext>()
-                .AddDefaultTokenProviders(); ;
+                .AddDefaultTokenProviders();
 
             Services.AddLogging();
-
-            Services.Configure<IdentityOptions>(config =>
-            {
-                config.Password.RequiredLength = 6;
-                config.Password.RequireDigit = false;
-                config.Password.RequireLowercase = false;
-                config.Password.RequireNonAlphanumeric = false;
-                config.Password.RequireUppercase = false;
-            });
 
             ServiceProvider = Services.BuildServiceProvider();
 
