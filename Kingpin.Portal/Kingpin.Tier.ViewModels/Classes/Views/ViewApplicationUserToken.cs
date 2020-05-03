@@ -19,6 +19,19 @@ namespace Kingpin.Tier.ViewModels.Classes.Views
         }
 
         /// <summary>
+        /// Gets or Sets <see cref="Name"/>
+        /// </summary>
+        [XmlElement("name")]
+        public string Name { get; set; }
+
+        /// <summary>
+        /// Gets or Sets <see cref="LoginProvider"/>
+        /// </summary>
+        [XmlElement("login-provider")]
+        public string LoginProvider { get; set; }
+
+
+        /// <summary>
         /// Gets or Sets <see cref="LastModified"/>
         /// </summary>
         [XmlElement("last-modified")]
