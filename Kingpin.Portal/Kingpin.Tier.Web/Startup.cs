@@ -44,7 +44,7 @@ namespace Kingpin.Tier.Web
         public MapperConfiguration MapperConfiguration { get; private set; }
 
         /// <summary>
-        /// Gets or Sets <see cref="JwtSettings"/>
+        /// Gets or Sets <see cref="IMapper"/>
         /// </summary>
         public IMapper Mapper { get; set; }
 
