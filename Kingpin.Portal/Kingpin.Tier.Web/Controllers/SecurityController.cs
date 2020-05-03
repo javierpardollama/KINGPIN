@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Kingpin.Tier.Web.Controllers
 {
     /// <summary>
-    /// Represents a <see cref="ApplicationUserController"/> class. Inherits <see cref="ControllerBase"/>
+    /// Represents a <see cref="SecurityController"/> class. Inherits <see cref="ControllerBase"/>
     /// </summary>
     [Route("api/security")]
     [Produces("application/json")]
