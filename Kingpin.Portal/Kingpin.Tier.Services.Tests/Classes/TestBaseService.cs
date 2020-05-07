@@ -17,7 +17,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
     /// <summary>
     /// Represents a <see cref="TestBaseService"/> class.
     /// </summary>
-    public class TestBaseService
+    public abstract class TestBaseService
     {
         /// <summary>
         /// Instance of <see cref="IMapper"/>
@@ -33,6 +33,11 @@ namespace Kingpin.Tier.Services.Tests.Classes
         /// Instance of <see cref="Dictionary{string, string}"/>
         /// </summary>
         private Dictionary<string, string> JwtSettings;
+
+        /// <summary>
+        /// Instance of <see cref="DbContextOptions{ApplicationContext}"/>
+        /// </summary>
+        private DbContextOptions<ApplicationContext> Options;
 
         /// <summary>
         /// Instance of <see cref="ApplicationContext"/>
@@ -85,7 +90,7 @@ namespace Kingpin.Tier.Services.Tests.Classes
 
             ServiceProvider = Services.BuildServiceProvider();
 
-            Context = ServiceProvider.GetRequiredService<ApplicationContext>();
+            Context = new ApplicationContext(Options);
             UserManager = ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
             SignInManager = ServiceProvider.GetRequiredService<SignInManager<ApplicationUser>>();           
         }  
@@ -123,6 +128,16 @@ namespace Kingpin.Tier.Services.Tests.Classes
         public void SetUpConfiguration()
         {     
             Configuration = new ConfigurationBuilder().AddInMemoryCollection(JwtSettings).Build();
+        }
+
+        /// <summary>
+        /// Sets Up Options
+        /// </summary>
+        public void SetUpOptions()
+        {
+            Options = new DbContextOptionsBuilder<ApplicationContext>()
+           .UseInMemoryDatabase(databaseName: "Data Source=kingpin.db")
+           .Options;
         }
     }
 }

@@ -53,6 +53,8 @@ namespace Kingpin.Tier.Services.Tests.Classes
 
             SetUpConfiguration();
 
+            SetUpOptions();
+
             SetUpServices();
 
             SetUpMapper();

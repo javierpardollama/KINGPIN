@@ -18,7 +18,6 @@ namespace Kingpin.Tier.Services.Tests.Classes
     [TestFixture]
     public class TestTokenService : TestBaseService
     {
-
         private TokenService Service;
 
         /// <summary>
@@ -38,6 +37,8 @@ namespace Kingpin.Tier.Services.Tests.Classes
             SetUpJwtSettings();
 
             SetUpConfiguration();
+
+            SetUpOptions();
 
             SetUpServices();
 
