@@ -108,6 +108,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Finds Application User By Email
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindApplicationUserByEmail()
         {
@@ -116,6 +120,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Resets Password
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task ResetPassword()
         {
@@ -130,6 +138,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Changes Password
+        /// </summary>
         [Test]
         public void ChangePassword()
         {
@@ -149,6 +160,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Changes Email
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task ChangeEmail()
         {

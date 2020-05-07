@@ -100,6 +100,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Finds All Application Role
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindAllApplicationRole()
         {
@@ -108,6 +112,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Finds Application Role By Id
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindApplicationRoleById()
         {
@@ -116,6 +124,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Removes Application Role By Id
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task RemoveApplicationRoleById()
         {
@@ -124,6 +136,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Updates Application Role
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task UpdateApplicationRole()
         {
@@ -139,6 +155,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Adds Application Role
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task AddApplicationRole()
         {
@@ -153,6 +173,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Checks Name
+        /// </summary>
         [Test]
         public void CheckName()
         {

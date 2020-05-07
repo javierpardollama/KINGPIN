@@ -107,6 +107,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Signs In
+        /// </summary>
         [Test]
         public void SignIn()
         {
@@ -121,6 +124,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Joins In
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task JoinIn()
         {
@@ -135,6 +142,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Finds Application User By Email
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindApplicationUserByEmail()
         {
@@ -143,6 +154,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Checks Email
+        /// </summary>
         [Test]
         public void CheckEmail()
         {

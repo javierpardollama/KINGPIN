@@ -71,6 +71,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             @context.SaveChanges();
         }
 
+        /// <summary>
+        /// Generates Jwt Token
+        /// </summary>
         [Test]
         public void GenerateJwtToken()
         {
@@ -79,6 +82,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Writes Jwt Token
+        /// </summary>
         [Test]
         public void WriteJwtToken()
         {
@@ -89,6 +95,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Generates Symmetric Security Key
+        /// </summary>
         [Test]
         public void GenerateSymmetricSecurityKey()
         {
@@ -97,6 +106,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Generates Signing Credentials
+        /// </summary>
         [Test]
         public void GenerateSigningCredentials()
         {
@@ -105,6 +117,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Generates Token Expiration Date
+        /// </summary>
         [Test]
         public void GenerateTokenExpirationDate()
         {
@@ -113,6 +128,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Generates Jwt Claims
+        /// </summary>
         [Test]
         public void GenerateJwtClaims()
         {

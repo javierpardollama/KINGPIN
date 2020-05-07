@@ -104,6 +104,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Context.SaveChanges();
         }
 
+        /// <summary>
+        /// Finds All Application User
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindAllApplicationUser()
         {
@@ -112,6 +116,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Finds Application User By Id
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindApplicationUserById()
         {
@@ -120,6 +128,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Removes Application User By Id
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task RemoveApplicationUserById()
         {
@@ -128,6 +140,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Updates Application User
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task UpdateApplicationUser()
         {
@@ -142,6 +158,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Updates Application User Role
+        /// </summary>
         [Test]
         public void UpdateApplicationUserRole()
         {
@@ -156,6 +175,10 @@ namespace Kingpin.Tier.Services.Tests.Classes
             Assert.Pass();
         }
 
+        /// <summary>
+        /// Finds Application Role By Id
+        /// </summary>
+        /// <returns>Instance of <see cref="Task"/></returns>
         [Test]
         public async Task FindApplicationRoleById()
         {
