@@ -23,7 +23,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Constants", "K
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Settings", "Kingpin.Tier.Settings\Kingpin.Tier.Settings.csproj", "{A4E59295-9B50-46F4-B74F-1D55EA4EBD97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kingpin.Tier.Services.Tests", "Kingpin.Tier.Services.Tests\Kingpin.Tier.Services.Tests.csproj", "{FC861A66-EADA-449D-ABFD-00572236BFA2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kingpin.Tier.Services.Tests", "Kingpin.Tier.Services.Tests\Kingpin.Tier.Services.Tests.csproj", "{FC861A66-EADA-449D-ABFD-00572236BFA2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
