@@ -34,7 +34,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// Updates Application Role
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpPut]
         [Route("updateapplicationrole")]
         public async Task<IActionResult> UpdateApplicationRole([FromBody]UpdateApplicationRole @viewModel) => new JsonResult(value: await Service.UpdateApplicationRole(@viewModel));
@@ -42,7 +42,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// <summary>
         /// Finds All Application Role
         /// </summary>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpGet]
         [Route("findallapplicationrole")]
         public async Task<IActionResult> FindAllApplicationRole() => new JsonResult(value: await Service.FindAllApplicationRole());
@@ -51,7 +51,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// Adds Application Role
         /// </summary>
         /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpPost]
         [Route("addapplicationrole")]
         public async Task<IActionResult> AddApplicationRole([FromBody]AddApplicationRole @viewModel) => new JsonResult(value: await Service.AddApplicationRole(@viewModel));
@@ -60,7 +60,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// Removes Application Role By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpDelete]
         [Route("removeapplicationrolebyid/{id}")]
         public async Task<IActionResult> RemoveApplicationRoleById(int @id)

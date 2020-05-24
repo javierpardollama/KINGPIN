@@ -15,14 +15,14 @@ namespace Kingpin.Tier.Services.Interfaces
         /// <summary>
         /// Finds All Application User
         /// </summary>
-        /// <returns>Instance of <see cref="ICollection{ViewApplicationUser}"/></returns>
+        /// <returns>Instance of <see cref="Task{ICollection{ViewApplicationUser}}"/></returns>
         Task<ICollection<ViewApplicationUser>> FindAllApplicationUser();
 
         /// <summary>
         /// Finds Application User By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="ApplicationUser"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationUser}"/></returns>
         Task<ApplicationUser> FindApplicationUserById(int @id);
 
         /// <summary>
@@ -36,7 +36,7 @@ namespace Kingpin.Tier.Services.Interfaces
         /// Updates Application User
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationUser"/></param>
-        /// <returns>Instance of <see cref="ViewApplicationUser"/></returns>
+        /// <returns>Instance of <see cref="Task{ViewApplicationUser}"/></returns>
         Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser @viewModel);
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Kingpin.Tier.Services.Interfaces
         /// Finds Application Role By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         Task<ApplicationRole> FindApplicationRoleById(int @id);
     }
 }

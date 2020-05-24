@@ -39,7 +39,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Adds Application Role
         /// </summary>
         /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ViewApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ViewApplicationRole}"/></returns>
         public async Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole @viewModel)
         {
             await CheckName(@viewModel);
@@ -72,7 +72,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Checks Name
         /// </summary>
         /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         public async Task<ApplicationRole> CheckName(AddApplicationRole @viewModel)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole
@@ -104,7 +104,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Checks Name
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         public async Task<ApplicationRole> CheckName(UpdateApplicationRole @viewModel)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole
@@ -135,7 +135,7 @@ namespace Kingpin.Tier.Services.Classes
         /// <summary>
         /// Finds All Application Role
         /// </summary>
-        /// <returns>Instance of <see cref="ICollection{ViewApplicationRole}"/></returns>
+        /// <returns>Instance of <see cref="Task{ICollection{ViewApplicationRole}}"/></returns>
         public async Task<ICollection<ViewApplicationRole>> FindAllApplicationRole()
         {
             ICollection<ApplicationRole> @applicationRoles = await Context.ApplicationRole
@@ -150,7 +150,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Finds Application Role By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         public async Task<ApplicationRole> FindApplicationRoleById(int @id)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole.
@@ -204,7 +204,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Updates Application Role
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ViewApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ViewApplicationRole}"/></returns>
         public async Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole @viewModel)
         {
             await CheckName(@viewModel);

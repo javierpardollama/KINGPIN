@@ -38,7 +38,7 @@ namespace Kingpin.Tier.Services.Classes
         /// <summary>
         /// Finds All Application User
         /// </summary>
-        /// <returns>Instance of <see cref="ICollection{ViewApplicationUser}"/></returns>
+        /// <returns>Instance of <see cref="Task{ICollection{ViewApplicationUser}}"/></returns>
         public async Task<ICollection<ViewApplicationUser>> FindAllApplicationUser()
         {
             ICollection<ApplicationUser> @applicationUsers = await Context.ApplicationUser
@@ -57,7 +57,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Finds Application User By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="ApplicationUser"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationUser}"/></returns>
         public async Task<ApplicationUser> FindApplicationUserById(int @id)
         {
             ApplicationUser @applicationUser = await Context.ApplicationUser
@@ -115,7 +115,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Updates Application User
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationUser"/></param>
-        /// <returns>Instance of <see cref="ViewApplicationUser"/></returns>
+        /// <returns>Instance of <see cref="Task{ViewApplicationUser}"/></returns>
         public async Task<ViewApplicationUser> UpdateApplicationUser(UpdateApplicationUser @viewModel)
         {
             ApplicationUser @applicationUser = await FindApplicationUserById(@viewModel.Id);
@@ -165,7 +165,7 @@ namespace Kingpin.Tier.Services.Classes
         /// Finds Application Role By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         public async Task<ApplicationRole> FindApplicationRoleById(int @id)
         {
             ApplicationRole @applicationRole = await Context.ApplicationRole

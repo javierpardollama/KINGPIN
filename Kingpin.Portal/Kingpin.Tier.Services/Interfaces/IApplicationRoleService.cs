@@ -16,14 +16,14 @@ namespace Kingpin.Tier.Services.Interfaces
         /// <summary>
         /// Finds All Application Role
         /// </summary>
-        /// <returns>Instance of <see cref="ICollection{ViewApplicationRole}"/></returns>
+        /// <returns>Instance of <see cref="Task{ICollection{ViewApplicationRole}}"/></returns>
         Task<ICollection<ViewApplicationRole>> FindAllApplicationRole();
 
         /// <summary>
         /// Finds Application Role By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         Task<ApplicationRole> FindApplicationRoleById(int @id);
 
         /// <summary>
@@ -37,28 +37,28 @@ namespace Kingpin.Tier.Services.Interfaces
         /// Updates Application Role
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ViewApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ViewApplicationRole}"/></returns>
         Task<ViewApplicationRole> UpdateApplicationRole(UpdateApplicationRole @viewModel);
 
         /// <summary>
         /// Adds Application Role
         /// </summary>
         /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ViewApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ViewApplicationRole}"/></returns>
         Task<ViewApplicationRole> AddApplicationRole(AddApplicationRole @viewModel);
 
         /// <summary>
         /// Checks Name
         /// </summary>
         /// <param name="viewModel">Injected <see cref="AddApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         Task<ApplicationRole> CheckName(AddApplicationRole @viewModel);
 
         /// <summary>
         /// Checks Name
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationRole"/></param>
-        /// <returns>Instance of <see cref="ApplicationRole"/></returns>
+        /// <returns>Instance of <see cref="Task{ApplicationRole}"/></returns>
         Task<ApplicationRole> CheckName(UpdateApplicationRole @viewModel);
     }
 }

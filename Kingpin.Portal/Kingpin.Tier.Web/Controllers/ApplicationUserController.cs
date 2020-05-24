@@ -33,7 +33,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// Updates Application User
         /// </summary>
         /// <param name="viewModel">Injected <see cref="UpdateApplicationUser"/></param>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpPut]
         [Route("updateapplicationuser")]
         public async Task<IActionResult> UpdateApplicationUser([FromBody]UpdateApplicationUser @viewModel) => new JsonResult(value: await Service.UpdateApplicationUser(@viewModel));
@@ -41,7 +41,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// <summary>
         /// Finds All Application User
         /// </summary>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpGet]
         [Route("findallapplicationuser")]
         public async Task<IActionResult> FindAllApplicationUser() => new JsonResult(value: await Service.FindAllApplicationUser());
@@ -50,7 +50,7 @@ namespace Kingpin.Tier.Web.Controllers
         /// Removes Application User By Id
         /// </summary>
         /// <param name="id">Injected <see cref="int"/></param>
-        /// <returns>Instance of <see cref="JsonResult"/></returns>
+        /// <returns>Instance of <see cref="Task{JsonResult}"/></returns>
         [HttpDelete]
         [Route("removeapplicationuserbyid/{id}")]
         public async Task<IActionResult> RemoveApplicationUserById(int @id)
