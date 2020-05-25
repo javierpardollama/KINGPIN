@@ -63,7 +63,7 @@ namespace Kingpin.Tier.Contexts.Classes
         /// <summary>
         /// Saves Changes Syncronously
         /// </summary>
-        /// <returns>Istance of <see cref="int"/></returns>
+        /// <returns>Instance of <see cref="int"/></returns>
         public override int SaveChanges()
         {
             UpdateSoftStatus();
@@ -73,7 +73,7 @@ namespace Kingpin.Tier.Contexts.Classes
         /// <summary>
         /// Saves Changes Asyncronously
         /// </summary>
-        /// <returns>Istance of <see cref="Task{int}"/></returns>
+        /// <returns>Instance of <see cref="Task{int}"/></returns>
         public async Task<int> SaveChangesAsync()
         {
             UpdateSoftStatus();
