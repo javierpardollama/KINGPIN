@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace Kingpin.Tier.Services.Classes
 {
     /// <summary>
-    /// Represents a <see cref="ApplicationRoleService"/> interface. Inherits <see cref="BaseService"/>. Implemenets <see cref="IApplicationRoleService"/>
+    /// Represents a <see cref="ApplicationRoleService"/> class. Inherits <see cref="BaseService"/>. Implements <see cref="IApplicationRoleService"/>
     /// </summary>
     public class ApplicationRoleService : BaseService, IApplicationRoleService
     {

@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace Kingpin.Tier.Services.Classes
 {
     /// <summary>
-    /// Represents a <see cref="AuthService"/> interface. Inherits <see cref="BaseService"/>. Implemenets <see cref="IAuthService"/>
+    /// Represents a <see cref="AuthService"/> class. Inherits <see cref="BaseService"/>. Implements <see cref="IAuthService"/>
     /// </summary>
     public class AuthService : BaseService, IAuthService
     {

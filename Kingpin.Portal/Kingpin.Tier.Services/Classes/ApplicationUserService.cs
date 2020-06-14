@@ -18,7 +18,7 @@ using Microsoft.Extensions.Logging;
 namespace Kingpin.Tier.Services.Classes
 {
     /// <summary>
-    /// Represents a <see cref="ApplicationUserService"/> interface. Inherits <see cref="BaseService"/>. Implemenets <see cref="IApplicationUserService"/>
+    /// Represents a <see cref="ApplicationUserService"/> class. Inherits <see cref="BaseService"/>. Implements <see cref="IApplicationUserService"/>
     /// </summary>
     public class ApplicationUserService : BaseService, IApplicationUserService
     {
