@@ -30,7 +30,7 @@ import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 @Component({
   selector: 'app-applicationuser-update-modal',
   templateUrl: './applicationuser-update-modal.component.html',
-  styleUrls: ['./applicationuser-update-modal.component.css']
+  styleUrls: ['./applicationuser-update-modal.component.scss']
 })
 export class ApplicationUserUpdateModalComponent implements OnInit {
 

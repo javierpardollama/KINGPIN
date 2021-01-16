@@ -26,7 +26,7 @@ import { TimeAppVariants } from './../../../../../variants/time.app.variants';
 @Component({
   selector: 'app-applicationrole-update-modal',
   templateUrl: './applicationrole-update-modal.component.html',
-  styleUrls: ['./applicationrole-update-modal.component.css']
+  styleUrls: ['./applicationrole-update-modal.component.scss']
 })
 export class ApplicationRoleUpdateModalComponent implements OnInit {
 

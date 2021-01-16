@@ -21,7 +21,7 @@ import {
 @Component({
   selector: 'app-applicationuser-grid',
   templateUrl: './applicationuser-grid.component.html',
-  styleUrls: ['./applicationuser-grid.component.css']
+  styleUrls: ['./applicationuser-grid.component.scss']
 })
 export class ApplicationUserGridComponent implements OnInit {
 

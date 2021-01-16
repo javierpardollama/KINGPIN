@@ -12,7 +12,6 @@ import {
   HTTP_INTERCEPTORS
 } from '@angular/common/http';
 
-import { RouterModule } from '@angular/router';
 
 // Angular Material
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -31,9 +30,6 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-
-// Guards
-import { SignInGuard } from './../guards/signin.guard';
 
 // Interceptors
 import { AuthInterceptor } from './../interceptors/auth.interceptor';
@@ -96,6 +92,7 @@ import {
 import {
   ChangeEmailSecurityComponent
 } from './security/changeemail-security/changeemail-security.component';
+import { AppRoutingModule } from './app-routing.module';
 
 
 
@@ -145,69 +142,7 @@ import {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    RouterModule.forRoot([
-      {
-        path: '',
-        component: HomeComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard]
-      },
-      // App-Auth
-      {
-        path: 'auth/joinin',
-        component: JoinInAuthComponent,
-        pathMatch: 'full'
-      },
-      {
-        path: 'auth/signin',
-        component: SignInAuthComponent,
-        pathMatch: 'full'
-      },
-      // App-Security
-      {
-        path: 'security',
-        component: SecurityComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard]
-      },
-      {
-        path: 'changeemail',
-        component: ChangeEmailSecurityComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard]
-      },
-      {
-        path: 'changepassword',
-        component: ChangePasswordSecurityComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard]
-      },
-      {
-        path: 'resetpassword',
-        component: ResetPasswordSecurityComponent,
-        pathMatch: 'full'
-      },
-      // App-Management
-      {
-        path: 'management',
-        component: ManagementComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard],
-      },
-      // App-Grid
-      {
-        path: 'management/applicationroles',
-        component: ApplicationRoleGridComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard],
-      },
-      {
-        path: 'management/applicationusers',
-        component: ApplicationUserGridComponent,
-        pathMatch: 'full',
-        canActivate: [SignInGuard]
-      }
-    ]),
+    AppRoutingModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

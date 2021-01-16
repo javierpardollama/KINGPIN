@@ -27,7 +27,7 @@ import {
 @Component({
   selector: 'app-applicationrole-grid',
   templateUrl: './applicationrole-grid.component.html',
-  styleUrls: ['./applicationrole-grid.component.css']
+  styleUrls: ['./applicationrole-grid.component.scss']
 })
 export class ApplicationRoleGridComponent implements OnInit {
 
