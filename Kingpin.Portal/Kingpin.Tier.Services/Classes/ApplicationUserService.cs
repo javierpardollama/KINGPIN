@@ -151,7 +151,7 @@ namespace Kingpin.Tier.Services.Classes
             {
                 ApplicationRole @applicationRole = await FindApplicationRoleById(x);
 
-                ApplicationUserRole @applicationUserRole = new ApplicationUserRole
+                ApplicationUserRole @applicationUserRole = new()
                 {
                     UserId = @applicationUser.Id,
                     RoleId = @applicationUser.Id,

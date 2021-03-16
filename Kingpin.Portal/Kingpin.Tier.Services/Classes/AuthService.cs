@@ -151,7 +151,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             await CheckEmail(@viewModel);
 
-            ApplicationUser @applicationUser = new ApplicationUser
+            ApplicationUser @applicationUser = new()
             {
                 UserName = @viewModel.Email,
                 Email = @viewModel.Email,

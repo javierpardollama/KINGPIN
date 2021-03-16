@@ -44,7 +44,7 @@ namespace Kingpin.Tier.Services.Classes
         {
             await CheckName(@viewModel);
 
-            ApplicationRole @applicationRole = new ApplicationRole
+            ApplicationRole @applicationRole = new()
             {
                 Name = @viewModel.Name,
                 NormalizedName = @viewModel.Name,
