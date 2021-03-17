@@ -43,11 +43,9 @@ namespace Kingpin.Tier.Services.Tests.Classes
         [SetUp]
         public void Setup()
         {
-            SetUpJwtSettings();
+            SetUpContextOptions();
 
-            SetUpConfiguration();
-
-            SetUpOptions();
+            SetUpJwtOptions();
 
             SetUpServices();
 

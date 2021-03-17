@@ -7,13 +7,14 @@ using AutoMapper;
 using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Logging.Classes;
 using Kingpin.Tier.Services.Interfaces;
+using Kingpin.Tier.Settings.Classes;
 using Kingpin.Tier.ViewModels.Classes.Auth;
 using Kingpin.Tier.ViewModels.Classes.Views;
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Kingpin.Tier.Services.Classes
 {
@@ -42,16 +43,16 @@ namespace Kingpin.Tier.Services.Classes
         /// </summary>
         /// <param name="mapper">Injected <see cref="IMapper"/></param>
         /// <param name="logger">Injected <see cref="ILogger{AuthService}"/></param>
-        /// <param name="configuration">Injected <see cref="IConfiguration"/></param>
+        /// <param name="jwtSettings">Injected <see cref="IOptions{JwtSettings}"/></param>
         /// <param name="userManager">Injected <see cref=" UserManager{ApplicationUser}"/></param>
         /// <param name="signInManager">Injected <see cref=" SignInManager{ApplicationUser}"/></param>
         /// <param name="tokenService">Injected <see cref="ITokenService"/></param>
         public AuthService(IMapper @mapper,
                            ILogger<AuthService> @logger,
-                           IConfiguration @configuration,
+                           IOptions<JwtSettings> @jwtSettings,
                            UserManager<ApplicationUser> @userManager,
                            SignInManager<ApplicationUser> @signInManager,
-                           ITokenService @tokenService) : base(@mapper, @logger, @configuration)
+                           ITokenService @tokenService) : base(@mapper, @logger, @jwtSettings)
         {
             UserManager = @userManager;
             SignInManager = @signInManager;
@@ -77,7 +78,7 @@ namespace Kingpin.Tier.Services.Classes
                 @applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
                 {
                     Name = Guid.NewGuid().ToString(),
-                    LoginProvider = JwtSettings.JwtIssuer,
+                    LoginProvider = JwtSettings.Value.JwtIssuer,
                     ApplicationUser = @applicationUser,
                     UserId = @applicationUser.Id,
                     Value = TokenService.WriteJwtToken(TokenService.GenerateJwtToken(@applicationUser))
@@ -119,7 +120,7 @@ namespace Kingpin.Tier.Services.Classes
                 @applicationUser.ApplicationUserTokens.Add(new ApplicationUserToken
                 {
                     Name = Guid.NewGuid().ToString(),
-                    LoginProvider = JwtSettings.JwtIssuer,
+                    LoginProvider = JwtSettings.Value.JwtIssuer,
                     ApplicationUser = @applicationUser,
                     UserId = @applicationUser.Id,
                     Value = TokenService.WriteJwtToken(TokenService.GenerateJwtToken(@applicationUser))
