@@ -8,6 +8,7 @@ using Kingpin.Tier.Entities.Classes;
 using Kingpin.Tier.Services.Interfaces;
 using Kingpin.Tier.Settings.Classes;
 
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -21,9 +22,11 @@ namespace Kingpin.Tier.Services.Classes
         /// <summary>
         /// Initializes a new Instance of <see cref="TokenService"/>
         /// </summary>
+        /// <param name="logger">Injected <see cref="ILogger{TokenService}"/></param>
         /// <param name="jwtSettings">Injected <see cref="IOptions{JwtSettings}"/></param>
         public TokenService(
-            IOptions<JwtSettings> @jwtSettings) : base(@jwtSettings)
+            ILogger<TokenService> @logger,
+            IOptions<JwtSettings> @jwtSettings) : base(@logger, @jwtSettings)
         {
         }
 
